@@ -93,6 +93,37 @@
 
     });
 
+// jQuery for Repeater fields Group -- Upload Image -- Functionality
+
+    jQuery(document).ready(function ($) {
+        // Event delegation for the "Upload Image" button
+        $(document).on('click', '.slider-bin-select-image', function () {
+            const button = $(this);
+
+            // Use closest() to find the appropriate image preview div
+            const hiddenInput = button.siblings('input[type="hidden"]');
+            const imagePreview = button.closest('.inner-field-wrapper').siblings('.image-preview');
+
+            // Use WordPress media uploader
+            const mediaUploader = wp.media({
+                title: 'Upload Image',
+                button: {
+                    text: 'Use this image'
+                },
+                multiple: false // Set to true to allow multiple images to be selected
+            });
+
+            mediaUploader.on('select', function () {
+                const attachment = mediaUploader.state().get('selection').first().toJSON();
+                hiddenInput.val(attachment.url); // Set the hidden input value to the image URL
+                imagePreview.html('<img src="' + attachment.url + '" style="max-width: 100px; height: auto;" />'); // Show the image preview
+            });
+
+            // Open the media uploader
+            mediaUploader.open();
+        });
+    });
+
 // JavaScript for Slider Type toggle Functionality
 
     (function($) {
@@ -138,10 +169,17 @@
             $('#post_repeater').append(newGroup);
             console.log('New group added');
         });
-        // Remove Video URL Field
-        // $('#video_repeater').on('click', '.remove-video', function () {
-        //     $(this).closest('.video_group').remove();
-        // });
+        // Remove repeater group
+        $(document).on('click', '.remove-repeater', function () {
+            const groupToRemove = $(this).closest('.post_group');
+
+            if ($('#post_repeater .post_group').length > 1) {
+                groupToRemove.remove();
+                console.log('Group removed');
+            } else {
+                alert('At least one post group must remain.');
+            }
+        });
 
         // Event delegation for dynamically added .post-select dropdowns
         $(document).on('change', '.post-select', function () {
@@ -157,6 +195,7 @@
                             parentGroup.find('[name="post_heading[]"]').val(data.data.title);
                             parentGroup.find('[name="post_subheading[]"]').val(data.data.excerpt);
                             parentGroup.find('[name="post_image[]"]').val(data.data.image_url);
+                            parentGroup.find('[name="post_url[]"]').val(data.data.link);
 
                             // Update Image Preview
                             const previewDiv = parentGroup.find('.image-preview');
@@ -180,7 +219,7 @@
                 <div class="video_group">
                     <div class="inner-field-wrapper">
                         <label for="video_url_${index}">Custom Video URL:</label>
-                        <input type="url" name="video_urls[]" value="" style="width: 80%;">
+                        <input type="url" name="video_urls[]" value="">
                         <button type="button" class="button remove-video">Remove</button>
                     </div>
                 </div>
@@ -216,63 +255,6 @@
         });
     });
 
-
-// jQuery for Repeater fields Group -- Upload Image -- Functionality
-
-    jQuery(document).ready(function ($) {
-        // Event delegation for the "Upload Image" button
-        $(document).on('click', '.slider-bin-select-image', function () {
-            const button = $(this);
-
-            // Use closest() to find the appropriate image preview div
-            const hiddenInput = button.siblings('input[type="hidden"]');
-            const imagePreview = button.closest('.inner-field-wrapper').siblings('.image-preview');
-
-            // Use WordPress media uploader
-            const mediaUploader = wp.media({
-                title: 'Upload Image',
-                button: {
-                    text: 'Use this image'
-                },
-                multiple: false // Set to true to allow multiple images to be selected
-            });
-
-            mediaUploader.on('select', function () {
-                const attachment = mediaUploader.state().get('selection').first().toJSON();
-                hiddenInput.val(attachment.url); // Set the hidden input value to the image URL
-                imagePreview.html('<img src="' + attachment.url + '" style="max-width: 100px; height: auto;" />'); // Show the image preview
-            });
-
-            // Open the media uploader
-            mediaUploader.open();
-        });
-    });
-
-// jQuery for Toggle between Hero fields Group ---- Functionality
-
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     var sameOption = document.querySelector('input[name="hero_field_option"][value="same"]');
-    //     var separateOption = document.querySelector('input[name="hero_field_option"][value="separate"]');
-
-    //     var heroSameFields = document.getElementById('hero_same_fields');
-    //     var heroSeparateFields = document.getElementById('hero_separate_fields');
-
-    //     // Function to toggle the fields based on the selected option
-    //     function toggleHeroFields() {
-    //         if (sameOption.checked) {
-    //             heroSameFields.style.display = 'block';
-    //             heroSeparateFields.style.display = 'none';
-    //         } else if (separateOption.checked) {
-    //             heroSeparateFields.style.display = 'block';
-    //             heroSameFields.style.display = 'none';
-    //         }
-    //     }
-
-    //     toggleHeroFields();
-
-    //     sameOption.addEventListener('change', toggleHeroFields);
-    //     separateOption.addEventListener('change', toggleHeroFields);
-    // });
 
 // jQuery for Post Slider Blog Post data Call ---- Functionality
 

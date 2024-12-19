@@ -28,8 +28,11 @@
         $image_slider_data = get_post_meta($post->ID, '_slider_bin_image_slider', true);
         $video_slider_data = get_post_meta($post->ID, '_slider_bin_videos', true);
 
-        // Fields
         ?>
+        <!--
+         *slider Type - Hero Same heading/Hero separate heading/image/video/post
+         * Fields
+         -->
         <div id="slider_type_wrapper">
             <label for="slider_type"><?php _e('Select Slider Type - ', 'slider_bin'); ?></label>
             <select id="slider_type" name="slider_type">
@@ -42,7 +45,10 @@
         </div>
 
         <div id="slider_fields">
-            <!-- Hero Slider Same Heading Fields -->
+            <!--
+                *Hero Slider Same Heading Fields HTML
+                *Backend layout
+            -->
             <div id="hero_same_fields" class="slider-fields" style="display: none;">
                 <?php
                     // Retrieve the saved meta data
@@ -91,7 +97,10 @@
                 </div>
             </div>
 
-            <!-- Hero Slider Separate Heading Fields -->
+            <!--
+                *Hero Slider Separate Heading Fields HTML
+                *Backend layout
+            -->
             <div id="hero_separate_fields" class="slider-fields" style="display: none;">
                 <div class="slider-slogan">
                     <h2 class="slider-title">Empower Every Frame with a Fresh Perspective</h2>
@@ -129,7 +138,10 @@
                 <button class="button" type="button" id="add_more_hero_repeater">Add More</button>
             </div>
 
-            <!-- Post Slider Fields -->
+            <!--
+                *Post Slider Fields HTML
+                *Backend layout
+            -->
             <div id="post_fields" class="slider-fields" style="display: none;">
 
                 <div class="slider-slogan">
@@ -141,7 +153,7 @@
                     <!-- Repeatable group -->
                     <div class="post_group">
                         <div class="inner-field-wrapper">
-                            <label for="post_url">Blog Post URL:</label>
+                            <label for="post_url[]">Select Blog:</label>
                             <select name="post_url[]" class="post-select">
                                 <option value="">Select Post</option>
                                 <?php
@@ -152,7 +164,7 @@
                                 ?>
                             </select>
                         </div>
-
+                        <input type="hidden" name="post_url[]" value="" >
                         <div class="inner-field-wrapper">
                             <label for="post_heading">Heading:</label>
                             <input type="text" name="post_heading[]" value="">
@@ -168,8 +180,11 @@
                             <button type="button" class="button slider-bin-select-image">Upload Image</button>
                             <input type="hidden" name="post_image[]" value="">
                         </div>
+
                         <!-- Image Preview -->
                         <div class="image-preview"></div>
+                        <button type="button" class="button remove-repeater">Remove</button>
+
                     </div>
                 </div>
                 <!-- Add button to add more groups -->
@@ -177,7 +192,10 @@
 
             </div>
 
-            <!-- Image Slider Fields -->
+            <!--
+                *Image Slider Fields HTML
+                *Backend layout
+            -->
             <div id="image_fields" class="slider-fields" style="display: none;">
                 <div class="slider-slogan">
                     <h2 class="slider-title">Let Your Images Speak Louder Than Words</h2>
@@ -203,7 +221,10 @@
 
             </div>
 
-            <!-- Video Slider Fields -->
+            <!--
+                *Video Slider Fields HTML
+                *Backend layout
+            -->
             <div id="video_fields" class="slider-fields" style="display: none;">
                 <div class="slider-slogan">
                     <h2 class="slider-title">Heroic Moments, Singular Focus</h2>
@@ -224,7 +245,7 @@
                             <div class="video_group">
                                 <div class="inner-field-wrapper">
                                     <label for="video_url_<?php echo $index; ?>">Custom Video URL:</label>
-                                    <input type="url" name="video_urls[]" value="<?php echo esc_url($video_url); ?>" style="width: 80%;">
+                                    <input type="url" name="video_urls[]" value="<?php echo esc_url($video_url); ?>" >
                                     <button type="button" class="button remove-video">Remove</button>
                                 </div>
                             </div>
@@ -236,7 +257,7 @@
                         <div class="video_group">
                             <div class="inner-field-wrapper">
                                 <label for="video_url_0">Custom Video URL:</label>
-                                <input type="url" name="video_urls[]" value="" style="width: 80%;">
+                                <input type="url" name="video_urls[]" value="">
                                 <button type="button" class="button remove-video">Remove</button>
                             </div>
                         </div>
@@ -275,7 +296,11 @@
     }
 
     //Save Post Meta
+    // Save Backend Layout
+    // Save What Data Send to Database
+
     function slider_bin_save_meta_box_data($post_id) {
+
         // Verify nonce for security
         if (!isset($_POST['slider_bin_nonce']) || !wp_verify_nonce($_POST['slider_bin_nonce'], 'slider_bin_save_meta_box_data')) {
             return;
@@ -296,7 +321,7 @@
             update_post_meta($post_id, '_slider_type', sanitize_text_field($_POST['slider_type']));
         }
 
-         // Save Hero Same Slider fields
+         // Save Hero Same Heading Slider fields
 
          if (isset($_POST['slider_type']) && $_POST['slider_type'] === 'hero_same') {
             // Get the post ID
@@ -345,7 +370,7 @@
 
         }
 
-        // Save Hero Separate Slider fields
+        // Save Hero Separate Heading Slider fields
 
         if (isset($_POST['slider_type']) && $_POST['slider_type'] === 'hero_separate') {
             // Ensure all repeater fields are arrays
@@ -377,7 +402,7 @@
 
         // Save Post Slider fields
 
-        if (isset($_POST['post_image'])) {
+        if (isset($_POST['post_image'], $_POST['post_heading'], $_POST['post_subheading'], $_POST['post_url'])) {
             $post_images = $_POST['post_image'];
             $post_headings = $_POST['post_heading'];
             $post_subheadings = $_POST['post_subheading'];
@@ -385,17 +410,28 @@
 
             $post_slider_data = [];
             for ($i = 0; $i < count($post_images); $i++) {
-                // Avoid saving empty values
-                if (!empty($post_images[$i]) || !empty($post_headings[$i]) || !empty($post_subheadings[$i]) || !empty($post_urls[$i])) {
+                $image = isset($post_images[$i]) ? sanitize_text_field($post_images[$i]) : '';
+                $heading = isset($post_headings[$i]) ? sanitize_text_field($post_headings[$i]) : '';
+                $subheading = isset($post_subheadings[$i]) ? sanitize_textarea_field($post_subheadings[$i]) : '';
+                $url = isset($post_urls[$i]) ? esc_url_raw($post_urls[$i]) : '';
+
+                if (!empty($image) || !empty($heading) || !empty($subheading) || !empty($url)) {
                     $post_slider_data[] = [
-                        'image' => sanitize_text_field($post_images[$i]),
-                        'heading' => sanitize_text_field($post_headings[$i]),
-                        'subheading' => sanitize_textarea_field($post_subheadings[$i]),
-                        'url' => esc_url_raw($post_urls[$i]),
+                        'image' => $image,
+                        'heading' => $heading,
+                        'subheading' => $subheading,
+                        'url' => $url,
                     ];
                 }
             }
-            update_post_meta($post_id, '_post_slider_data', $post_slider_data);
+
+            // Log data structure for debugging
+            error_log('Post Slider Data: ' . print_r($post_slider_data, true));
+
+            $result = update_post_meta($post_id, '_post_slider_data', $post_slider_data);
+            error_log('Meta update result: ' . ($result ? 'Success' : 'Failure'));
+        } else {
+            error_log('Missing expected fields in the slider form submission.');
         }
 
         // Save Image Slider fields (if 'image' slider type is selected)

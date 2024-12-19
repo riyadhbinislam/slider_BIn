@@ -24,20 +24,13 @@
 .inner-field-wrapper label {
   display: block;
   width: 100%;
-  font-size: 14px;
-  color: #333c4e;
   margin-bottom: 8px;
-  font-weight: 500;
 }
 
 .inner-field-wrapper input,
 .inner-field-wrapper textarea {
   width: 100%;
   margin-bottom: 10px;
-  border-color: #ebedee;
-  background-color: #fafafa;
-  font-size: 16px;
-  padding: 5px;
 }
 
 .hero_group{
@@ -45,7 +38,15 @@
   grid-template-columns: 1fr 1fr;
   gap: 30px;
   margin-bottom: 20px;
+  border: 1px solid #d8d8d8;
+  padding: 20px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
 }
+
 
 
 #slider_type_wrapper {
@@ -108,4 +109,31 @@
   padding: 15px;
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(0,0,0,.04);
+  position: relative;
 }
+
+.post_group .remove-repeater {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}
+
+.video_group .inner-field-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.video_group {
+  margin-bottom: 15px;
+}
+.video_group .inner-field-wrapper label,
+.video_group .inner-field-wrapper input{
+  margin-bottom: 0 !important;
+}
+.video_group .inner-field-wrapper label {
+  width: fit-content !important;
+}
+
+#video_repeater {width: 700px;max-width: 100%;}

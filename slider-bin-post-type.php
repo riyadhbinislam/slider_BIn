@@ -23,7 +23,7 @@
             'public'            => true,
             'has_archive'       => true,
             'show_in_rest'      => true, // Enables Gutenberg support
-            'supports'          => array('title', 'thumbnail'), //  'editor', Add other features like 'custom-fields', 'excerpt', etc.
+            'supports'          => array('title' ), //  'thumbnail', 'editor', Add other features like 'custom-fields', 'excerpt', etc.
             'rewrite'           => array('slug' => 'slider-post'), // Customize the URL slug
             'menu_icon'         => 'dashicons-tickets-alt', // Dashicons icon for the menu
             'menu_position'     => 101, // Position it at the bottom of the admin menu

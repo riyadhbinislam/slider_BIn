@@ -1,5 +1,5 @@
 <?php
-// Shortcode handler
+    // Shortcode handler
     function slider_bin_shortcode($atts) {
         $atts = shortcode_atts(array(
             'id' => '',
@@ -42,8 +42,7 @@
     add_shortcode('slider_bin', 'slider_bin_shortcode');
 
     /**
-     * Render Hero Slider
-     * Render Hero Same Slider
+     * Render Hero Same Heading Slider
      */
 
      function render_hero_same_slider($post_id) {
@@ -60,41 +59,14 @@
 
         // Start output buffering
         ob_start();
-        ?>
-        <div class="slider-wrapper hero-same-wrapper">
-            <div id="arrow-left" class="arrow"></div>
-            <div id="slider">
-                <?php if (!empty($hero_same_slider_data['images'])):
-                    foreach ($hero_same_slider_data['images'] as $image_url): ?>
-                        <div class="slide">
-                            <img src="<?php echo esc_url($image_url); ?>" alt="Hero Image">
-                        </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-                <div class="slider-content">
-                    <?php if (!empty($hero_same_slider_data['heading'])): ?>
-                        <h1><?php echo esc_html($hero_same_slider_data['heading']); ?></h1>
-                    <?php endif; ?>
 
-                    <?php if (!empty($hero_same_slider_data['subheading'])): ?>
-                        <p><?php echo esc_html($hero_same_slider_data['subheading']); ?></p>
-                    <?php endif; ?>
+        // Include the slider module
+        include plugin_dir_path(__FILE__) . 'modules/slider-bin-hero-same-heading-slider.php';
 
-                    <?php if (!empty($hero_same_slider_data['button_text']) && !empty($hero_same_slider_data['button_link'])): ?>
-                        <a href="<?php echo esc_url($hero_same_slider_data['button_link']); ?>" class="hero-button">
-                            <?php echo esc_html($hero_same_slider_data['button_text']); ?>
-                        </a>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <div id="arrow-right" class="arrow"></div>
-        </div>
-        <?php
         return ob_get_clean();
     }
     /**
-     * Render Hero Slider
-     * Render Hero Separate Slider
+     * Render Hero Separate Heading Slider
      */
 
     function render_hero_separate_slider($post_id) {
@@ -113,41 +85,8 @@
 
         // Start output buffering
         ob_start();
-        ?>
-
-        <div class="slider-wrapper hero-separate-wrapper">
-            <div id="arrow-left" class="arrow"></div>
-            <div id="slider">
-                <?php
-                foreach ($hero_separate_slider_data as $slide) {
-                // Extract slide data with fallbacks
-                $image = isset($slide['image']) ? esc_url($slide['image']) : '';
-                $heading = isset($slide['heading']) ? esc_html($slide['heading']) : '';
-                $subheading = isset($slide['subheading']) ? esc_html($slide['subheading']) : '';
-                $button_link = isset($slide['button_link']) ? esc_url($slide['button_link']) : '';
-                $button_text = isset($slide['button_text']) ? esc_html($slide['button_text']) : '';
-                ?>
-
-                <div class="slide" style="background-image: url('<?php echo esc_url($image); ?>');">
-                    <div class="slide-content">
-                        <?php if ($heading) { ?>
-                            <h1><?php echo $heading; ?></h1>
-                        <?php } ?>
-                        <?php if ($subheading) { ?>
-                            <p><?php echo $subheading; ?></p>
-                        <?php } ?>
-                        <?php if ($button_text && $button_link) { ?>
-                            <a href="<?php echo $button_link; ?>" class="hero-button"><?php echo $button_text; ?></a>
-                        <?php } ?>
-                    </div>
-                </div>
-
-                <?php } ?>
-            </div>
-            <div id="arrow-right" class="arrow"></div>
-        </div>
-
-        <?php
+        // Include the slider module
+        include plugin_dir_path(__FILE__) . 'modules/slider-bin-hero-separate-heading-slider.php';
         // Return the buffered output
         return ob_get_clean();
     }
@@ -172,32 +111,10 @@
 
         // Start output buffering
         ob_start();
-        ?>
-
-        <div class="slider-wrapper">
-            <div id="arrow-left" class="arrow"></div>
-            <div id="slider">
-                <?php
-                    foreach ($image_slider_data as $index => $image_url) {
-                    // Trim and sanitize the image URL
-                    $image_url = esc_url(trim($image_url));
-
-                    if ($image_url) { ?>
-
-                    <div class="slide">
-                        <img class="slide-image" src="<?php echo $image_url; ?>" alt="<?php echo esc_attr('Slider Image ' . ($index + 1)); ?>">
-                    </div>
-                <?php }
-                else { ?>
-                    <p>No slider data available.</p>
-                <?php }} ?>
-            </div>
-            <div id="arrow-right" class="arrow"></div>
-        </div>
-
-    <?php
-    // Return the buffered output
-    return ob_get_clean();
+        // Include the slider module
+        include plugin_dir_path(__FILE__) . 'modules/slider-bin-image-slider.php';
+        // Return the buffered output
+        return ob_get_clean();
     }
 
     /**
@@ -214,134 +131,30 @@
 
     // Start output buffering
     ob_start();
-    ?>
-
-    <div class="slider-wrapper">
-        <div id="arrow-left" class="arrow"></div>
-        <div id="slider">
-            <?php if (!empty($post_slider_data)) {
-                foreach ($post_slider_data as $index => $slide) {
-                // Ensure each slide has valid data
-                $image = isset($slide['image']) ? esc_url($slide['image']) : '';
-                $heading = isset($slide['heading']) ? esc_html($slide['heading']) : '';
-                $subheading = isset($slide['subheading']) ? esc_html($slide['subheading']) : '';
-                $url = isset($slide['url']) ? esc_url($slide['url']) : '';
-            ?>
-
-            <div class="slide" style="background-image: url('<?php if ($image) { echo $image;} ?>');">
-                <div class="slide-content">
-                    <?php if ($heading) { ?>
-                        <h2><?php echo $heading; ?></h2>
-                    <?php } ?>
-                    <?php if ($subheading) { ?>
-                        <p><?php echo $subheading; ?></p>
-                    <?php } ?>
-                    <?php if ($url) { ?>
-                        <a href="<?php echo $url; ?>" class="slider-link">Read More</a>
-                    <?php } ?>
-                </div>
-            </div>
-            <?php }
-            } else { ?>
-                <p>No slider data available.</p>
-            <?php } ?>
-        </div>
-        <div id="arrow-right" class="arrow"></div>
-    </div>
-
-    <?php
+    // Include the slider module
+    include plugin_dir_path(__FILE__) . 'modules/slider-bin-post-slider.php';
     // Return the buffered output
     return ob_get_clean();
-    }
+
+
+}
 
     /**
      * Render Video Slider
      */
 
      function render_video_slider($post_id) {
+        // Fetch stored video URLs from the '_video_urls' meta field
+        $video_urls = get_post_meta($post_id, '_video_urls', true);
 
-            // Fetch stored video URLs from the '_video_urls' meta field
-            $video_urls = get_post_meta($post_id, '_video_urls', true);
+        // Fetch the media or related data from the '_slider_bin_videos' meta field
+        $slider_bin_videos = get_post_meta($post_id, '_slider_bin_videos', true);
 
-            // Fetch the media or related data from the '_slider_bin_videos' meta field (optional)
-            $slider_bin_videos = get_post_meta($post_id, '_slider_bin_videos', true);
-
-            // If no video URLs are found, return a default message
-            if (empty($video_urls) || !is_array($video_urls)) {
-                return __('No videos found for this slider.', 'slider_bin');
-            }
-       // Start output buffering
-       ob_start();
-     ?>
-
-    <div class="slider-wrapper">
-        <div id="arrow-left" class="arrow"></div>
-
-        <div id="slider">
-            <?php
-                // Check if '_video_urls' is set and not empty, and render video URLs
-                // Loop through each video URL and display it
-                if (!empty($video_urls) && is_array($video_urls)) {
-                    foreach ($video_urls as $video_url) {
-                        $video_url = esc_url(trim($video_url)); // Sanitize and trim the URL
-                        if ($video_url) {
-                            // Check if URL is a YouTube video
-                            if (strpos($video_url, 'youtube.com') !== false) {
-                                // Extract YouTube video ID and create embed URL
-                                preg_match('/(?:https?:\/\/(?:www\.)?youtube\.com\/(?:[^\/\n\s]+\/\S+|(?:v|e(?:mbed)?)\/([\w-]+)|(?:.*?[?&]v=([\w-]+))))/', $video_url, $matches);
-                                $youtube_video_id = isset($matches[1]) ? $matches[1] : '';
-                                if ($youtube_video_id) {
-                                    $video_url = "https://www.youtube.com/embed/{$youtube_video_id}";
-                                }
-                            }
-
-                            // Check if URL is a Vimeo video
-                            if (strpos($video_url, 'vimeo.com') !== false) {
-                                // Extract Vimeo video ID and create embed URL
-                                preg_match('/(?:https?:\/\/(?:www\.)?vimeo\.com\/(?:.*\/)?(\d+))/', $video_url, $matches);
-                                $vimeo_video_id = isset($matches[1]) ? $matches[1] : '';
-                                if ($vimeo_video_id) {
-                                    $video_url = "https://player.vimeo.com/video/{$vimeo_video_id}";
-                                }
-                            }
-                            ?>
-
-                            <div class="slide video-slide">
-                                <iframe width="100%" height="100%" src="<?php echo $video_url; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
-
-                            <?php
-                        }
-                    }
-                }
-                elseif (!empty($slider_bin_videos)){
-                    // If media URLs are stored as a comma-separated string, split them into an array
-                    $slider_bin_videos = explode(',', $slider_bin_videos);
-                    foreach ($slider_bin_videos as $media_url) {
-                        $media_url = esc_url(trim($media_url)); // Sanitize and trim the URL // Check if the media URL is valid
-                        if ($media_url) {
-                            ?>
-                            <div class="slide media-slide">
-                               <iframe width="100%" height="auto" src="<?php echo $media_url; ?>"frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
-                            <?php
-                        }
-                    }
-                }
-                else{
-                    echo '<p>No videos or media found for this slider.</p>';
-                }
-            ?>
-
-
-        </div>
-
-        <div id="arrow-right" class="arrow"></div>
-    </div>
-
-    <?php
-    // Return the buffered output
-    return ob_get_clean();
-}
-
+        // Start output buffering
+        ob_start();
+        // Include the slider module
+        include plugin_dir_path(__FILE__) . 'modules/slider-bin-video-slider.php';
+        // Return the buffered output
+        return ob_get_clean();
+    }
 ?>

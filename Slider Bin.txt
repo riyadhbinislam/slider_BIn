@@ -1,22 +1,107 @@
 Slider Bin
     css
         -slider-bin-style.css
+        -slider-bin-admin-style.css
     inc
         -classes
-            ---class-slider.php
-            ---class-image.php
-            ---class-content.php
-            ---class-video.php
-        -helpers
-            ---autoloader.php
-        -traits
-            ---trait-singleton.php
-        -init.php
+            ---class-slider-bin-post-type
+            ---class-slider-bin-post-metabox
+            ---class-slider-bin-fontend
+            ---class-slider-bin-
     js
         -slider-bin-plugin.js
+        -slider-bin-media.js
+
     modules
-        --image-slider.php
-        --content-slider.php
-        --video-slider.php
-        --hero-slider.php
+        --slider-bin-hero-same-slider.php
+        --slider-bin-hero-separate-slider.php
+        --slider-bin-post-slider.php
+        --slider-bin-image-slider.php
+        --slider-bin-video-slider.php
     slider-bin.php
+
+
+
+slider-bin.php contain these functions-
+
+
+    *Enqueue Styles and Scripts
+
+    *Enqueue Admin Scripts and Localize Admin Data
+
+    *Plugin Activation
+
+    *Plugin Deactivation
+
+    *Register Slider Post Type
+
+    *Add the Settings page under the Slider Bin post type menu
+
+    *Render the settings page content
+
+    *Add new columns to the post list
+
+    *Populate the custom columns
+
+    *Make Slider Type sortable
+
+    *Modify query to sort by Slider Type
+
+    *Add meta box for Register Slider Post Type
+
+    *Meta box callback
+        **slider Type
+        **Hero Slider Same Heading Fields HTML
+        **Hero Slider Separate Heading Fields HTML
+        **Post Slider Fields HTML
+        **Image Slider Fields HTML
+        **Video Slider Fields HTML
+
+    *Save Post Meta
+        **Verify nonce for security
+        **Auto-save check
+        **Check permissions
+        **Save slider type
+        **Save Hero Same Heading Slider fields
+        **Save Hero Separate Heading Slider fields
+        **Save Post Slider fields
+        **Save Image Slider fields
+        **Save Video Slider fields
+
+    *Register AJAX Action For Blog Post Data call.
+
+    *Shortcode handler For Frontend
+
+    *Render Hero Same Heading Slider
+
+    *Render Hero Separate Heading Slider
+
+    *Render Image Slider
+
+    *Render Post Slider
+
+    *Render Video Slider
+
+
+
+Bugs-
+
+#Hero With single Heading-
+   - on select preview image.
+   - Edit screen placeholder
+
+#Hero With Multiple Heading
+    - Edit screen placeholder
+    - on publish or update preview in palceholder
+    - remove button**
+
+#image
+    -Remove Button
+
+#post slider
+    -Selected title will show on select fields
+    -Edit screen placeholder
+
+#Video Slider
+    -on select video preview
+    -remove button for media seleced video
