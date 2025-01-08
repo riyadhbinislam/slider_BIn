@@ -1,9 +1,12 @@
+var autoSlideInterval;
+var AUTO_SLIDE_DELAY = parseInt(sliderBinSettings.autoplay_timeout);
+var AUTO_SLIDE_SPEED = parseInt(sliderBinSettings.autoplay_speed);
+var AUTO_SLIDE_PAUSE_ON_HOVER = sliderBinSettings.autoplay_pause_on_hover === 'true';
+
 var sliderImages = document.querySelectorAll('.slide'),
     arrowLeft = document.querySelector('#arrow-left'),
     arrowRight = document.querySelector('#arrow-right'),
-    current = 0,
-    autoSlideInterval,
-    AUTO_SLIDE_DELAY = 5000; // 5 seconds
+    current = 0;
 
 function reset() {
     for (let i = 0; i < sliderImages.length; i++) {

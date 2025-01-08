@@ -1,0 +1,55 @@
+Documentation for the Slider Bin Plugin
+
+1. Introduction
+
+The Slider Bin Plugin is designed for WordPress users who need versatile, responsive sliders for their website. This plugin supports multiple slider types, and customization options are available via a dedicated settings page.
+
+2. Slider Types
+	1.	Hero with Same Heading Slider
+        •	Use one heading, subheading, and button across multiple images.
+        •	Example Use Case: A product banner with different product images.
+	2.	Hero with Separate Heading Slider
+        •	Assign unique headings, subheadings, and buttons for each image.
+        •	Example Use Case: Highlight multiple product categories.
+	3.	Post Slider
+        •	Slide through blog posts with a featured image, excerpt, and a “Read More” link.
+        •	Example Use Case: Showcase your latest blog articles.
+	4.	Image Slider
+        •	A simple slider for rotating images.
+        •	Example Use Case: Display a photo gallery.
+	5.	Video Slider
+        •	Showcase videos using media uploads or URLs from YouTube/Vimeo.
+        •	Example Use Case: Share promotional or tutorial videos.
+
+3. How to Use
+	1.	Add a New Slider
+        •	Navigate to Sliders > Add New Slider in the WordPress admin.
+        •	Choose a slider type.
+        •	Configure settings and upload content (images, videos, posts, etc.).
+        •	Save the slider to generate a unique shortcode.
+	2.	Embed the Slider
+        •	Copy the shortcode (e.g., [slider_bin id="123"]) displayed on the slider page.
+        •	Paste the shortcode into a post, page, or widget area.
+	3.	Customize Settings
+        •	Navigate to Sliders > Settings.
+        •	Change typography, button styles, slider speed, and transitions.
+        •	Save your changes to apply them globally.
+
+4. Shortcode Reference
+	•	Basic Slider Shortcode: [slider_bin id="123"] Replace 123 with the actual ID of your slider.
+
+5. Advanced Usage
+	•	Custom CSS
+            Use the WordPress Customizer or your theme’s stylesheet to apply additional styles. Target sliders with the class slider-wrapper.
+
+6. Support
+    For issues, suggestions, or support, contact [riyadhbin@gmail.com] or [https://omnixima.com/].
+
+7. License
+    This plugin is licensed under the GPLv2 or later.
+
+8. Changelog
+    See the CHANGELOG.md file for the latest updates.
+
+9. Credits
+    This plugin was developed by [Riyadh Bin Islam].

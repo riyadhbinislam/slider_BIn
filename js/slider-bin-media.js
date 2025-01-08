@@ -47,14 +47,14 @@
             mediaUploader.open();
         });
 
-        // Handle media selection for videos
-        $('.slider-bin-select-videos').on('click', function (e) {
+         // Handle media selection for image-slider images
+        $('.slider-bin-select-is-images').on('click', function (e) {
             e.preventDefault();
 
-            var button = $(this); // The button that was clicked
-            var fieldContainer = button.closest('.slider-fields'); // Parent field container
-            var hiddenInput = fieldContainer.find('input[type="hidden"]'); // Related hidden input
-            var previewContainer = fieldContainer.find('.video-preview'); // Related preview container
+            var button = $(this);
+            var fieldContainer = button.closest('.slider-fields');
+            var hiddenInput = fieldContainer.find('input[type="hidden"]');
+            var previewContainer = fieldContainer.find('.image-preview');
 
             if (mediaUploader) {
                 mediaUploader.open();
@@ -62,14 +62,14 @@
             }
 
             mediaUploader = wp.media({
-                title: 'Select Videos', // Title for media modal
+                title: 'Select Images',
                 button: {
-                    text: 'Use Videos' // Button text
+                    text: 'Use Images'
                 },
                 library: {
-                    type: ['video'] // Filter for videos
+                    type: 'image'
                 },
-                multiple: true // Allow multiple selection
+                multiple: true
             });
 
             mediaUploader.on('select', function () {
@@ -81,14 +81,173 @@
                 // Store URLs in the hidden input field
                 hiddenInput.val(urls.join(','));
 
-                // Display selected videos as a preview
+                // Display selected images as a preview with caption fields
                 var previewHtml = urls.map(function (url) {
-                    return '<video src="' + url + '" controls style="max-width: 200px; margin-right: 5px;"></video>';
+                    return `
+                        <div class="image-preview-container">
+                            <img src="${url}" style="max-width: 100px; margin: 5px;" />
+                            <input type="text"
+                                   class="image-caption"
+                                   name="image_captions[${url}]"
+                                   placeholder="Enter image caption"
+                                   style="width: 100%; max-width: 300px; margin: 5px 0;" />
+                            <button type="button" class="remove-image-button" data-image-url="${url}">Remove</button>
+                        </div>
+                    `;
                 }).join('');
+
                 previewContainer.html(previewHtml);
             });
 
             mediaUploader.open();
+        });
+
+        // Handle remove image button for image-slider
+        $(document).on('click', '.remove-image-button', function() {
+            var button = $(this);
+            var container = button.closest('.image-preview-container');
+            var imageUrl = button.data('image-url');
+            var fieldContainer = button.closest('.slider-fields');
+            var hiddenInput = fieldContainer.find('input[type="hidden"]');
+
+            // Remove the image container
+            container.remove();
+
+            // Update the hidden input with remaining images
+            var currentUrls = hiddenInput.val().split(',');
+            var newUrls = currentUrls.filter(url => url !== imageUrl);
+            hiddenInput.val(newUrls.join(','));
+        });
+
+        // Handle WordPress Media Uploader for Videos
+        $(document).on('click', '.slider-bin-select-videos', function(e) {
+            e.preventDefault();
+            const button = $(this);
+            const videoGroup = button.closest('.inner-field-wrapper').parent();
+
+            // Create the media frame
+            const mediaUploader = wp.media({
+                title: 'Select Videos',
+                button: {
+                    text: 'Use these videos'
+                },
+                multiple: true, // Allow multiple selection
+                library: {
+                    type: 'video' // Restrict to video files only
+                }
+            });
+
+            // When videos are selected
+            mediaUploader.on('select', function() {
+                const attachments = mediaUploader.state().get('selection').toJSON();
+
+                // Get or create video preview container
+                let previewContainer = videoGroup.find('.video-preview');
+                if (previewContainer.length === 0) {
+                    previewContainer = $('<div class="video-preview" style="margin-top: 10px;"></div>');
+                    videoGroup.append(previewContainer);
+                }
+
+                // Get existing videos
+                let uploadedVideos = $('#slider_bin_videos').val();
+                uploadedVideos = uploadedVideos ? uploadedVideos.split(',') : [];
+
+                // Process each selected video
+                attachments.forEach(function(attachment) {
+                    // Create video preview
+                    const videoWrapper = $('<div class="video-wrapper" style="display: inline-block; margin: 10px;"></div>');
+                    const videoHtml = `
+                        <video
+                            width="200"
+                            controls
+                            style="margin-bottom: 5px; display: block;"
+                        >
+                            <source src="${attachment.url}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <button type="button" class="button remove-video-preview" style="display: block; margin: 0 auto;">Remove</button>`;
+
+                    videoWrapper.html(videoHtml);
+                    previewContainer.append(videoWrapper);
+
+                    // Add to uploaded videos array if not already present
+                    if (!uploadedVideos.includes(attachment.url)) {
+                        uploadedVideos.push(attachment.url);
+                    }
+                });
+
+                // Update hidden input with all video URLs
+                $('#slider_bin_videos').val(uploadedVideos.join(','));
+            });
+
+            // Open the uploader dialog
+            mediaUploader.open();
+        });
+
+        // Add remove button functionality for uploaded videos
+        $(document).on('click', '.remove-video-preview', function() {
+            const videoWrapper = $(this).closest('.video-wrapper');
+            const videoUrl = videoWrapper.find('video source').attr('src');
+
+            // Remove from hidden input
+            let uploadedVideos = $('#slider_bin_videos').val().split(',');
+            uploadedVideos = uploadedVideos.filter(url => url !== videoUrl);
+            $('#slider_bin_videos').val(uploadedVideos.join(','));
+
+            // Remove preview
+            videoWrapper.remove();
+
+            // If no videos left, show placeholder or remove container
+            const previewContainer = $('.video-preview');
+            if (previewContainer.children().length === 0) {
+                previewContainer.remove();
+            }
+        });
+
+        // Initialize existing video previews on page load
+        function initializeVideoPreview() {
+            const uploadedVideos = $('#slider_bin_videos').val();
+            if (uploadedVideos) {
+                const videoUrls = uploadedVideos.split(',');
+                const previewContainer = $('.video-preview');
+
+                videoUrls.forEach(url => {
+                    if (url.trim()) {
+                        const videoWrapper = $('<div class="video-wrapper" style="display: inline-block; margin: 10px;"></div>');
+                        const videoHtml = `
+                            <video
+                                width="200"
+                                controls
+                                style="margin-bottom: 5px; display: block;"
+                            >
+                                <source src="${url}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <button type="button" class="button remove-video-preview" style="display: block; margin: 0 auto;">Remove</button>`;
+
+                        videoWrapper.html(videoHtml);
+                        previewContainer.append(videoWrapper);
+                    }
+                });
+            }
+        }
+
+        // Call initialization on page load
+        initializeVideoPreview();
+
+
+        // Initialize the preview section when the page loads
+        $('#hero_image_slider_preview').each(function () {
+            var previewContainer = $(this);
+            var hiddenInput = $('#hero_images');
+            var imageUrls = hiddenInput.val().split(',');
+
+            if (imageUrls.length > 0 && imageUrls[0] !== '') {
+                var previewHtml = imageUrls.map(function (url) {
+                    return '<img src="' + url + '" style="max-width: 100px; margin-right: 5px;">';
+                }).join('');
+                previewContainer.html(previewHtml);
+            }
         });
 
     });
@@ -96,7 +255,7 @@
 // jQuery for Repeater fields Group -- Upload Image -- Functionality
 
     jQuery(document).ready(function ($) {
-        // Event delegation for the "Upload Image" button
+        // Handle the "Upload Image" button For repeater Field
         $(document).on('click', '.slider-bin-select-image', function () {
             const button = $(this);
 
@@ -124,165 +283,38 @@
         });
     });
 
-// JavaScript for Slider Type toggle Functionality
+// Shortcode Copy Functionality
+    jQuery(document).ready(function($) {
+        // Handle copy button click using event delegation
+        $(document).on('click', '.copy-shortcode', function(e) {
+            e.preventDefault();
 
-    (function($) {
-        function toggleFields() {
-            const sliderType = $('#slider_type').val();
-            $('.slider-fields').hide();
-            if (sliderType === 'hero_same') {
-                $('#hero_same_fields').show();
-            } else if (sliderType === 'hero_separate') {
-                $('#hero_separate_fields').show();
-            } else if (sliderType === 'image') {
-                $('#image_fields').show();
-            } else if (sliderType === 'post') {
-                $('#post_fields').show();
-            } else if (sliderType === 'video') {
-                $('#video_fields').show();
-            }
-        }
+            var $button = $(this);
+            var shortcode = $button.data('shortcode');
 
-        $(document).ready(function() {
-            toggleFields();
-            $('#slider_type').on('change', toggleFields);
-        });
-    })(jQuery);
+            // Create temporary textarea
+            var $temp = $('<textarea>');
+            $('body').append($temp);
+            $temp.val(shortcode).select();
 
-// jQuery for Post Repeater fields Group Functionality
+            try {
+                // Copy the text
+                document.execCommand('copy');
 
-    jQuery(document).ready(function ($) {
-        $(document).on('click', '#add_more_repeater', function () {
-            console.log('Add More button clicked');
-            const lastGroup = $('#post_repeater .post_group:last');
-            console.log('Last group:', lastGroup);
+                // Update button text temporarily
+                var originalText = $button.text();
+                $button.text('Copied!');
 
-            if (lastGroup.length === 0) {
-                console.error('No post_group elements found!');
-                return;
+                setTimeout(function() {
+                    $button.text(originalText);
+                }, 2000);
+
+            } catch (err) {
+                console.error('Failed to copy text:', err);
             }
 
-            const newGroup = lastGroup.clone();
-            newGroup.find('input[type="text"], input[type="hidden"], textarea, select').val('');
-            newGroup.find('.image-preview').html('');
-
-            $('#post_repeater').append(newGroup);
-            console.log('New group added');
-        });
-        // Remove repeater group
-        $(document).on('click', '.remove-repeater', function () {
-            const groupToRemove = $(this).closest('.post_group');
-
-            if ($('#post_repeater .post_group').length > 1) {
-                groupToRemove.remove();
-                console.log('Group removed');
-            } else {
-                alert('At least one post group must remain.');
-            }
-        });
-
-        // Event delegation for dynamically added .post-select dropdowns
-        $(document).on('change', '.post-select', function () {
-            const postId = $(this).val(); // Selected post ID
-            const parentGroup = $(this).closest('.post_group'); // Parent group to update fields
-
-            if (postId) {
-                fetch(`${ajaxurl}?action=get_post_data&post_id=${postId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Update fields
-                            parentGroup.find('[name="post_heading[]"]').val(data.data.title);
-                            parentGroup.find('[name="post_subheading[]"]').val(data.data.excerpt);
-                            parentGroup.find('[name="post_image[]"]').val(data.data.image_url);
-                            parentGroup.find('[name="post_url[]"]').val(data.data.link);
-
-                            // Update Image Preview
-                            const previewDiv = parentGroup.find('.image-preview');
-                            previewDiv.html(`<img src="${data.data.image_url}" alt="Preview" style="max-width: 100px;">`);
-                        } else {
-                            console.error(data.message);
-                        }
-                    })
-                    .catch(error => console.error("Error fetching post data:", error));
-            }
+            // Remove temporary textarea
+            $temp.remove();
         });
     });
 
-// jQuery for Video Repeater fields Group Functionality
-
-    jQuery(document).ready(function ($) {
-        // Add More Button Click
-        $('#add_more_video_repeater').on('click', function () {
-            var index = $('#video_repeater .video_group').length; // Count the current groups
-            var newField = `
-                <div class="video_group">
-                    <div class="inner-field-wrapper">
-                        <label for="video_url_${index}">Custom Video URL:</label>
-                        <input type="url" name="video_urls[]" value="">
-                        <button type="button" class="button remove-video">Remove</button>
-                    </div>
-                </div>
-            `;
-            $('#video_repeater').append(newField);
-        });
-
-        // Remove Video URL Field
-        $('#video_repeater').on('click', '.remove-video', function () {
-            $(this).closest('.video_group').remove();
-        });
-    });
-
-// jQuery for Hero Repeater fields Group Functionality
-
-    jQuery(document).ready(function ($) {
-        $(document).on('click', '#add_more_hero_repeater', function () {
-            console.log('Hero Add More button clicked');
-            const lastGroup = $('#hero_repeater .hero_group:last');
-            console.log('Last group:', lastGroup);
-
-            if (lastGroup.length === 0) {
-                console.error('No post_group elements found!');
-                return;
-            }
-
-            const newGroup = lastGroup.clone();
-            newGroup.find('input[type="text"], input[type="hidden"], textarea, select').val('');
-            newGroup.find('.image-preview').html('');
-
-            $('#hero_repeater').append(newGroup);
-            console.log('New group added');
-        });
-    });
-
-
-// jQuery for Post Slider Blog Post data Call ---- Functionality
-
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".post-select").forEach(function (select) {
-        select.addEventListener("change", function () {
-            const postId = this.value; // Selected post ID
-            const parentGroup = this.closest(".post_group"); // Parent group to update fields
-
-            if (postId) {
-                fetch(`${ajaxurl}?action=get_post_data&post_id=${postId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Update fields
-                            parentGroup.querySelector('[name="post_heading[]"]').value = data.data.title;
-                            parentGroup.querySelector('[name="post_subheading[]"]').value = data.data.excerpt;
-                            parentGroup.querySelector('[name="post_image[]"]').value = data.data.image_url;
-
-                            // Update Image Preview
-                            const previewDiv = parentGroup.querySelector(".image-preview");
-                            previewDiv.innerHTML = `<img src="${data.data.image_url}" alt="Preview" style="max-width: 100px;">`;
-                        } else {
-                            console.error(data.message);
-                        }
-                    })
-                    .catch(error => console.error("Error fetching post data:", error));
-            }
-        });
-    });
-});
