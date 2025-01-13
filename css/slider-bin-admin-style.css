@@ -275,7 +275,6 @@
 .slider-type-settings .form-table {
     border-bottom: 1px solid #d8d8d8;
     margin-bottom: 10px;
-    display: block;!i;!;
     padding-bottom: 10px;
 }
 
@@ -345,3 +344,14 @@
 }
 
 
+.slider-type-settings form h2 {
+  color: #2271b1;
+  font-weight: 400;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.slider-type-settings form h2:hover {
+  background-color: #e2e2e2;
+  width: fit-content;
+}

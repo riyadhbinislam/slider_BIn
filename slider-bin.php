@@ -3,7 +3,7 @@
     Plugin Name:        Slider Bin
     Plugin URI:         https://github.com/riyadhbinislam?tab=repositories
     Description:         A versatile WordPress slider plugin supporting multiple slider types including hero, post, image, and video sliders.
-    Version:            1.1.0
+    Version:            1.1.1
     Requires at Least:  6.7.1
     Requires PHP:       7.2
     Author:             Riyadh Bin Islam
@@ -14,19 +14,22 @@
     Text Domain:        slider_bin
     */
 
-    // Define plugin root path
-
 
     if (!defined('ABSPATH')) {
         exit; // Exit if accessed directly
     }
 
-    // Define the plugin URL and path constants
+/**
+ * Define plugin root path
+ * Define plugin root URL
+ * Define plugin basename
+ */
+
     define('SLIDER_BIN_VERSION', '1.1.0');
     define('SLIDER_BIN_URL', plugin_dir_url(__FILE__));
     define('SLIDER_BIN_PATH', plugin_dir_path(__FILE__));
 
-   // Autoloader
+// Autoloader
     spl_autoload_register(function ($class) {
         if (strpos($class, 'Slider_Bin') === 0) {
             $class_file = SLIDER_BIN_PATH . 'class/class-' . strtolower(str_replace('_', '-', $class)) . '.php';
@@ -36,10 +39,11 @@
         }
     });
 
-    // Include the main plugin class
+/**
+ * Include the main plugin class
+ * Initialize the plugin
+ */
     require_once SLIDER_BIN_PATH . 'class/class-slider-bin.php';
-
-    // Initialize the plugin
     new Slider_Bin();
 
     function slider_bin_debug_log($message) {
@@ -53,15 +57,14 @@
     }
 
 
-    // Initialize plugin
+/// Initialize main plugin class
     function slider_bin_init() {
-            // Initialize main plugin class
         global $slider_bin;
         $slider_bin = new Slider_Bin();
     }
 
 
-    // Activation hook
+// Activation hook
     register_activation_hook(__FILE__, 'slider_bin_activate');
     function slider_bin_activate() {
         // Version checks
@@ -78,11 +81,11 @@
         flush_rewrite_rules();
     }
 
-    // Deactivation hook
+// Deactivation hook
     register_deactivation_hook(__FILE__, 'slider_bin_deactivate');
     function slider_bin_deactivate() {
         flush_rewrite_rules();
     }
 
-    /// Hook into WordPress init with priority 0 to ensure it runs early
+/// Hook into WordPress init with priority 0 to ensure it runs early
     add_action('init', 'slider_bin_init', 0);

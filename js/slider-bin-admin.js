@@ -420,3 +420,34 @@
         });
     });
 
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle media file selection
+        document.querySelectorAll('.media-file-selector').forEach(button => {
+            button.addEventListener('click', function() {
+                var buttonId = this.id;
+                var mediaInputId = buttonId + '_media'; // Corresponding hidden input ID
+
+                // Open the WordPress media uploader
+                var mediaUploader = wp.media({
+                    title: 'Select Media File',
+                    button: {
+                        text: 'Use this media'
+                    },
+                    multiple: false
+                });
+
+                mediaUploader.on('select', function() {
+                    var attachment = mediaUploader.state().get('selection').first().toJSON();
+                    // Set the selected media URL to the hidden input
+                    document.querySelector(`#${mediaInputId}`).value = attachment.url;
+
+                    // Update the preview
+                    var previewContainer = button.nextElementSibling;
+                    previewContainer.innerHTML = '<img src="' + attachment.url + '" alt="Selected Media" style="max-width: 100%; height: auto;" />';
+                });
+
+                mediaUploader.open();
+            });
+        });
+    });

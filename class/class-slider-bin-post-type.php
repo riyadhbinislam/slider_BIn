@@ -34,8 +34,6 @@ class Slider_Bin_Post_Type {
         add_filter('manage_edit-slider_post_sortable_columns', array($this, 'sortable_columns'));
         add_action('pre_get_posts', array($this, 'column_orderby'));
         add_action('manage_slider_post_posts_custom_column', array($this, 'custom_column_content'), 10, 2);
-        add_action('admin_menu', array($this, 'add_settings_page'));
-        add_action('admin_init', array($this, 'register_settings'));
     }
 
 

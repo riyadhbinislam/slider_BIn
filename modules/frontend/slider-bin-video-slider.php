@@ -12,10 +12,10 @@
 
 
     $slider_width = isset($options['video_slider_width']) ? esc_attr($options['video_slider_width']) : '100%';
-    $slider_height = isset($options['video_slider_height']) ? esc_attr($options['video_slider_height']) : '400px';
+    $slider_height = isset($options['video_slider_height']) ? esc_attr($options['video_slider_height']) : '700px';
 
-    $left_arrow_style = isset($options['video_slider_arrow_left']) ? esc_attr($options['video_slider_arrow_left']) : '';
-    $right_arrow_style = isset($options['video_slider_arrow_right']) ? esc_attr($options['video_slider_arrow_right']) : '';
+    $video_slider_left_media_file = isset($options['video_slider_left_media_file']) ? esc_attr($options['video_slider_left_media_file']) : '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Left.svg';
+    $video_slider_right_media_file = isset($options['video_slider_right_media_file']) ? esc_attr($options['video_slider_right_media_file']) : '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Right.svg';
 
     $left_arrow_color = isset($options['video_slider_left_arrow_color']) ? esc_attr($options['video_slider_left_arrow_color']) : '';
     $left_arrow_opacity = isset($options['video_slider_left_arrow_opacity']) ? esc_attr($options['video_slider_left_arrow_opacity']) : '';
@@ -35,61 +35,19 @@
     $right_arrow_width = isset($options['video_slider_right_arrow_width']) ? esc_attr($options['video_slider_right_arrow_width']) : '';
     $right_arrow_height = isset($options['video_slider_right_arrow_height']) ? esc_attr($options['video_slider_right_arrow_height']) : '';
 ?>
-    <style>
-        #arrow-left svg {
-            width: <?php echo $left_arrow_width; ?>;
-            height: <?php echo $left_arrow_height; ?>;
-            color: <?php echo $left_arrow_color; ?>;
-            fill: <?php echo $left_arrow_color; ?>;
-            stroke: <?php echo $left_arrow_color; ?>;
-            path: <?php echo $left_arrow_color; ?>;
-            opacity: <?php echo $left_arrow_opacity; ?>;
-        }
 
-        #arrow-right svg {
-            width: <?php echo $right_arrow_width; ?>;
-            height: <?php echo $right_arrow_height; ?>;
-            color: <?php echo $right_arrow_color; ?>;
-            fill: <?php echo $right_arrow_color; ?>;
-            stroke: <?php echo $right_arrow_color; ?>;
-            path: <?php echo $right_arrow_color; ?>;
-            opacity: <?php echo $right_arrow_opacity; ?>;
-        }
-    </style>
-<div class="slider-wrapper video-slider" style="width: <?php echo $slider_width; ?>; ">
+<div class="slider-wrapper video-slider" style="width: <?php echo empty($slider_width) ? '100%' : $slider_width; ?>; ">
+    <div id="arrow-left" class="arrow" style="
+        width: <?php echo empty($left_arrow_width) ? '40px' : $left_arrow_width; ?>;
+        height: <?php echo empty($left_arrow_height) ? '40px' : $left_arrow_height; ?>;
+        left: <?php echo empty($left_arrow_position_left) ? '0' : $left_arrow_position_left; ?>;
+        top: <?php echo empty($left_arrow_position_top) ? '50%' : $left_arrow_position_top; ?>;
+        right: <?php echo empty($left_arrow_position_right) ? 'auto' : $left_arrow_position_right; ?>;
+        bottom: <?php echo empty($left_arrow_position_bottom) ? 'auto' : $left_arrow_position_bottom; ?>;
+        opacity: <?php echo empty($left_arrow_opacity) ? '1' : $left_arrow_opacity; ?>; ">
+        <img src="<?php echo empty($video_slider_left_media_file) ? '' : $video_slider_left_media_file; ?>" alt="">
+    </div>
 
-    <?php if ((count($video_urls) + count($slider_bin_videos)) > 1): ?>
-        <div id="arrow-left" class="arrow" style="left: <?php echo $left_arrow_position_left; ?>; top: <?php echo $left_arrow_position_top; ?>; right: <?php echo $right_arrow_position_right; ?>; bottom: <?php echo $right_arrow_position_bottom; ?>; opacity: <?php echo $left_arrow_opacity; ?>; ">
-            <?php
-                $svg_path = $left_arrow_style;
-                if (filter_var($svg_path, FILTER_VALIDATE_URL)) {
-                    // Add arguments to ignore SSL verification for local development
-                    $args = array(
-                        'sslverify' => false, // Ignore SSL verification
-                        'timeout'   => 30
-                    );
-
-                    $response = wp_remote_get($svg_path, $args);
-                    if (!is_wp_error($response)) {
-                        $svg_content = wp_remote_retrieve_body($response);
-
-                        // Add the necessary attributes for sizing and coloring
-                        $svg_content = str_replace(
-                            '<svg',
-                            '<svg width="' . $left_arrow_width . '" height="' . $left_arrow_height . '" style="fill: ' . $left_arrow_color . ';"',
-                            $svg_content
-                        );
-
-                        // Output the modified SVG
-                        echo $svg_content;
-                    } else {
-                        // Fallback in case of error
-                        echo '<img src="' . esc_url($svg_path) . '" alt="Arrow Left" style="width: ' . $left_arrow_width . '; height: ' . $left_arrow_height . ';">';
-                    }
-                }
-            ?>
-        </div>
-    <?php endif; ?>
 
     <div id="slider">
         <?php
@@ -100,12 +58,12 @@
                 $video_url = esc_url(trim($video_url));
                 if (!empty($video_url)) {
                     ?>
-                    <div class="slide media-slide" style="height: <?php echo $slider_height; ?>;">
+                    <div class="slide media-slide" style="height: <?php echo empty($slider_height) ? '700px' : $slider_height; ?>;">
                         <video
                             width="100%"
                             height="100%"
-                            autoplay
                             muted
+                            autoplay = "1"
                             loop
                             playsinline
                             style="object-fit: cover;">
@@ -143,13 +101,20 @@
                             $embed_url = "https://player.vimeo.com/video/{$vimeo_id}?autoplay=1&muted=1";
                         }
                     }
+                    //others Url
+                    elseif (strpos($video_url, 'youtube.com') == false || strpos($video_url, 'vimeo.com') == false || strpos($video_url, 'youtu.be') == false) {
+                        $embed_url = ($video_url);
+                    }
+
+
 
                     if (!empty($embed_url)) {
                         ?>
-                        <div class="slide video-slide" style="<?php echo $slider_height; ?>;">
+                        <div class="slide video-slide" style="height: <?php echo empty($slider_height) ? '700px' : $slider_height; ?>;">
                             <iframe
                                 width="100%"
                                 height="100%"
+                                loop
                                 src="<?php echo esc_url($embed_url); ?>"
                                 frameborder="0"
                                 allow="autoplay; encrypted-media"
@@ -165,38 +130,16 @@
         ?>
     </div>
 
+    <div id="arrow-right" class="arrow" style="
+        width: <?php echo empty($right_arrow_width) ? '40px' : $right_arrow_width; ?>;
+        height: <?php echo empty($right_arrow_height) ? '40px' : $right_arrow_height; ?>;
+        left: <?php echo empty($right_arrow_position_left) ? 'auto' : $right_arrow_position_left; ?>;
+        top: <?php echo empty($right_arrow_position_top) ? '50%' : $right_arrow_position_top; ?>;
+        right: <?php echo empty($right_arrow_position_right) ? '0' : $right_arrow_position_right; ?>;
+        bottom: <?php echo empty($right_arrow_position_bottom) ? 'auto' : $right_arrow_position_bottom; ?>;
+        opacity: <?php echo empty($right_arrow_opacity) ? '1' : $right_arrow_opacity; ?>;">
+        <img src="<?php echo empty($video_slider_right_media_file) ? '' : $video_slider_right_media_file; ?>" alt="">
+    </div>
 
-    <?php if ((count($video_urls) + count($slider_bin_videos)) > 1): ?>
-        <div id="arrow-right" class="arrow" style="left: <?php echo $right_arrow_position_left; ?>; top: <?php echo $right_arrow_position_top; ?>; right: <?php echo $right_arrow_position_right; ?>; bottom: <?php echo $right_arrow_position_bottom; ?>; opacity: <?php echo $right_arrow_opacity; ?>; ">
-            <?php
-                $svg_path = $right_arrow_style;
-                if (filter_var($svg_path, FILTER_VALIDATE_URL)) {
-                    // Add arguments to ignore SSL verification for local development
-                    $args = array(
-                        'sslverify' => false, // Ignore SSL verification
-                        'timeout'   => 30
-                    );
-
-                    $response = wp_remote_get($svg_path, $args);
-                    if (!is_wp_error($response)) {
-                        $svg_content = wp_remote_retrieve_body($response);
-
-                        // Add the necessary attributes for sizing and coloring
-                        $svg_content = str_replace(
-                            '<svg',
-                            '<svg width="' . $right_arrow_width . '" height="' . $right_arrow_height . '" style="fill: ' . $right_arrow_color . ';"',
-                            $svg_content
-                        );
-
-                        // Output the modified SVG
-                        echo $svg_content;
-                    } else {
-                        // Fallback in case of error
-                        echo '<img src="' . esc_url($svg_path) . '" alt="Arrow Right" style="width: ' . $right_arrow_width . '; height: ' . $right_arrow_height . ';">';
-                    }
-                }
-            ?>
-        </div>
-    <?php endif; ?>
 </div>
 

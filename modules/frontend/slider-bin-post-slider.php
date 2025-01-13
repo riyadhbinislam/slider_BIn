@@ -6,7 +6,7 @@
     $post_slider_options = get_option('slider_bin_post_slider_settings');
     // Slider style related options with fallbacks
     $slider_width = isset($post_slider_options['post_slider_width']) ? esc_attr($post_slider_options['post_slider_width']) : '100%';
-    $slider_height = isset($post_slider_options['post_slider_height']) ? esc_attr($post_slider_options['post_slider_height']) : '400px';
+    $slider_height = isset($post_slider_options['post_slider_height']) ? esc_attr($post_slider_options['post_slider_height']) : '700px';
 
     /**
      * Background settings
@@ -15,17 +15,17 @@
     $bg_image_size = isset($post_slider_options['post_slider_bg_image_size']) ? esc_attr($post_slider_options['post_slider_bg_image_size']) : 'cover';
     $bg_overlay = isset($post_slider_options['post_slider_bg_overlay']) ? esc_attr($post_slider_options['post_slider_bg_overlay']) : 'true';
     $bg_overlay_color = isset($post_slider_options['post_slider_bg_overlay_color']) ? esc_attr($post_slider_options['post_slider_bg_overlay_color']) : '#000000';
-    $bg_overlay_opacity = isset($post_slider_options['post_slider_bg_overlay_opacity']) ? esc_attr($post_slider_options['post_slider_bg_overlay_opacity']) : '0.5';
+    $bg_overlay_opacity = isset($post_slider_options['post_slider_bg_overlay_opacity']) ? esc_attr($post_slider_options['post_slider_bg_overlay_opacity']) : '0.6';
 
     /**
      * Content settings
      */
-    $content_position_top = isset($post_slider_options['post_slider_content_position_top']) ? esc_attr($post_slider_options['post_slider_content_position_top']) : 'center';
-    $content_position_left = isset($post_slider_options['post_slider_content_position_left']) ? esc_attr($post_slider_options['post_slider_content_position_left']) : 'center';
-    $content_position_right = isset($post_slider_options['post_slider_content_position_right']) ? esc_attr($post_slider_options['post_slider_content_position_right']) : 'center';
-    $content_position_bottom = isset($post_slider_options['post_slider_content_position_bottom']) ? esc_attr($post_slider_options['post_slider_content_position_bottom']) : 'center';
-    $content_padding = isset($post_slider_options['post_slider_content_padding']) ? esc_attr($post_slider_options['post_slider_content_padding']) : '0 20px 0 0';
-    $content_margin = isset($post_slider_options['post_slider_content_margin']) ? esc_attr($post_slider_options['post_slider_content_margin']) : '0 20px 0 0';
+    $content_position_top = isset($post_slider_options['post_slider_content_position_top']) ? esc_attr($post_slider_options['post_slider_content_position_top']) : '50%';
+    $content_position_left = isset($post_slider_options['post_slider_content_position_left']) ? esc_attr($post_slider_options['post_slider_content_position_left']) : '50%';
+    $content_position_right = isset($post_slider_options['post_slider_content_position_right']) ? esc_attr($post_slider_options['post_slider_content_position_right']) : '50%';
+    $content_position_bottom = isset($post_slider_options['post_slider_content_position_bottom']) ? esc_attr($post_slider_options['post_slider_content_position_bottom']) : 'auto';
+    $content_padding = isset($post_slider_options['post_slider_content_padding']) ? esc_attr($post_slider_options['post_slider_content_padding']) : '0 80px';
+    $content_margin = isset($post_slider_options['post_slider_content_margin']) ? esc_attr($post_slider_options['post_slider_content_margin']) : '0';
     $content_alignment = isset($post_slider_options['post_slider_content_alignment']) ? esc_attr($post_slider_options['post_slider_content_alignment']) : 'center';
 
     /**
@@ -34,10 +34,10 @@
     $heading_font_family = isset($post_slider_options['post_slider_heading_font_family']) ? esc_attr($post_slider_options['post_slider_heading_font_family']) : 'Arial, sans-serif';
     $heading_font_size = isset($post_slider_options['post_slider_heading_font_size']) ? esc_attr($post_slider_options['post_slider_heading_font_size']) : '32px';
     $heading_font_weight = isset($post_slider_options['post_slider_heading_font_weight']) ? esc_attr($post_slider_options['post_slider_heading_font_weight']) : '700';
-    $heading_line_height = isset($post_slider_options['post_slider_heading_line_height']) ? esc_attr($post_slider_options['post_slider_heading_line_height']) : '1.2';
+    $heading_line_height = isset($post_slider_options['post_slider_heading_line_height']) ? esc_attr($post_slider_options['post_slider_heading_line_height']) : '1.5';
     $heading_color = isset($post_slider_options['post_slider_heading_color']) ? esc_attr($post_slider_options['post_slider_heading_color']) : '#ffffff';
-    $heading_margin = isset($post_slider_options['post_slider_heading_margin']) ? esc_attr($post_slider_options['post_slider_heading_margin']) : '0 0 20px 0';
-    $heading_padding = isset($post_slider_options['post_slider_heading_padding']) ? esc_attr($post_slider_options['post_slider_heading_padding']) : '0';
+    $heading_margin = isset($post_slider_options['post_slider_heading_margin']) ? esc_attr($post_slider_options['post_slider_heading_margin']) : '0 0 10px 0';
+    $heading_padding = isset($post_slider_options['post_slider_heading_padding']) ? esc_attr($post_slider_options['post_slider_heading_padding']) : '0 0 10px 0';
 
     /**
      * Subheading / Excerpt settings
@@ -47,24 +47,24 @@
     $excerpt_font_weight = isset($post_slider_options['post_slider_subheading_font_weight']) ? esc_attr($post_slider_options['post_slider_subheading_font_weight']) : '400';
     $excerpt_line_height = isset($post_slider_options['post_slider_subheading_line_height']) ? esc_attr($post_slider_options['post_slider_subheading_line_height']) : '1.5';
     $excerpt_color = isset($post_slider_options['post_slider_subheading_color']) ? esc_attr($post_slider_options['post_slider_subheading_color']) : '#ffffff';
-    $excerpt_margin = isset($post_slider_options['post_slider_subheading_margin']) ? esc_attr($post_slider_options['post_slider_subheading_margin']) : '0 0 30px 0';
-    $excerpt_padding = isset($post_slider_options['post_slider_subheading_padding']) ? esc_attr($post_slider_options['post_slider_subheading_padding']) : '0';
+    $excerpt_margin = isset($post_slider_options['post_slider_subheading_margin']) ? esc_attr($post_slider_options['post_slider_subheading_margin']) : '0 0 10px 0';
+    $excerpt_padding = isset($post_slider_options['post_slider_subheading_padding']) ? esc_attr($post_slider_options['post_slider_subheading_padding']) : '0 0 10px 0';
 
     /**
      * Button settings
      */
     $button_font_family = isset($post_slider_options['post_slider_button_font_family']) ? esc_attr($post_slider_options['post_slider_button_font_family']) : 'Arial, sans-serif';
     $button_font_weight = isset($post_slider_options['post_slider_button_font_weight']) ? esc_attr($post_slider_options['post_slider_button_font_weight']) : '400';
-    $button_font_size = isset($post_slider_options['post_slider_button_font_size']) ? esc_attr($post_slider_options['post_slider_button_font_size']) : '14px';
+    $button_font_size = isset($post_slider_options['post_slider_button_font_size']) ? esc_attr($post_slider_options['post_slider_button_font_size']) : '16px';
     $button_color = isset($post_slider_options['post_slider_button_color']) ? esc_attr($post_slider_options['post_slider_button_color']) : '#ffffff';
-    $button_padding = isset($post_slider_options['post_slider_button_padding']) ? esc_attr($post_slider_options['post_slider_button_padding']) : '10px 20px';
-    $button_margin = isset($post_slider_options['post_slider_button_margin']) ? esc_attr($post_slider_options['post_slider_button_margin']) : '20px';
+    $button_padding = isset($post_slider_options['post_slider_button_padding']) ? esc_attr($post_slider_options['post_slider_button_padding']) : '10px 35px';
+    $button_margin = isset($post_slider_options['post_slider_button_margin']) ? esc_attr($post_slider_options['post_slider_button_margin']) : '0 20px 0 0';
     $button_bg_color = isset($post_slider_options['post_slider_button_bg_color']) ? esc_attr($post_slider_options['post_slider_button_bg_color']) : '#ff5733';
     $button_border_color = isset($post_slider_options['post_slider_button_border_color']) ? esc_attr($post_slider_options['post_slider_button_border_color']) : '#ff5733';
     $button_border_width = isset($post_slider_options['post_slider_button_border_width']) ? esc_attr($post_slider_options['post_slider_button_border_width']) : '1px';
     $button_border_style = isset($post_slider_options['post_slider_button_border_style']) ? esc_attr($post_slider_options['post_slider_button_border_style']) : 'solid';
     $button_border_radius = isset($post_slider_options['post_slider_button_border_radius']) ? esc_attr($post_slider_options['post_slider_button_border_radius']) : '5px';
-    $button_box_shadow = isset($post_slider_options['post_slider_button_box_shadow']) ? esc_attr($post_slider_options['post_slider_button_box_shadow']) : '0px 4px 6px #888888';
+    $button_box_shadow = isset($post_slider_options['post_slider_button_box_shadow']) ? esc_attr($post_slider_options['post_slider_button_box_shadow']) : 'none';
     $button_text_align = isset($post_slider_options['post_slider_button_text_align']) ? esc_attr($post_slider_options['post_slider_button_text_align']) : 'center';
     $button_text_decoration = isset($post_slider_options['post_slider_button_text_decoration']) ? esc_attr($post_slider_options['post_slider_button_text_decoration']) : 'none';
     $button_target = isset($post_slider_options['post_slider_button_target']) ? esc_attr($post_slider_options['post_slider_button_target']) : '_self';
@@ -72,22 +72,23 @@
     /**
      * Arrow settings
      */
-    $post_slider_arrow_left = isset($post_slider_options['post_slider_arrow_left']) ? esc_attr($post_slider_options['post_slider_arrow_left']) : 'Icon-1';
-    $post_slider_arrow_right = isset($post_slider_options['post_slider_arrow_right']) ? esc_attr($post_slider_options['post_slider_arrow_right']) : 'Icon-1';
-    $post_slider_left_arrow_position_top = isset($post_slider_options['post_slider_left_arrow_position_top']) ? esc_attr($post_slider_options['post_slider_left_arrow_position_top']) : '10%';
-    $post_slider_left_arrow_position_left = isset($post_slider_options['post_slider_left_arrow_position_left']) ? esc_attr($post_slider_options['post_slider_left_arrow_position_left']) : '10%';
-    $post_slider_left_arrow_position_right = isset($post_slider_options['post_slider_left_arrow_position_right']) ? esc_attr($post_slider_options['post_slider_left_arrow_position_right']) : '10%';
-    $post_slider_left_arrow_position_bottom = isset($post_slider_options['post_slider_left_arrow_position_bottom']) ? esc_attr($post_slider_options['post_slider_left_arrow_position_bottom']) : '10%';
+    $post_slider_left_media_file = isset($post_slider_options['post_slider_left_media_file']) ? esc_attr($post_slider_options['post_slider_left_media_file']) : '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Left.svg';
+    $post_slider_right_media_file = isset($post_slider_options['post_slider_right_media_file']) ? esc_attr($post_slider_options['post_slider_right_media_file']) : '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Right.svg';
+
+    $post_slider_left_arrow_position_top = isset($post_slider_options['post_slider_left_arrow_position_top']) ? esc_attr($post_slider_options['post_slider_left_arrow_position_top']) : '50%';
+    $post_slider_left_arrow_position_left = isset($post_slider_options['post_slider_left_arrow_position_left']) ? esc_attr($post_slider_options['post_slider_left_arrow_position_left']) : '0';
+    $post_slider_left_arrow_position_right = isset($post_slider_options['post_slider_left_arrow_position_right']) ? esc_attr($post_slider_options['post_slider_left_arrow_position_right']) : 'auto';
+    $post_slider_left_arrow_position_bottom = isset($post_slider_options['post_slider_left_arrow_position_bottom']) ? esc_attr($post_slider_options['post_slider_left_arrow_position_bottom']) : 'auto';
     $post_slider_left_arrow_color = isset($post_slider_options['post_slider_left_arrow_color']) ? esc_attr($post_slider_options['post_slider_left_arrow_color']) : '#ffffff';
-    $post_slider_left_arrow_opacity = isset($post_slider_options['post_slider_left_arrow_opacity']) ? esc_attr($post_slider_options['post_slider_left_arrow_opacity']) : '0.8';
+    $post_slider_left_arrow_opacity = isset($post_slider_options['post_slider_left_arrow_opacity']) ? esc_attr($post_slider_options['post_slider_left_arrow_opacity']) : '1';
     $post_slider_left_arrow_height = isset($post_slider_options['post_slider_left_arrow_height']) ? esc_attr($post_slider_options['post_slider_left_arrow_height']) : '40px';
     $post_slider_left_arrow_width = isset($post_slider_options['post_slider_left_arrow_width']) ? esc_attr($post_slider_options['post_slider_left_arrow_width']) : '40px';
-    $post_slider_right_arrow_position_top = isset($post_slider_options['post_slider_right_arrow_position_top']) ? esc_attr($post_slider_options['post_slider_right_arrow_position_top']) : '10%';
-    $post_slider_right_arrow_position_left = isset($post_slider_options['post_slider_right_arrow_position_left']) ? esc_attr($post_slider_options['post_slider_right_arrow_position_left']) : '10%';
-    $post_slider_right_arrow_position_right = isset($post_slider_options['post_slider_right_arrow_position_right']) ? esc_attr($post_slider_options['post_slider_right_arrow_position_right']) : '10%';
-    $post_slider_right_arrow_position_bottom = isset($post_slider_options['post_slider_right_arrow_position_bottom']) ? esc_attr($post_slider_options['post_slider_right_arrow_position_bottom']) : '10%';
+    $post_slider_right_arrow_position_top = isset($post_slider_options['post_slider_right_arrow_position_top']) ? esc_attr($post_slider_options['post_slider_right_arrow_position_top']) : '50%';
+    $post_slider_right_arrow_position_left = isset($post_slider_options['post_slider_right_arrow_position_left']) ? esc_attr($post_slider_options['post_slider_right_arrow_position_left']) : 'auto';
+    $post_slider_right_arrow_position_right = isset($post_slider_options['post_slider_right_arrow_position_right']) ? esc_attr($post_slider_options['post_slider_right_arrow_position_right']) : '0';
+    $post_slider_right_arrow_position_bottom = isset($post_slider_options['post_slider_right_arrow_position_bottom']) ? esc_attr($post_slider_options['post_slider_right_arrow_position_bottom']) : 'auto';
     $post_slider_right_arrow_color = isset($post_slider_options['post_slider_right_arrow_color']) ? esc_attr($post_slider_options['post_slider_right_arrow_color']) : '#ffffff';
-    $post_slider_right_arrow_opacity = isset($post_slider_options['post_slider_right_arrow_opacity']) ? esc_attr($post_slider_options['post_slider_right_arrow_opacity']) : '0.8';
+    $post_slider_right_arrow_opacity = isset($post_slider_options['post_slider_right_arrow_opacity']) ? esc_attr($post_slider_options['post_slider_right_arrow_opacity']) : '1';
     $post_slider_right_arrow_height = isset($post_slider_options['post_slider_right_arrow_height']) ? esc_attr($post_slider_options['post_slider_right_arrow_height']) : '40px';
     $post_slider_right_arrow_width = isset($post_slider_options['post_slider_right_arrow_width']) ? esc_attr($post_slider_options['post_slider_right_arrow_width']) : '40px';
     ?>
@@ -97,60 +98,19 @@
         background-color: <?php echo $bg_overlay_color;  ?> !important;
         opacity: <?php echo $bg_overlay_opacity; ?> !important;
     }
-
-    #arrow-left svg {
-        width: <?php echo $post_slider_left_arrow_width; ?>;
-        height: <?php echo $post_slider_left_arrow_height; ?>;
-        color: <?php echo $post_slider_left_arrow_color; ?>;
-        fill: <?php echo $post_slider_left_arrow_color; ?>;
-        stroke: <?php echo $post_slider_left_arrow_color; ?>;
-        path: <?php echo $post_slider_left_arrow_color; ?>;
-        opacity: <?php echo $post_slider_left_arrow_opacity; ?>;
-    }
-
-    #arrow-right svg {
-        width: <?php echo $post_slider_right_arrow_width; ?>;
-        height: <?php echo $post_slider_right_arrow_height; ?>;
-        color: <?php echo $post_slider_right_arrow_color; ?>;
-        fill: <?php echo $post_slider_right_arrow_color; ?>;
-        stroke: <?php echo $post_slider_right_arrow_color; ?>;
-        path: <?php echo $post_slider_right_arrow_color; ?>;
-        opacity: <?php echo $post_slider_right_arrow_opacity; ?>;
-    }
-
 </style>
 
 
 <div class="slider-wrapper post-slider" style="width: <?php echo $slider_width; ?>;  ">
-    <div id="arrow-left" class="arrow" style="left:<?php echo $post_slider_left_arrow_position_left; ?>; top:<?php echo $post_slider_left_arrow_position_top; ?>; right:<?php echo $post_slider_left_arrow_position_right; ?>; bottom:<?php echo $post_slider_left_arrow_position_bottom; ?>; opacity: <?php echo $post_slider_left_arrow_opacity; ?>; height: <?php echo $post_slider_left_arrow_height; ?>; width: <?php echo $post_slider_left_arrow_width; ?>;">
-        <?php
-            $svg_path = $post_slider_arrow_left;
-            if (filter_var($svg_path, FILTER_VALIDATE_URL)) {
-                // Add arguments to ignore SSL verification for local development
-                $args = array(
-                    'sslverify' => false, // Ignore SSL verification
-                    'timeout'   => 30
-                );
-
-                $response = wp_remote_get($svg_path, $args);
-                if (!is_wp_error($response)) {
-                    $svg_content = wp_remote_retrieve_body($response);
-
-                    // Add the necessary attributes for sizing and coloring
-                    $svg_content = str_replace(
-                        '<svg',
-                        '<svg width="' . $post_slider_left_arrow_width . '" height="' . $post_slider_left_arrow_height . '" style="fill: ' . $post_slider_left_arrow_color . ';"',
-                        $svg_content
-                    );
-
-                    // Output the modified SVG
-                    echo $svg_content;
-                } else {
-                    // Fallback in case of error
-                    echo '<img src="' . esc_url($svg_path) . '" alt="Arrow Left" style="width: ' . $post_slider_left_arrow_width . '; height: ' . $post_slider_left_arrow_height . ';">';
-                }
-            }
-        ?>
+    <div id="arrow-left" class="arrow" style="
+        width: <?php echo empty($post_slider_left_arrow_width) ? '40px' : $post_slider_left_arrow_width; ?>;
+        height: <?php echo empty($post_slider_left_arrow_height) ? '40px' : $post_slider_left_arrow_height; ?>;
+        left: <?php echo empty($post_slider_left_arrow_position_left) ? '0' : $post_slider_left_arrow_position_left; ?>;
+        top: <?php echo empty($post_slider_left_arrow_position_top) ? '50%' : $post_slider_left_arrow_position_top; ?>;
+        right: <?php echo empty($post_slider_left_arrow_position_right) ? 'auto' : $post_slider_left_arrow_position_right; ?>;
+        bottom: <?php echo empty($post_slider_left_arrow_position_bottom) ? 'auto' : $post_slider_left_arrow_position_bottom; ?>;
+        opacity: <?php echo empty($post_slider_left_arrow_opacity) ? 'auto' : $post_slider_left_arrow_opacity; ?>; ">
+        <img src="<?php echo empty($post_slider_left_media_file) ? '' : $post_slider_left_media_file; ?>" alt="">
     </div>
     <div id="slider">
         <?php if (!empty($post_slider_data)) {
@@ -164,15 +124,15 @@
         ?>
 
         <div class="slide" style=" background-image: url('<?php if ($image) { echo $image;} ?>'); background-size: <?php echo $bg_image_size; ?>; background-position: <?php echo $bg_image_position; ?>; background-repeat: no-repeat; height: <?php echo $slider_height; ?>; ">
-            <div class="slide-content" style=" top: <?php echo $content_position_top; ?>; left: <?php echo $content_position_left; ?>; right: <?php echo $content_position_right; ?>; bottom: <?php echo $content_position_bottom; ?>; margin: <?php echo $content_margin; ?>; padding: <?php echo $content_padding; ?>; " >
+            <div class="slide-content" style="height:fit-content; top: <?php echo $content_position_top; ?>; left: <?php echo $content_position_left; ?>; right: <?php echo $content_position_right; ?>; bottom: <?php echo $content_position_bottom; ?>; margin: <?php echo $content_margin; ?>; padding: <?php echo $content_padding; ?>; " >
                 <?php if ($heading) { ?>
-                    <h2 style=" font-family: <?php echo $heading_font_family; ?>; font-size: <?php echo $heading_font_size; ?>; color: <?php echo $heading_color; ?>; text-align: <?php echo $heading_text_align; ?>; font-weight: <?php echo $heading_font_weight; ?>; line-height: <?php echo $heading_line_height; ?>; margin: <?php echo $heading_margin; ?>; padding: <?php echo $heading_padding; ?>; ">
+                    <h2 style=" font-family: <?php echo $heading_font_family; ?>; font-size: <?php echo $heading_font_size; ?>; color: <?php echo $heading_color; ?>; font-weight: <?php echo $heading_font_weight; ?>; line-height: <?php echo $heading_line_height; ?>; margin: <?php echo $heading_margin; ?>; padding: <?php echo $heading_padding; ?>; ">
                         <?php echo $heading; ?>
                     </h2>
                 <?php } ?>
 
                 <?php if ($subheading) { ?>
-                    <p style=" font-family: <?php echo $excerpt_font_family; ?>; font-size: <?php echo $excerpt_font_size; ?>; color: <?php echo $excerpt_color; ?>; text-align: <?php echo $excerpt_text_align; ?>; font-weight: <?php echo $excerpt_font_weight; ?>; line-height: <?php echo $excerpt_line_height; ?>; margin: <?php echo $excerpt_margin; ?>; padding: <?php echo $excerpt_padding; ?>; ">
+                    <p style=" font-family: <?php echo $excerpt_font_family; ?>; font-size: <?php echo $excerpt_font_size; ?>; color: <?php echo $excerpt_color; ?>; font-weight: <?php echo $excerpt_font_weight; ?>; line-height: <?php echo $excerpt_line_height; ?>; margin: <?php echo $excerpt_margin; ?>; padding: <?php echo $excerpt_padding; ?>; ">
                         <?php echo $subheading; ?>
                     </p>
                 <?php } ?>
@@ -189,34 +149,14 @@
             <p>No slider data available.</p>
         <?php } ?>
     </div>
-    <div id="arrow-right" class="arrow" style="left:<?php echo $post_slider_right_arrow_position_left; ?>; top:<?php echo $post_slider_right_arrow_position_top; ?>; right:<?php echo $post_slider_right_arrow_position_right; ?>; bottom:<?php echo $post_slider_right_arrow_position_bottom; ?>; opacity: <?php echo $post_slider_right_arrow_opacity; ?>; height: <?php echo $post_slider_right_arrow_height; ?>; width: <?php echo $post_slider_right_arrow_width; ?>;">
-    <?php
-        $svg_path = $post_slider_arrow_right;
-        if (filter_var($svg_path, FILTER_VALIDATE_URL)) {
-            // Add arguments to ignore SSL verification for local development
-            $args = array(
-                'sslverify' => false, // Ignore SSL verification
-                'timeout'   => 30
-            );
-
-            $response = wp_remote_get($svg_path, $args);
-            if (!is_wp_error($response)) {
-                $svg_content = wp_remote_retrieve_body($response);
-
-                // Add the necessary attributes for sizing and coloring
-                $svg_content = str_replace(
-                    '<svg',
-                    '<svg width="' . $post_slider_right_arrow_width . '" height="' . $post_slider_right_arrow_height . '" style="fill: ' . $post_slider_right_arrow_color . ';"',
-                    $svg_content
-                );
-
-                // Output the modified SVG
-                echo $svg_content;
-            } else {
-                // Fallback in case of error
-                echo '<img src="' . esc_url($svg_path) . '" alt="Arrow Left" style="width: ' . $post_slider_right_arrow_width . '; height: ' . $post_slider_right_arrow_height . ';">';
-            }
-        }
-    ?>
+    <div id="arrow-right" class="arrow" style="
+        width: <?php echo empty($post_slider_right_arrow_width) ? '40px' : $post_slider_right_arrow_width; ?>;
+        height: <?php echo empty($post_slider_right_arrow_height) ? '40px' : $post_slider_right_arrow_height; ?>;
+        left: <?php echo empty($post_slider_right_arrow_position_left) ? 'auto' : $post_slider_right_arrow_position_left; ?>;
+        top: <?php echo empty($post_slider_right_arrow_position_top) ? '50%' : $post_slider_right_arrow_position_top; ?>;
+        right: <?php echo empty($post_slider_right_arrow_position_right) ? '0' : $post_slider_right_arrow_position_right; ?>;
+        bottom: <?php echo empty($post_slider_right_arrow_position_bottom) ? 'auto' : $post_slider_right_arrow_position_bottom; ?>;
+        opacity: <?php echo empty($post_slider_right_arrow_opacity) ? '1' : $post_slider_right_arrow_opacity; ?>; ">
+        <img src="<?php echo empty($post_slider_right_media_file) ? '' : $post_slider_right_media_file; ?>" alt="">
     </div>
 </div>

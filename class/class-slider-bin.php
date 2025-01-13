@@ -52,18 +52,18 @@ class Slider_Bin {
             'slider-bin-style',
             SLIDER_BIN_URL . 'css/slider-bin-style.css',
             array(),
-            SLIDER_BIN_VERSION
+            filemtime(SLIDER_BIN_PATH . 'css/slider-bin-style.css')
         );
 
         wp_enqueue_script(
             'slider-bin-script',
             SLIDER_BIN_URL . 'js/slider-bin-plugin.js',
             array('jquery'),
-            SLIDER_BIN_VERSION,
+            filemtime(SLIDER_BIN_PATH . 'js/slider-bin-plugin.js') ,
             true
         );
 
-        // Localize script
+        // // Localize script
         $options = get_option('slider_bin_settings');
         wp_localize_script(
             'slider-bin-script',
@@ -109,21 +109,21 @@ class Slider_Bin {
             'slider-bin-admin-style',
             SLIDER_BIN_URL . 'css/slider-bin-admin-style.css',
             array(),
-            SLIDER_BIN_VERSION
+            filemtime(SLIDER_BIN_PATH . 'css/slider-bin-admin-style.css')
         );
 
         wp_enqueue_script(
             'slider-bin-media-script',
             SLIDER_BIN_URL . 'js/slider-bin-media.js',
             array('jquery'),
-            SLIDER_BIN_VERSION,
+            filemtime(SLIDER_BIN_PATH . 'js/slider-bin-media.js'),
             true
         );
         wp_enqueue_script(
             'slider-bin-admin-script',
             SLIDER_BIN_URL . 'js/slider-bin-admin.js',
             array('jquery'),
-            SLIDER_BIN_VERSION,
+            filemtime(SLIDER_BIN_PATH . 'js/slider-bin-admin.js'),
             true
         );
 
