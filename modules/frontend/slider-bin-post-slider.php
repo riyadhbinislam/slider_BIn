@@ -101,7 +101,7 @@
 </style>
 
 
-<div class="slider-wrapper post-slider" style="width: <?php echo $slider_width; ?>;  ">
+<div id="<?php echo esc_attr($unique_id); ?>" class="slider-wrapper post-slider" style="width: <?php echo $slider_width; ?>;">
     <div id="arrow-left" class="arrow" style="
         width: <?php echo empty($post_slider_left_arrow_width) ? '40px' : $post_slider_left_arrow_width; ?>;
         height: <?php echo empty($post_slider_left_arrow_height) ? '40px' : $post_slider_left_arrow_height; ?>;

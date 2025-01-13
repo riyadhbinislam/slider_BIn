@@ -36,7 +36,7 @@
     $right_arrow_height = isset($options['video_slider_right_arrow_height']) ? esc_attr($options['video_slider_right_arrow_height']) : '';
 ?>
 
-<div class="slider-wrapper video-slider" style="width: <?php echo empty($slider_width) ? '100%' : $slider_width; ?>; ">
+<div id="<?php echo esc_attr($unique_id); ?>" class="slider-wrapper video-slider" style="width: <?php echo empty($slider_width) ? '100%' : $slider_width; ?>; ">
     <div id="arrow-left" class="arrow" style="
         width: <?php echo empty($left_arrow_width) ? '40px' : $left_arrow_width; ?>;
         height: <?php echo empty($left_arrow_height) ? '40px' : $left_arrow_height; ?>;

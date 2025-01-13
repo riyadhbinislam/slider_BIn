@@ -116,7 +116,7 @@ $button_target               = isset($hero_same_options['hero_same_button_target
 
 
 
-<div class="slider-wrapper hero-same-wrapper" style="width: <?php echo empty($slider_width) ? '100%' : $slider_width; ?>;">
+<div id="<?php echo esc_attr($unique_id); ?>" class="slider-wrapper hero-same-wrapper" style="width: <?php echo empty($slider_width) ? '100%' : $slider_width; ?>;">
     <div id="arrow-left" class="arrow" style="
         width: <?php echo empty($hero_same_left_arrow_width) ? '40px' : $hero_same_left_arrow_width; ?>;
         height: <?php echo empty($hero_same_left_arrow_height) ? '40px' : $hero_same_left_arrow_height; ?>;
@@ -125,7 +125,9 @@ $button_target               = isset($hero_same_options['hero_same_button_target
         right: <?php echo empty($hero_same_left_arrow_position_right) ? 'auto' : $hero_same_left_arrow_position_right; ?>;
         bottom: <?php echo empty($hero_same_left_arrow_position_bottom) ? 'auto' : $hero_same_left_arrow_position_bottom; ?>;
         opacity: <?php echo empty($hero_same_left_arrow_opacity) ? '1' : $hero_same_left_arrow_opacity; ?>; ">
-        <img src="<?php echo empty($hero_same_left_media_file) ? '' : $hero_same_left_media_file; ?>" alt="">
+        <img src="<?php echo empty($hero_same_left_media_file) ? '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Left.svg' : $hero_same_left_media_file; ?>" alt="">
+
+
     </div>
     <div id="slider">
         <?php if (!empty($hero_same_slider_data['images'])):
@@ -136,14 +138,14 @@ $button_target               = isset($hero_same_options['hero_same_button_target
             <?php endforeach; ?>
         <?php endif; ?>
         <div class="slider-content" style="
-                                        height: fit-content;
-                                        top: <?php echo empty($hero_same_content_position_top) ? '50%' : $hero_same_content_position_top; ?>;
-                                        left: <?php echo empty($hero_same_content_position_left) ? '50%' : $hero_same_content_position_left; ?>;
-                                        right: <?php echo empty($hero_same_content_position_right) ? '50%' : $hero_same_content_position_right; ?>;
-                                        bottom: <?php echo empty($hero_same_content_position_bottom) ? 'auto' : $hero_same_content_position_bottom; ?>;
-                                        align-items: <?php echo empty($content_alignment) ? 'center' : $content_alignment; ?>;
-                                        padding: <?php echo empty($content_padding) ? '0 150px' : $content_padding; ?>;
-                                        margin: <?php echo empty($content_margin) ? '0 0 10px 0' : $content_margin; ?>;">
+                    height: fit-content;
+                    top: <?php echo empty($hero_same_content_position_top) ? '50%' : $hero_same_content_position_top; ?>;
+                    left: <?php echo empty($hero_same_content_position_left) ? '50%' : $hero_same_content_position_left; ?>;
+                    right: <?php echo empty($hero_same_content_position_right) ? '50%' : $hero_same_content_position_right; ?>;
+                    bottom: <?php echo empty($hero_same_content_position_bottom) ? 'auto' : $hero_same_content_position_bottom; ?>;
+                    align-items: <?php echo empty($content_alignment) ? 'center' : $content_alignment; ?>;
+                    padding: <?php echo empty($content_padding) ? '0 20px' : $content_padding; ?>;
+                    margin: <?php echo empty($content_margin) ? '0 0 10px 0' : $content_margin; ?>;">
             <?php if (!empty($hero_same_slider_data['heading'])): ?>
                 <h1 style="
                     font-family: <?php echo empty($heading_font_family) ? 'Arial, sans-serif' : $heading_font_family; ?>;
@@ -151,7 +153,7 @@ $button_target               = isset($hero_same_options['hero_same_button_target
                     font-weight: <?php echo empty($heading_font_weight) ? 'normal' : $heading_font_weight; ?>;
                     line-height: <?php echo empty($heading_line_height) ? '1.5' : $heading_line_height; ?>;
                     color: <?php echo empty($heading_color) ? '#fff' : $heading_color; ?>;
-                    margin: <?php echo empty($heading_margin) ? '0 0 10px 0' : $heading_margin; ?>;
+                    margin: <?php echo empty($heading_margin) ? '0 auto' : $heading_margin; ?>;
                     padding: <?php echo empty($heading_padding) ? '0 0 10px 0' : $heading_padding; ?>;">
                     <?php echo esc_html($hero_same_slider_data['heading']); ?>
                 </h1>
@@ -171,7 +173,7 @@ $button_target               = isset($hero_same_options['hero_same_button_target
             <?php endif; ?>
 
             <?php if (!empty($hero_same_slider_data['button_text']) && !empty($hero_same_slider_data['button_link'])): ?>
-                <a href="<?php echo esc_url($hero_same_slider_data['button_link']); ?>" class="hero-button" target="<?php echo empty($button_target) ? '_self' : $button_target; ?>" style="
+                <a href="<?php echo esc_url($hero_same_slider_data['button_link']); ?>" class="hero-button" target="<?php echo empty($button_target) ? '_blunk' : $button_target; ?>" style="
                     background-color: <?php echo empty($button_bg_color) ? '#000' : $button_bg_color; ?>;
                     border-width: <?php echo empty($button_border_width) ? '0' : $button_border_width; ?>;
                     border-style: <?php echo empty($button_border_style) ? 'none' : $button_border_style; ?>;
@@ -199,7 +201,7 @@ $button_target               = isset($hero_same_options['hero_same_button_target
         right: <?php echo empty($hero_same_right_arrow_position_right) ? '0' : $hero_same_right_arrow_position_right; ?>;
         bottom: <?php echo empty($hero_same_right_arrow_position_bottom) ? 'auto' : $hero_same_right_arrow_position_bottom; ?>;
         opacity: <?php echo empty($hero_same_right_arrow_opacity) ? '1' : $hero_same_right_arrow_opacity; ?>;">
-        <img src="<?php echo empty($hero_same_right_media_file) ? '' : $hero_same_right_media_file; ?>" alt="">
+        <img src="<?php echo empty($hero_same_right_media_file) ? '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Right.svg' : $hero_same_right_media_file; ?>" alt="">
     </div>
 </div>
 

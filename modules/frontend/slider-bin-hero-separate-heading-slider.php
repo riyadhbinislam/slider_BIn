@@ -101,7 +101,7 @@
         opacity: <?php echo $bg_overlay_opacity; ?> !important;
     }
 </style>
-<div class="slider-wrapper hero-separate-wrapper"style="width: <?php echo empty($slider_width) ? '100%' : $slider_width; ?>;" >
+<div id="<?php echo esc_attr($unique_id); ?>" class="slider-wrapper hero-separate-wrapper"style="width: <?php echo empty($slider_width) ? '100%' : $slider_width; ?>;" >
     <div id="arrow-left" class="arrow" style="
         width: <?php echo empty($hero_separate_left_arrow_width) ? '40px' : $hero_separate_left_arrow_width; ?>;
         height: <?php echo empty($hero_separate_left_arrow_height) ? '40px' : $hero_separate_left_arrow_height; ?>;

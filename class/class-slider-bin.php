@@ -69,7 +69,7 @@ class Slider_Bin {
             'slider-bin-script',
             'sliderBinSettings',
             array(
-                'autoplay_timeout' => isset($options['autoplay_timeout']) ? intval($options['autoplay_timeout']) : 5000,
+                'autoplay_timeout' => isset($options['autoplay_timeout']) ? intval($options['autoplay_timeout']) : 2500,
                 'autoplay_speed' => isset($options['autoplay_speed']) ? intval($options['autoplay_speed']) : 500,
                 'autoplay_pause_on_hover' => isset($options['autoplay_pause_on_hover']) ? $options['autoplay_pause_on_hover'] : 'true'
             )
