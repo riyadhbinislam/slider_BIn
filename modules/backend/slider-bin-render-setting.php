@@ -13,10 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="slider-settings-container">
         <!-- Individual Slider Styles -->
             <div class="slider-individual-style">
-            <h2><?php _e('Individual Slider Styles', 'slider_bin'); ?></h2>
+            <h2><?php _e('Select Slider Type', 'slider_bin'); ?></h2>
             <div class="slider-type-wrap">
                 <div class="slider-type-heading">
-                    <h3><?php _e('Slider Type', 'slider_bin'); ?></h3>
+                    <!-- <h3><?php _e('Slider Type', 'slider_bin'); ?></h3> -->
                     <select name="slider_type" id="slider_type" class="slider-type-select">
                         <option value="hero_same"><?php _e('Hero with Same Heading Slider', 'slider_bin'); ?></option>
                         <option value="hero_separate"><?php _e('Hero with Separate Heading Slider', 'slider_bin'); ?></option>
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="individual-setting-wrap">
                 <!-- Hero Same Heading Slider Settings -->
                 <div class="slider-type-settings" id="hero-same-settings" <?php echo $selected_type === 'hero_same' ? '' : 'style="display: none;"'; ?>>
-                    <h3><?php _e('Hero Same Heading Slider Setting', 'slider_bin'); ?></h3>
+                    <h3><?php _e('Hero With Same Heading Slider Setting', 'slider_bin'); ?></h3>
                     <form action="options.php" method="post">
                         <?php
                         settings_fields('slider_bin_hero_same_settings');
@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                 <!-- Hero Separate Heading Slider Settings -->
                 <div class="slider-type-settings" id="hero-separate-settings" <?php echo $selected_type === 'hero_separate' ? '' : 'style="display: none;"'; ?>>
-                    <h3><?php _e('Hero Separate Heading Slider Setting', 'slider_bin'); ?></h3>
+                    <h3><?php _e('Hero With Separate Heading Slider Setting', 'slider_bin'); ?></h3>
 
                     <form action="options.php" method="post">
                         <?php
@@ -59,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         ?>
                     </form>
                     <!-- Clear Button for Hero Separate -->
-                    <form method="post" action="">
+                    <form method="post" action="" class="clear-saved-settings">
                         <?php wp_nonce_field('slider_bin_settings', 'slider_bin_settings_nonce'); ?>
                         <input type="hidden" name="action" value="clear_hero_separate_settings">
                         <?php submit_button(__('Clear Settings', 'slider_bin'), 'secondary', 'clear_hero_separate_settings'); ?>
@@ -79,7 +79,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                     </form>
                     <!-- Clear Button for Image Slider -->
-                    <form method="post" action="">
+                    <form method="post" action="" class="clear-saved-settings">
                         <?php wp_nonce_field('slider_bin_settings', 'slider_bin_settings_nonce'); ?>
                         <input type="hidden" name="action" value="clear_image_slider_settings">
                         <?php submit_button(__('Clear Settings', 'slider_bin'), 'secondary', 'clear_image_slider_settings'); ?>
@@ -99,7 +99,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                     </form>
                     <!-- Clear Button for Post Slider -->
-                    <form method="post" action="">
+                    <form method="post" action="" class="clear-saved-settings">
                         <?php wp_nonce_field('slider_bin_settings', 'slider_bin_settings_nonce'); ?>
                         <input type="hidden" name="action" value="clear_post_slider_settings">
                         <?php submit_button(__('Clear Settings', 'slider_bin'), 'secondary', 'clear_post_slider_settings'); ?>
@@ -119,7 +119,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                     </form>
                     <!-- Clear Button for Video Slider -->
-                    <form method="post" action="">
+                    <form method="post" action="" class="clear-saved-settings">
                         <?php wp_nonce_field('slider_bin_settings', 'slider_bin_settings_nonce'); ?>
                         <input type="hidden" name="action" value="clear_video_slider_settings">
                         <?php submit_button(__('Clear Settings', 'slider_bin'), 'secondary', 'clear_video_slider_settings'); ?>

@@ -44,17 +44,6 @@
  * Initialize the plugin
  */
     require_once SLIDER_BIN_PATH . 'class/class-slider-bin.php';
-    new Slider_Bin();
-
-    function slider_bin_debug_log($message) {
-        if (WP_DEBUG === true) {
-            if (is_array($message) || is_object($message)) {
-                error_log(print_r($message, true));
-            } else {
-                error_log($message);
-            }
-        }
-    }
 
 
 /// Initialize main plugin class
@@ -85,6 +74,18 @@
     register_deactivation_hook(__FILE__, 'slider_bin_deactivate');
     function slider_bin_deactivate() {
         flush_rewrite_rules();
+    }
+
+
+// Debug log function
+    function slider_bin_debug_log($message) {
+        if (WP_DEBUG === true) {
+            if (is_array($message) || is_object($message)) {
+                error_log(print_r($message, true));
+            } else {
+                error_log($message);
+            }
+        }
     }
 
 /// Hook into WordPress init with priority 0 to ensure it runs early

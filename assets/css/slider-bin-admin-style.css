@@ -1,0 +1,345 @@
+/* ------ Admin Area CSs --------- */
+
+
+/* ADD NEW SLIDER PAGE STYLE - START*/
+#slider_type_wrapper {
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+#slider_type_wrapper label {
+  margin-right: 10px;
+  color: #08223d;
+}
+
+#slider_type {
+  border: 1px solid #cdd8e2;
+  border-radius: 5px;
+  font-size: 13px;
+  transition: border-color 0.3s;
+  background-color: aliceblue;
+}
+
+#slider_type:focus {
+  border-color: #007bff;
+}
+
+#slider_fields {
+  padding: 20px;
+  border-radius: 15px;
+}
+
+#hero_separate_fields .hero_group,
+#post_repeater .post_group {
+  max-width: 400px;
+  width: 100%;
+  border: 1px solid #cdd8e2;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: aliceblue;
+}
+
+@media (max-width: 768px){
+  .post_group ,
+  .hero_group {
+      max-width: 100%;
+  }
+}
+
+#post_repeater,
+#hero_repeater {
+  display: flex;
+  justify-content: space-around;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.video_group .inner-field-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.slider-fields {
+  display: none;
+}
+
+.inner-field-wrapper {
+  margin-bottom: 15px;
+}
+
+.inner-field-wrapper label {
+  display: block;
+  margin-bottom: 5px;
+  color: #08223d;
+}
+
+.inner-field-wrapper input[type="text"],
+.inner-field-wrapper input[type="url"],
+.inner-field-wrapper textarea {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #cdd8e2;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #072039;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.inner-field-wrapper input[type="text"]::placeholder,
+.inner-field-wrapper input[type="url"]::placeholder,
+.inner-field-wrapper textarea::placeholder {
+  color: #9aa1a8;
+  font-weight: 300;
+}
+
+.inner-field-wrapper input[type="text"]:focus,
+.inner-field-wrapper input[type="url"]:focus,
+.inner-field-wrapper textarea:focus {
+  border-color: #007bff;
+}
+
+.inner-field-wrapper button.button {
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.inner-field-wrapper button.button:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.image-preview,
+.slider-preview-wrapper {
+  margin-top: 20px;
+}
+
+.image-preview img,
+.slider-preview-wrapper img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slider-preview-wrapper .tag {
+  display: inline-block;
+  color: #007bff;
+  padding: 5px 0;
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  border-bottom: 1px dotted;
+}
+
+
+.slider-preview-wrapper .slider-preview {
+  border: 1px solid #cdd8e2;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.remove-image-button,
+.remove-hero-group,
+.remove-repeater,
+.remove-video {
+  background-color: #dc3545 !important;
+  border: none !important;
+  color: #fff !important;
+  float: right !important;
+}
+
+.remove-image-button:hover,
+.remove-hero-group:hover,
+.remove-repeater:hover,
+.remove-video:hover {
+background-color: #c82333 !important;
+}
+
+#add_more_hero_repeater,
+#add_more_repeater,
+#add_more_video_repeater {
+  display: block;
+  margin: 30px auto;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+}
+
+#add_more_hero_repeater:hover,
+#add_more_repeater:hover,
+#add_more_video_repeater:hover {
+  background-color: #218838;
+}
+
+#image_slider_preview .image-preview-container {
+  display: flex;
+  align-items: center !important;
+  gap: 15px !important;
+  justify-content: flex-start;
+}
+
+.image-preview-container input {
+  max-width: 500px !important;
+  width: 100%;
+}
+
+#video_repeater p {
+  width: fit-content;
+  color: cadetblue;
+}
+
+/* ADD NEW SLIDER PAGE STYLE - End*/
+
+
+/* Setting Page */
+
+.slider-settings-container {
+  max-width: 1100px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: aliceblue;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+
+.slider-settings-container .slider-type-select {
+  width: 100% !important;
+  padding: 10px !important;
+  margin-top: 10px !important;
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  background-color: #f9f9f9 !important;
+  font-size: 14px !important;
+  max-width: 100%;
+}
+
+.slider-settings-container .form-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.slider-settings-container .form-table th, .form-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.slider-settings-container .form-table th {
+  background-color: #f9f9f9;
+  text-align: left;
+}
+
+.slider-settings-container .form-table td {
+  background-color: #fff;
+}
+
+.slider-settings-container input[type="text"],
+.slider-settings-container input[type="color"],
+.slider-settings-container select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.slider-settings-container input[type="color"] {
+  padding: 0 !important;
+  width: 40px !important;
+}
+
+.slider-settings-container input[type="color"]:after {
+  content: "Select Color";
+  position: absolute;
+  top: 35%;
+  left: 0;
+  margin-left: 50px;
+  padding-left: 10px;
+  color: #2271b1;
+}
+
+.slider-settings-container .form-table td:has(input[type="color"]){
+  position: relative;
+}
+
+
+input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.button:hover {
+  background-color: #218838;
+}
+
+.media-preview {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.color-picker {
+  padding: 0;
+  height: 36px;
+  border: none;
+}
+
+.clear-saved-settings .button {
+  background-color: #dc3545;
+  color: #fff;
+  border-color: #dc3545;
+}
+
+.clear-saved-settings .button:hover {
+  background-color: #c82333;
+  color: #fff;
+  border-color: #dc3545;
+}
+
+.slider-type-settings {
+  position: relative;
+}
+
+.slider-type-settings .clear-saved-settings {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.slider-type-settings h3 {
+  font-size: 28px;
+}
+
+.slider-type-settings form h2 {
+  color: #2271b1;
+  margin: 20px 0px;
+}
+
+
+
+/* SLIDER SETTINGs PAGE STYLE - Start*/

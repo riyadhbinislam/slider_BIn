@@ -4,11 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-
-<div class="slider-slogan">
-    <h2 class="slider-title">Empower Every Frame with a Fresh Perspective</h2>
-    <p class="slider-Subtitle">Highlight each hero image with its own heading, subheading, and call-to-action.</p>
-</div>
 <div id="hero_repeater">
     <?php
         // Retrieve saved data
@@ -125,3 +120,17 @@ if ( ! defined( 'ABSPATH' ) ) {
     ?>
 </div>
 <button class="button" type="button" id="add_more_hero_repeater">Add More</button>
+
+<div class="slider-preview-wrapper">
+    <?php if (!empty($hero_separate_slider_data)):
+       $post_id = get_the_ID();
+       // Generate a unique ID for this slider preview
+       $unique_id = 'slider_bin_' . $post_id . '_' . uniqid();
+
+        ?>
+        <span class="tag">Preview</span>
+        <div class="slider-preview">
+            <?php include SLIDER_BIN_PATH . 'modules/frontend/slider-bin-hero-separate-heading-slider.php';?>
+        </div>
+    <?php endif; ?>
+</div>

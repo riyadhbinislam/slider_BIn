@@ -72,8 +72,8 @@
     /**
      * Arrow settings
      */
-    $post_slider_left_media_file = isset($post_slider_options['post_slider_left_media_file']) ? esc_attr($post_slider_options['post_slider_left_media_file']) : '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Left.svg';
-    $post_slider_right_media_file = isset($post_slider_options['post_slider_right_media_file']) ? esc_attr($post_slider_options['post_slider_right_media_file']) : '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Right.svg';
+    $post_slider_left_media_file = isset($post_slider_options['post_slider_left_media_file']) ? esc_attr($post_slider_options['post_slider_left_media_file']) : '/wp-content/plugins/slider-bin/assets/icon/Arrow-Left.svg';
+    $post_slider_right_media_file = isset($post_slider_options['post_slider_right_media_file']) ? esc_attr($post_slider_options['post_slider_right_media_file']) : '/wp-content/plugins/slider-bin/assets/icon/Arrow-Right.svg';
 
     $post_slider_left_arrow_position_top = isset($post_slider_options['post_slider_left_arrow_position_top']) ? esc_attr($post_slider_options['post_slider_left_arrow_position_top']) : '50%';
     $post_slider_left_arrow_position_left = isset($post_slider_options['post_slider_left_arrow_position_left']) ? esc_attr($post_slider_options['post_slider_left_arrow_position_left']) : '0';
@@ -94,7 +94,7 @@
     ?>
 
 <style>
-    #slider::before {
+    .bg-overlay-post::before {
         background-color: <?php echo $bg_overlay_color;  ?> !important;
         opacity: <?php echo $bg_overlay_opacity; ?> !important;
     }
@@ -102,7 +102,7 @@
 
 
 <div id="<?php echo esc_attr($unique_id); ?>" class="slider-wrapper post-slider" style="width: <?php echo $slider_width; ?>;">
-    <div id="arrow-left" class="arrow" style="
+    <div id="arrow-left" class="arrow-left" style="
         width: <?php echo empty($post_slider_left_arrow_width) ? '40px' : $post_slider_left_arrow_width; ?>;
         height: <?php echo empty($post_slider_left_arrow_height) ? '40px' : $post_slider_left_arrow_height; ?>;
         left: <?php echo empty($post_slider_left_arrow_position_left) ? '0' : $post_slider_left_arrow_position_left; ?>;
@@ -112,7 +112,7 @@
         opacity: <?php echo empty($post_slider_left_arrow_opacity) ? 'auto' : $post_slider_left_arrow_opacity; ?>; ">
         <img src="<?php echo empty($post_slider_left_media_file) ? '' : $post_slider_left_media_file; ?>" alt="">
     </div>
-    <div id="slider">
+    <div id="slider" class="bg-overlay-post">
         <?php if (!empty($post_slider_data)) {
             // print_r($post_slider_data);
             foreach ($post_slider_data as $index => $slide) {
@@ -149,7 +149,7 @@
             <p>No slider data available.</p>
         <?php } ?>
     </div>
-    <div id="arrow-right" class="arrow" style="
+    <div id="arrow-right" class="arrow-right" style="
         width: <?php echo empty($post_slider_right_arrow_width) ? '40px' : $post_slider_right_arrow_width; ?>;
         height: <?php echo empty($post_slider_right_arrow_height) ? '40px' : $post_slider_right_arrow_height; ?>;
         left: <?php echo empty($post_slider_right_arrow_position_left) ? 'auto' : $post_slider_right_arrow_position_left; ?>;

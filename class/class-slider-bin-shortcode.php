@@ -127,10 +127,6 @@ class Slider_Bin_Shortcode {
             }
         } catch (Exception $e) {
             ob_end_clean();
-            if (WP_DEBUG) {
-                return 'Error: ' . $e->getMessage();
-            }
-            return __('An error occurred while rendering the slider.', 'slider_bin');
         }
 
         return ob_get_clean();
@@ -212,12 +208,6 @@ class Slider_Bin_Shortcode {
         $video_urls = get_post_meta($post_id, '_video_urls', true);
         $slider_bin_videos = get_post_meta($post_id, '_slider_bin_videos', true);
 
-        // Debug log before processing
-        if (WP_DEBUG) {
-            error_log('Raw video_urls: ' . print_r($video_urls, true));
-            error_log('Raw slider_bin_videos: ' . print_r($slider_bin_videos, true));
-        }
-
         // Convert string to array if necessary
         if (is_string($video_urls)) {
             $video_urls = array_filter(explode(',', $video_urls));
@@ -227,15 +217,10 @@ class Slider_Bin_Shortcode {
             $slider_bin_videos = array_filter(explode(',', $slider_bin_videos));
         }
 
-        // Ensure we have arrays
+        // Ensure arrays
         $video_urls = is_array($video_urls) ? array_filter($video_urls) : array();
         $slider_bin_videos = is_array($slider_bin_videos) ? array_filter($slider_bin_videos) : array();
 
-        // Debug log after processing
-        if (WP_DEBUG) {
-            error_log('Processed video_urls: ' . print_r($video_urls, true));
-            error_log('Processed slider_bin_videos: ' . print_r($slider_bin_videos, true));
-        }
 
         if (empty($video_urls) && empty($slider_bin_videos)) {
             return __('No videos found for this slider.', 'slider_bin');
@@ -244,6 +229,9 @@ class Slider_Bin_Shortcode {
         // Make variables available to template
         set_query_var('video_urls', $video_urls);
         set_query_var('slider_bin_videos', $slider_bin_videos);
+
+        // Generate a unique ID for this slider
+        $unique_id = 'slider_bin_' . $post_id . '_' . uniqid();
 
         // Pass the unique ID to the template
         set_query_var('unique_id', $unique_id);

@@ -4,11 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-
-<div class="slider-slogan">
-    <h2 class="slider-title">Let Your Images Speak Louder Than Words</h2>
-    <p class="slider-Subtitle">Highlight your best shots with a dynamic sliding gallery.</p>
-</div>
 <div class="inner-field-wrapper">
     <label>Images:</label>
     <button type="button" class="button slider-bin-select-is-images">Upload Images</button>
@@ -31,20 +26,41 @@ if ( ! defined( 'ABSPATH' ) ) {
             ?>
             <div class="image-preview-container">
                 <img src="<?php echo esc_url($image); ?>" style="max-width: 100px; margin: 5px;" />
-                <input type="text"
-                       class="image-caption"
-                       name="image_captions[<?php echo esc_attr($image); ?>]"
-                       value="<?php echo $caption; ?>"
-                       placeholder="Enter image caption"
-                       style="width: 100%; margin: 5px 0;" />
-                <button type="button"
-                        class="remove-image-button"
-                        data-image-url="<?php echo esc_url($image); ?>">
+                <input type="text" class="image-caption" name="image_captions[<?php echo esc_attr($image); ?>]" value="<?php echo $caption; ?>" placeholder="Enter image caption" />
+                <button type="button" class="button remove-image-button" style="padding: 5px;" data-image-url="<?php echo esc_url($image); ?>">
                     Remove
                 </button>
             </div>
             <?php
         }
     }
+
     ?>
+</div>
+
+<div class="slider-preview-wrapper">
+    <?php
+        $post_id = get_the_ID();
+        // Generate a unique ID for this slider preview
+        $unique_id = 'slider_bin_' . $post_id . '_' . uniqid();
+        // Get image urls
+        $image_slider_data = get_post_meta($post_id, '_slider_bin_image_slider', true);
+        // Get captions
+        $image_captions = get_post_meta($post_id, '_slider_bin_image_captions', true) ?: array();
+
+        if (is_string($image_slider_data)) {
+            $image_slider_data = explode(',', $image_slider_data);
+        }
+
+        if (!is_array($image_slider_data) || empty($image_slider_data)) {
+            echo __('No images found for this slider.', 'slider_bin');
+            return;
+        }
+
+    if (!empty($image_slider_data)): ?>
+        <span class="tag">Preview</span>
+        <div class="slider-preview">
+            <?php include SLIDER_BIN_PATH . 'modules/frontend/slider-bin-image-slider.php';?>
+        </div>
+    <?php endif; ?>
 </div>

@@ -16,6 +16,9 @@ class Slider_Bin {
         $this->init_hooks();
         $this->init_components();
     }
+
+// Include the other necessary class files for the plugin to work
+// Post Type, Post Setting, Shortcode and Metabox Classes are included
     private function includes() {
         $files = [
             'class/class-slider-bin-post-type.php',
@@ -33,11 +36,16 @@ class Slider_Bin {
             }
         }
     }
+
+// Initialize the components of the plugin
+// Post Type, Post Setting, Shortcode and Metabox Components/ Class Objects
     private function init_components() {
         $this->post_type = slider_bin_init_post_type();
         $this->post_setting = slider_bin_init_post_setting();
         $this->shortcode = new Slider_Bin_Shortcode();
     }
+
+// Initialize Scripts and Styles for the plugin frontend and admin area on hooks
     private function init_hooks() {
         // Initialize scripts and styles
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_assets'));
@@ -47,19 +55,24 @@ class Slider_Bin {
         add_action('wp_ajax_get_post_data', array($this, 'get_post_data_ajax'));
         add_action('wp_ajax_nopriv_get_post_data', array($this, 'get_post_data_ajax'));
     }
+
+// Enqueue scripts and styles for the plugin frontend
+// Slider Styles and slider Main Script
+// Slider autoload Time and Speed localizing
+
     public function enqueue_frontend_assets() {
         wp_enqueue_style(
             'slider-bin-style',
-            SLIDER_BIN_URL . 'css/slider-bin-style.css',
+            SLIDER_BIN_URL . 'assets/css/slider-bin-style.css',
             array(),
-            filemtime(SLIDER_BIN_PATH . 'css/slider-bin-style.css')
+            filemtime(SLIDER_BIN_PATH . 'assets/css/slider-bin-style.css')
         );
 
         wp_enqueue_script(
             'slider-bin-script',
-            SLIDER_BIN_URL . 'js/slider-bin-plugin.js',
+            SLIDER_BIN_URL . 'assets/js/slider-bin-plugin.js',
             array('jquery'),
-            filemtime(SLIDER_BIN_PATH . 'js/slider-bin-plugin.js') ,
+            filemtime(SLIDER_BIN_PATH . 'assets/js/slider-bin-plugin.js') ,
             true
         );
 
@@ -71,10 +84,15 @@ class Slider_Bin {
             array(
                 'autoplay_timeout' => isset($options['autoplay_timeout']) ? intval($options['autoplay_timeout']) : 2500,
                 'autoplay_speed' => isset($options['autoplay_speed']) ? intval($options['autoplay_speed']) : 500,
-                'autoplay_pause_on_hover' => isset($options['autoplay_pause_on_hover']) ? $options['autoplay_pause_on_hover'] : 'true'
+                'autoplay_pause_on_hover' => isset($options['autoplay_pause_on_hover']) ? $options['autoplay_pause_on_hover'] : 'false',
             )
         );
     }
+
+// Enqueue scripts and styles for the plugin admin area
+// Slider Admin Styles and slider Admin Script
+// Slider Media Script and Color Picker Script
+
     public function enqueue_admin_assets($hook) {
         global $post_type, $current_screen;
 
@@ -107,23 +125,23 @@ class Slider_Bin {
 
         wp_enqueue_style(
             'slider-bin-admin-style',
-            SLIDER_BIN_URL . 'css/slider-bin-admin-style.css',
+            SLIDER_BIN_URL . 'assets/css/slider-bin-admin-style.css',
             array(),
-            filemtime(SLIDER_BIN_PATH . 'css/slider-bin-admin-style.css')
+            filemtime(SLIDER_BIN_PATH . 'assets/css/slider-bin-admin-style.css')
         );
 
         wp_enqueue_script(
             'slider-bin-media-script',
-            SLIDER_BIN_URL . 'js/slider-bin-media.js',
+            SLIDER_BIN_URL . 'assets/js/slider-bin-media.js',
             array('jquery'),
-            filemtime(SLIDER_BIN_PATH . 'js/slider-bin-media.js'),
+            filemtime(SLIDER_BIN_PATH . 'assets/js/slider-bin-media.js'),
             true
         );
         wp_enqueue_script(
             'slider-bin-admin-script',
-            SLIDER_BIN_URL . 'js/slider-bin-admin.js',
+            SLIDER_BIN_URL . 'assets/js/slider-bin-admin.js',
             array('jquery'),
-            filemtime(SLIDER_BIN_PATH . 'js/slider-bin-admin.js'),
+            filemtime(SLIDER_BIN_PATH . 'assets/js/slider-bin-admin.js'),
             true
         );
 
@@ -136,11 +154,38 @@ class Slider_Bin {
                 'ajaxurl' => admin_url('admin-ajax.php')
             )
         );
+
+        // Enqueue scripts and styles for previewing the slider in the admin area
+        wp_enqueue_style(
+            'slider-bin-style',
+            SLIDER_BIN_URL . 'assets/css/slider-bin-style.css',
+            array(),
+            filemtime(SLIDER_BIN_PATH . 'assets/css/slider-bin-style.css')
+        );
+
+        wp_enqueue_script(
+            'slider-bin-script',
+            SLIDER_BIN_URL . 'assets/js/slider-bin-plugin.js',
+            array('jquery'),
+            filemtime(SLIDER_BIN_PATH . 'assets/js/slider-bin-plugin.js') ,
+            true
+        );
+
+        // // Localize script
+        $options = get_option('slider_bin_settings');
+        wp_localize_script(
+            'slider-bin-script',
+            'sliderBinSettings',
+            array(
+                'autoplay_timeout' => isset($options['autoplay_timeout']) ? intval($options['autoplay_timeout']) : 2500,
+                'autoplay_speed' => isset($options['autoplay_speed']) ? intval($options['autoplay_speed']) : 500,
+                'autoplay_pause_on_hover' => isset($options['autoplay_pause_on_hover']) ? $options['autoplay_pause_on_hover'] : 'false',
+            )
+        );
     }
 
-
-    //Register AJAX Action
-    //For Post SLider - For Blog Post Data call.
+//Register AJAX Action
+//For Post SLider - For Blog Post Data call.
 
     public function get_post_data_ajax() {
         // Validate the request

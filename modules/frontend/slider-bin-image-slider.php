@@ -39,14 +39,14 @@
     $right_arrow_height = isset($options['image_slider_right_arrow_height']) ? esc_attr($options['image_slider_right_arrow_height']) : '40px';
     $right_arrow_width = isset($options['image_slider_right_arrow_width']) ? esc_attr($options['image_slider_right_arrow_width']) : '40px';
 
-    $image_slider_left_media_file = isset($options['image_slider_left_media_file']) ? esc_attr($options['image_slider_left_media_file']) : '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Left.svg';
-    $image_slider_right_media_file = isset($options['image_slider_right_media_file']) ? esc_attr($options['image_slider_right_media_file']) : '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Right.svg';
+    $image_slider_left_media_file = isset($options['image_slider_left_media_file']) ? esc_attr($options['image_slider_left_media_file']) : '/wp-content/plugins/slider-bin/assets/icon/Arrow-Left.svg';
+    $image_slider_right_media_file = isset($options['image_slider_right_media_file']) ? esc_attr($options['image_slider_right_media_file']) : '/wp-content/plugins/slider-bin/assets/icon/Arrow-Right.svg';
 
 ?>
 
 
 <div id="<?php echo esc_attr($unique_id); ?>" class="slider-wrapper image-slider" style="width: <?php echo $slider_width; ?>;">
-    <div id="arrow-left" class="arrow" style="
+    <div id="arrow-left" class="arrow-left" style="
         width: <?php echo empty($left_arrow_width) ? '40px' : $left_arrow_width; ?>;
         height: <?php echo empty($left_arrow_height) ? '40px' : $left_arrow_height; ?>;
         left: <?php echo empty($left_arrow_left) ? '0' : $left_arrow_left; ?>;
@@ -80,7 +80,7 @@
             <p>No slider data available.</p>
         <?php }} ?>
     </div>
-    <div id="arrow-right" class="arrow" style="
+    <div id="arrow-right" class="arrow-right" style="
         width: <?php echo empty($right_arrow_width) ? '40px' : $right_arrow_width; ?>;
         height: <?php echo empty($right_arrow_height) ? '40px' : $right_arrow_height; ?>;
         left: <?php echo empty($right_arrow_left) ? 'auto' : $right_arrow_left; ?>;

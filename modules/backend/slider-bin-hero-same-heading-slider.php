@@ -23,10 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     }
 ?>
 
-<div class="slider-slogan">
-    <h2 class="slider-title">Heroic Moments, Singular Focus</h2>
-    <p class="slider-Subtitle">A seamless hero slider with a single heading, subheading, and call-to-action to enhance multiple visuals.</p>
-</div>
 
 <div class="hero_group">
     <?php wp_nonce_field('hero_same_slider_nonce', 'hero_same_slider_nonce'); ?>
@@ -54,7 +50,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             name="hero_same_button_link"
             id="hero_same_button_link"
             value="<?php echo esc_url($hero_button_link); ?>"
-            placeholder="Enter CTA Button Link">
+            placeholder="www.example.com">
     </div>
 
     <div class="inner-field-wrapper">
@@ -83,3 +79,16 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
 </div>
 
+<div class="slider-preview-wrapper">
+    <?php if (!empty($hero_same_slider_data)):
+    $post_id = get_the_ID();
+
+    // Generate a unique ID for this slider preview
+    $unique_id = 'slider_bin_' . $post_id . '_' . uniqid();
+ ?>
+        <span class="tag">Preview</span>
+        <div class="slider-preview">
+            <?php include SLIDER_BIN_PATH . 'modules/frontend/slider-bin-hero-same-heading-slider.php';?>
+        </div>
+    <?php endif; ?>
+</div>

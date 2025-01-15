@@ -64,8 +64,8 @@ $subheading_padding = isset($hero_same_options['hero_same_subheading_padding']) 
 /**
  * Arrow settings
  */
-$hero_same_left_media_file = isset($hero_same_options['hero_same_left_media_file']) ? esc_attr($hero_same_options['hero_same_left_media_file']) : '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Left.svg';
-$hero_same_right_media_file = isset($hero_same_options['hero_same_right_media_file']) ? esc_attr($hero_same_options['hero_same_right_media_file']) : '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Right.svg';
+$hero_same_left_media_file = isset($hero_same_options['hero_same_left_media_file']) ? esc_attr($hero_same_options['hero_same_left_media_file']) : '/wp-content/plugins/slider-bin/assets/icon/Arrow-Left.svg';
+$hero_same_right_media_file = isset($hero_same_options['hero_same_right_media_file']) ? esc_attr($hero_same_options['hero_same_right_media_file']) : '/wp-content/plugins/slider-bin/assets/icon/Arrow-Right.svg';
 
 $hero_same_left_arrow_position_left = isset($hero_same_options['hero_same_left_arrow_position_left']) ? esc_attr($hero_same_options['hero_same_left_arrow_position_left']) : '0';
 $hero_same_left_arrow_position_top = isset($hero_same_options['hero_same_left_arrow_position_top']) ? esc_attr($hero_same_options['hero_same_left_arrow_position_top']) : '50%';
@@ -108,7 +108,7 @@ $button_target               = isset($hero_same_options['hero_same_button_target
 ?>
 
 <style>
-    #slider::before {
+    .bg-overlay-hero-same::before {
         background-color: <?php echo !empty($bg_overlay_color) ? $bg_overlay_color : '#000000'; ?> !important;
         opacity: <?php echo !empty($bg_overlay_opacity) ? $bg_overlay_opacity : '0.5'; ?> !important;
     }
@@ -117,7 +117,7 @@ $button_target               = isset($hero_same_options['hero_same_button_target
 
 
 <div id="<?php echo esc_attr($unique_id); ?>" class="slider-wrapper hero-same-wrapper" style="width: <?php echo empty($slider_width) ? '100%' : $slider_width; ?>;">
-    <div id="arrow-left" class="arrow" style="
+    <div id="arrow-left" class="arrow-left" style="
         width: <?php echo empty($hero_same_left_arrow_width) ? '40px' : $hero_same_left_arrow_width; ?>;
         height: <?php echo empty($hero_same_left_arrow_height) ? '40px' : $hero_same_left_arrow_height; ?>;
         left: <?php echo empty($hero_same_left_arrow_position_left) ? '0' : $hero_same_left_arrow_position_left; ?>;
@@ -129,7 +129,7 @@ $button_target               = isset($hero_same_options['hero_same_button_target
 
 
     </div>
-    <div id="slider">
+    <div id="slider" class="bg-overlay-hero-same">
         <?php if (!empty($hero_same_slider_data['images'])):
             foreach ($hero_same_slider_data['images'] as $image_url): ?>
                 <div class="slide" style="height: <?php echo empty($slider_height) ? '700px' : $slider_height; ?>;">
@@ -193,7 +193,7 @@ $button_target               = isset($hero_same_options['hero_same_button_target
             <?php endif; ?>
         </div>
     </div>
-    <div id="arrow-right" class="arrow" style="
+    <div id="arrow-right" class="arrow-right" style="
         width: <?php echo empty($hero_same_right_arrow_width) ? '40px' : $hero_same_right_arrow_width; ?>;
         height: <?php echo empty($hero_same_right_arrow_height) ? '40px' : $hero_same_right_arrow_height; ?>;
         left: <?php echo empty($hero_same_right_arrow_position_left) ? 'auto' : $hero_same_right_arrow_position_left; ?>;

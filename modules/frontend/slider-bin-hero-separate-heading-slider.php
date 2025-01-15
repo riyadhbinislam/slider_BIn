@@ -56,8 +56,8 @@
     /**
          * Arrow settings
          */
-        $hero_separate_left_media_file = isset($hero_separate_options['hero_separate_left_media_file']) ? esc_attr($hero_separate_options['hero_separate_left_media_file']) : '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Left.svg';
-        $hero_separate_right_media_file = isset($hero_separate_options['hero_separate_right_media_file']) ? esc_attr($hero_separate_options['hero_separate_right_media_file']) : '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Right.svg';
+        $hero_separate_left_media_file = isset($hero_separate_options['hero_separate_left_media_file']) ? esc_attr($hero_separate_options['hero_separate_left_media_file']) : '/wp-content/plugins/slider-bin/assets/icon/Arrow-Left.svg';
+        $hero_separate_right_media_file = isset($hero_separate_options['hero_separate_right_media_file']) ? esc_attr($hero_separate_options['hero_separate_right_media_file']) : '/wp-content/plugins/slider-bin/assets/icon/Arrow-Right.svg';
 
         $hero_separate_left_arrow_position_left = isset($hero_separate_options['hero_separate_left_arrow_position_left']) ? esc_attr($hero_separate_options['hero_separate_left_arrow_position_left']) : '0';
         $hero_separate_left_arrow_position_top = isset($hero_separate_options['hero_separate_left_arrow_position_top']) ? esc_attr($hero_separate_options['hero_separate_left_arrow_position_top']) : '50%';
@@ -96,13 +96,13 @@
         $button_target = isset($hero_separate_options['hero_separate_button_target']) ? esc_attr($hero_separate_options['hero_separate_button_target']) : '_self';
 ?>
 <style>
-    #slider::before {
+    .bg-overlay-hero-separate::before {
         background-color: <?php echo $bg_overlay_color; ?> !important;
         opacity: <?php echo $bg_overlay_opacity; ?> !important;
     }
 </style>
 <div id="<?php echo esc_attr($unique_id); ?>" class="slider-wrapper hero-separate-wrapper"style="width: <?php echo empty($slider_width) ? '100%' : $slider_width; ?>;" >
-    <div id="arrow-left" class="arrow" style="
+    <div id="arrow-left" class="arrow-left" style="
         width: <?php echo empty($hero_separate_left_arrow_width) ? '40px' : $hero_separate_left_arrow_width; ?>;
         height: <?php echo empty($hero_separate_left_arrow_height) ? '40px' : $hero_separate_left_arrow_height; ?>;
         left: <?php echo empty($hero_separate_left_arrow_position_left) ? '0' : $hero_separate_left_arrow_position_left; ?>;
@@ -111,7 +111,7 @@
         bottom: <?php echo empty($hero_separate_left_arrow_position_bottom) ? 'auto' : $hero_separate_left_arrow_position_bottom; ?>;">
         <img src="<?php echo empty($hero_separate_left_media_file) ? '' : $hero_separate_left_media_file; ?>" alt="">
     </div>
-    <div id="slider">
+    <div id="slider" class="bg-overlay-hero-separate">
         <?php
         foreach ($hero_separate_slider_data as $slide) {
             // Extract slide data with fallbacks
@@ -187,7 +187,7 @@
 
         <?php } ?>
     </div>
-    <div id="arrow-right" class="arrow" style="
+    <div id="arrow-right" class="arrow-right" style="
         width: <?php echo empty($hero_separate_right_arrow_width) ? '40px' : $hero_separate_right_arrow_width; ?>;
         height: <?php echo empty($hero_separate_right_arrow_height) ? '40px' : $hero_separate_right_arrow_height; ?>;
         left: <?php echo empty($hero_separate_right_arrow_position_left) ? 'auto' : $hero_separate_right_arrow_position_left; ?>;

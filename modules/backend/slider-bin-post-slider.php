@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 }
 ?>
 
-<div class="slider-slogan">
-    <h2 class="slider-title">Catch Up on Our Most Engaging Reads</h2>
-    <p class="slider-subtitle">Let your stories shine—slide through your top posts in style.</p>
-</div>
 
 <div id="post_repeater">
     <?php
@@ -70,6 +66,9 @@ if (!defined('ABSPATH')) {
                     <option value="">Select Post</option>
                     <?php
                     $posts = get_posts(['post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => -1]);
+                    if (empty($posts)) {
+                        echo '<option value="">No posts found</option>';
+                    }else {
                     foreach ($posts as $post_option) {
                         echo sprintf(
                             '<option value="%d" data-permalink="%s">%s</option>',
@@ -78,9 +77,10 @@ if (!defined('ABSPATH')) {
                             esc_html($post_option->post_title)
                         );
                     }
+                }
                     ?>
                 </select>
-                <input type="hidden" name="post_permalink[]" value="<?php echo esc_url(get_permalink($post_option->ID)); ?>">
+                <input type="hidden" name="post_permalink[]" value="<?php if (!empty($post_option->ID)){ echo esc_url(get_permalink($post_option->ID)) ;} ?>">
             </div>
 
             <div class="inner-field-wrapper">
@@ -105,3 +105,15 @@ if (!defined('ABSPATH')) {
     <?php } ?>
 </div>
 <button type="button" class="button" id="add_more_repeater" style="display:block; margin:30px auto;">Add More</button>
+
+<div class="slider-preview-wrapper">
+    <?php
+    if (!empty($saved_post_slider_data)): ?>
+        <span class="tag">Preview</span>
+        <div class="slider-preview">
+            <?php include SLIDER_BIN_PATH . 'modules/frontend/slider-bin-post-slider.php';?>
+        </div>
+    <?php endif; ?>
+</div>
+
+

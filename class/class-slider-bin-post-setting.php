@@ -40,7 +40,7 @@ class Slider_Bin_Post_Setting {
         // Add the settings page once
         add_submenu_page(
             'edit.php?post_type=slider_post',
-            __('Settings', 'slider_bin'),
+            __('Slider Bin Settings', 'slider_bin'),
             __('Settings', 'slider_bin'),
             'manage_options',
             'slider_bin_settings',
