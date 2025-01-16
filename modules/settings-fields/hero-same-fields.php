@@ -25,10 +25,6 @@
                 'label' => __('Background Image Size', 'slider_bin'),
                 'placeholder' => 'cover / contain / auto'
             ),
-            // 'hero_same_bg_overlay' => array(
-            //     'label' => __('Background Image Overlay', 'slider_bin'),
-            //     'placeholder' => 'true or false'
-            // ),
             'hero_same_bg_overlay_color' => array(
                 'label' => __('Background Image Overlay Color', 'slider_bin'),
                 'placeholder' => '#000000',
@@ -190,16 +186,6 @@
                 'label' => __('Right Arrow Width', 'slider_bin'),
                 'placeholder' => '40px'
             ),
-            // 'hero_same_arrow_left' => array(
-            //     'label' => __('Left Arrow Style', 'slider_bin'),
-            //     'placeholder' => '',
-            //     'type' => 'select',
-            // ),
-            // 'hero_same_arrow_right' => array(
-            //     'label' => __('Right Arrow Style', 'slider_bin'),
-            //     'placeholder' => '',
-            //     'type' => 'select',
-            // ),
             'hero_same_button_padding' => array(
                 'label' => __('Button Padding', 'slider_bin'),
                 'placeholder' => '10px 20px 10px 20px'
@@ -272,6 +258,28 @@
                 'label' => __('Select or Choose Right Icon', 'slider_bin'),
                 'placeholder' => '',
                 'type' => 'button'
+            ),
+            'hero_same_pagination_height' => array(
+                'label' => __('Pagination Height', 'slider_bin'),
+                'placeholder' => '15px'
+            ),
+            'hero_same_pagination_width' => array(
+                'label' => __('Pagination width', 'slider_bin'),
+                'placeholder' => '15px'
+            ),
+            'hero_same_pagination_gap' => array(
+                'label' => __('Pagination Gap', 'slider_bin'),
+                'placeholder' => '5px'
+            ),
+            'hero_same_pagination_color' => array(
+                'label' => __('Pagination Color', 'slider_bin'),
+                'placeholder' => '#8E1616',
+                'type' => 'color'
+            ),
+            'hero_same_pagination_active_color' => array(
+                'label' => __('Pagination Color On Active', 'slider_bin'),
+                'placeholder' => '#D84040',
+                'type' => 'color'
             ),
 
         );
@@ -366,6 +374,16 @@
                 'hero_same_right_arrow_opacity',
                 'hero_same_right_arrow_height',
                 'hero_same_right_arrow_width',
+            ),
+        ),
+        'pagination_settings' => array(
+            'title' => __('Pagination Settings', 'slider_bin'),
+            'fields' => array(
+                'hero_same_pagination_height',
+                'hero_same_pagination_width',
+                'hero_same_pagination_gap',
+                'hero_same_pagination_color',
+                'hero_same_pagination_active_color',
             ),
         ),
     );

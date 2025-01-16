@@ -265,7 +265,29 @@
         'post_slider_button_target' => array(
             'label' => __('Button Target', 'slider_bin'),
             'placeholder' => '_self'
-        )
+        ),
+        'post_slider_pagination_height' => array(
+            'label' => __('Pagination Height', 'slider_bin'),
+            'placeholder' => '15px'
+        ),
+        'post_slider_pagination_width' => array(
+            'label' => __('Pagination width', 'slider_bin'),
+            'placeholder' => '15px'
+        ),
+        'post_slider_pagination_gap' => array(
+            'label' => __('Pagination Gap', 'slider_bin'),
+            'placeholder' => '5px'
+        ),
+        'post_slider_pagination_color' => array(
+            'label' => __('Pagination Color', 'slider_bin'),
+            'placeholder' => '#8E1616',
+            'type' => 'color'
+        ),
+        'post_slider_pagination_active_color' => array(
+            'label' => __('Pagination Color On Active', 'slider_bin'),
+            'placeholder' => '#D84040',
+            'type' => 'color'
+        ),
 
     );
 
@@ -359,6 +381,16 @@
                 'post_slider_right_arrow_opacity',
                 'post_slider_right_arrow_width',
                 'post_slider_right_arrow_height',
+            ),
+        ),
+        'pagination_settings' => array(
+            'title' => __('Pagination Settings', 'slider_bin'),
+            'fields' => array(
+                'post_slider_pagination_height',
+                'post_slider_pagination_width',
+                'post_slider_pagination_gap',
+                'post_slider_pagination_color',
+                'post_slider_pagination_active_color',
             ),
         ),
     );

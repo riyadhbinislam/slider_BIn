@@ -94,12 +94,24 @@
         $button_font_family = isset($hero_separate_options['hero_separate_button_font_family']) ? esc_attr($hero_separate_options['hero_separate_button_font_family']) : 'Arial, sans-serif';
         $button_font_weight = isset($hero_separate_options['hero_separate_button_font_weight']) ? esc_attr($hero_separate_options['hero_separate_button_font_weight']) : '400';
         $button_target = isset($hero_separate_options['hero_separate_button_target']) ? esc_attr($hero_separate_options['hero_separate_button_target']) : '_self';
+
+        $pagination_height          =isset($hero_separate_options['hero_separate_pagination_height']) ?esc_attr($hero_separate_options['hero_separate_pagination_height']) : '15px';
+        $pagination_width           =isset($hero_separate_options['hero_separate_pagination_width']) ?esc_attr($hero_separate_options['hero_separate_pagination_width']) : '15px';
+        $pagination_gap             =isset($hero_separate_options['hero_separate_pagination_gap']) ?esc_attr($hero_separate_options['hero_separate_pagination_gap']) : '5px';
+        $pagination_color           =isset($hero_separate_options['hero_separate_pagination_color']) ?esc_attr($hero_separate_options['hero_separate_pagination_color']) : '#8E1616';
+        $pagination_active_color    =isset($hero_separate_options['hero_separate_pagination_active_color']) ?esc_attr($hero_separate_options['hero_separate_pagination_active_color']) : '#D84040';
+
+
 ?>
 <style>
     .bg-overlay-hero-separate::before {
         background-color: <?php echo $bg_overlay_color; ?> !important;
         opacity: <?php echo $bg_overlay_opacity; ?> !important;
     }
+    .dot.active {
+        background-color:<?php echo !empty($pagination_active_color) ? $pagination_active_color : '#D84040'; ?> !important;
+    }
+
 </style>
 <div id="<?php echo esc_attr($unique_id); ?>" class="slider-wrapper hero-separate-wrapper"style="width: <?php echo empty($slider_width) ? '100%' : $slider_width; ?>;" >
     <div id="arrow-left" class="arrow-left" style="
@@ -197,4 +209,14 @@
         opacity: <?php echo empty($hero_separate_right_arrow_opacity) ? '1' : $hero_separate_right_arrow_opacity; ?>;">
         <img src="<?php echo empty($hero_separate_right_media_file) ? '' : $hero_separate_right_media_file; ?>" alt="">
     </div>
+    <div class="pagination">
+    <?php if (!empty($hero_separate_slider_data)): ?>
+        <?php foreach ($hero_separate_slider_data as $index => $image_url): ?>
+            <span class="dot" style="height: <?php echo !empty($pagination_height) ? $pagination_height : '15px'; ?>;
+                                         width: <?php echo !empty($pagination_width) ? $pagination_width : '15px'; ?>;
+                                         margin-left:<?php echo !empty($pagination_gap) ? $pagination_gap : '5px'; ?>;
+                                         background-color: <?php echo !empty($pagination_color) ? $pagination_color : '#8E1616'; ?>;" onclick="currentSlide(<?php echo $index + 1; ?>)"></span>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>
 </div>

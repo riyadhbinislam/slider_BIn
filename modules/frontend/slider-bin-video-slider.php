@@ -34,7 +34,23 @@
     $right_arrow_color = isset($options['video_slider_right_arrow_color']) ? esc_attr($options['video_slider_right_arrow_color']) : '';
     $right_arrow_width = isset($options['video_slider_right_arrow_width']) ? esc_attr($options['video_slider_right_arrow_width']) : '';
     $right_arrow_height = isset($options['video_slider_right_arrow_height']) ? esc_attr($options['video_slider_right_arrow_height']) : '';
+
+
+    $pagination_height          =isset($video_slider_options['video_slider_pagination_height']) ?esc_attr($video_slider_options['video_slider_pagination_height']) : '15px';
+    $pagination_width           =isset($video_slider_options['video_slider_pagination_width']) ?esc_attr($video_slider_options['video_slider_pagination_width']) : '15px';
+    $pagination_gap             =isset($video_slider_options['video_slider_pagination_gap']) ?esc_attr($video_slider_options['video_slider_pagination_gap']) : '5px';
+    $pagination_color           =isset($video_slider_options['video_slider_pagination_color']) ?esc_attr($video_slider_options['video_slider_pagination_color']) : '#8E1616';
+    $pagination_active_color    =isset($video_slider_options['video_slider_pagination_active_color']) ?esc_attr($video_slider_options['video_slider_pagination_active_color']) : '#D84040';
+
 ?>
+
+
+<style>
+    .dot.active {
+        background-color:<?php echo !empty($pagination_active_color) ? $pagination_active_color : '#D84040'; ?> !important;
+    }
+
+</style>
 
 <div id="<?php echo esc_attr($unique_id); ?>" class="slider-wrapper video-slider" style="width: <?php echo empty($slider_width) ? '100%' : $slider_width; ?>; ">
     <div id="arrow-left" class="arrow-left" style="
@@ -141,5 +157,17 @@
         <img src="<?php echo empty($video_slider_right_media_file) ? '' : $video_slider_right_media_file; ?>" alt="">
     </div>
 
+    <div class="pagination">
+    <?php
+    $all_videos = array_merge($slider_bin_videos ?? [], $video_urls ?? []);
+    if (!empty($all_videos)): ?>
+        <?php foreach ($all_videos as $index => $video_url): ?>
+            <span class="dot" style="height: <?php echo !empty($pagination_height) ? $pagination_height : '15px'; ?>;
+                                         width: <?php echo !empty($pagination_width) ? $pagination_width : '15px'; ?>;
+                                         margin-left:<?php echo !empty($pagination_gap) ? $pagination_gap : '5px'; ?>;
+                                         background-color: <?php echo !empty($pagination_color) ? $pagination_color : '#8E1616'; ?>;" onclick="currentSlide(<?php echo $index + 1; ?>)"></span>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </div>
 
+</div>

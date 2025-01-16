@@ -106,7 +106,30 @@
             'label' => __('Right Arrow Height', 'slider_bin'),
             'placeholder' => '20px',
             'type' => 'text'
-        )
+        ),
+        'video_slider_pagination_height' => array(
+            'label' => __('Pagination Height', 'slider_bin'),
+            'placeholder' => '15px'
+        ),
+        'video_slider_pagination_width' => array(
+            'label' => __('Pagination width', 'slider_bin'),
+            'placeholder' => '15px'
+        ),
+        'video_slider_pagination_gap' => array(
+            'label' => __('Pagination Gap', 'slider_bin'),
+            'placeholder' => '5px'
+        ),
+        'video_slider_pagination_color' => array(
+            'label' => __('Pagination Color', 'slider_bin'),
+            'placeholder' => '#8E1616',
+            'type' => 'color'
+        ),
+        'video_slider_pagination_active_color' => array(
+            'label' => __('Pagination Color On Active', 'slider_bin'),
+            'placeholder' => '#D84040',
+            'type' => 'color'
+        ),
+
     );
 
     $vidoe_slider_groups = array(
@@ -133,6 +156,16 @@
                 'video_slider_right_arrow_color',
                 'video_slider_right_arrow_width',
                 'video_slider_right_arrow_height',
+            ),
+        ),
+        'pagination_settings' => array(
+            'title' => __('Pagination Settings', 'slider_bin'),
+            'fields' => array(
+                'video_slider_pagination_height',
+                'video_slider_pagination_width',
+                'video_slider_pagination_gap',
+                'video_slider_pagination_color',
+                'video_slider_pagination_active_color',
             ),
         ),
     );

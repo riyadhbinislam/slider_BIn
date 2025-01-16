@@ -105,6 +105,17 @@ $button_text_decoration      = isset($hero_same_options['hero_same_button_text_d
 $button_font_family          = isset($hero_same_options['hero_same_button_font_family']) ? esc_attr($hero_same_options['hero_same_button_font_family']) : 'Arial, sans-serif';
 $button_font_weight          = isset($hero_same_options['hero_same_button_font_weight']) ? esc_attr($hero_same_options['hero_same_button_font_weight']) : '400';
 $button_target               = isset($hero_same_options['hero_same_button_target']) ? esc_attr($hero_same_options['hero_same_button_target']) : '_self';
+
+
+$pagination_height          =isset($hero_same_options['hero_same_pagination_height']) ?esc_attr($hero_same_options['hero_same_pagination_height']) : '15px';
+$pagination_width           =isset($hero_same_options['hero_same_pagination_width']) ?esc_attr($hero_same_options['hero_same_pagination_width']) : '15px';
+$pagination_gap             =isset($hero_same_options['hero_same_pagination_gap']) ?esc_attr($hero_same_options['hero_same_pagination_gap']) : '5px';
+$pagination_color           =isset($hero_same_options['hero_same_pagination_color']) ?esc_attr($hero_same_options['hero_same_pagination_color']) : '#8E1616';
+$pagination_active_color    =isset($hero_same_options['hero_same_pagination_active_color']) ?esc_attr($hero_same_options['hero_same_pagination_active_color']) : '#D84040';
+
+
+
+
 ?>
 
 <style>
@@ -112,6 +123,10 @@ $button_target               = isset($hero_same_options['hero_same_button_target
         background-color: <?php echo !empty($bg_overlay_color) ? $bg_overlay_color : '#000000'; ?> !important;
         opacity: <?php echo !empty($bg_overlay_opacity) ? $bg_overlay_opacity : '0.5'; ?> !important;
     }
+    .dot.active {
+        background-color:<?php echo !empty($pagination_active_color) ? $pagination_active_color : '#D84040'; ?> !important;
+    }
+
 </style>
 
 
@@ -203,5 +218,18 @@ $button_target               = isset($hero_same_options['hero_same_button_target
         opacity: <?php echo empty($hero_same_right_arrow_opacity) ? '1' : $hero_same_right_arrow_opacity; ?>;">
         <img src="<?php echo empty($hero_same_right_media_file) ? '/wp-content/plugins/slider-bin/Assets/icon/Arrow-Right.svg' : $hero_same_right_media_file; ?>" alt="">
     </div>
+    <div class="pagination">
+        <?php if (!empty($hero_same_slider_data['images'])):
+            foreach ($hero_same_slider_data['images'] as $index => $image_url): ?>
+                <span class="dot" style="height: <?php echo !empty($pagination_height) ? $pagination_height : '15px'; ?>;
+                                         width: <?php echo !empty($pagination_width) ? $pagination_width : '15px'; ?>;
+                                         margin-left:<?php echo !empty($pagination_gap) ? $pagination_gap : '5px'; ?>;
+                                         background-color: <?php echo !empty($pagination_color) ? $pagination_color : '#8E1616'; ?>;" onclick="currentSlide(<?php echo $index + 1; ?>)"></span>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
 </div>
+
+
+
 

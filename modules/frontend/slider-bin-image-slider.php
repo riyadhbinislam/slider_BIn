@@ -42,8 +42,20 @@
     $image_slider_left_media_file = isset($options['image_slider_left_media_file']) ? esc_attr($options['image_slider_left_media_file']) : '/wp-content/plugins/slider-bin/assets/icon/Arrow-Left.svg';
     $image_slider_right_media_file = isset($options['image_slider_right_media_file']) ? esc_attr($options['image_slider_right_media_file']) : '/wp-content/plugins/slider-bin/assets/icon/Arrow-Right.svg';
 
-?>
+    $pagination_height          =isset($options['image_slider_pagination_height']) ?esc_attr($options['image_slider_pagination_height']) : '15px';
+    $pagination_width           =isset($options['image_slider_pagination_width']) ?esc_attr($options['image_slider_pagination_width']) : '15px';
+    $pagination_gap             =isset($options['image_slider_pagination_gap']) ?esc_attr($options['image_slider_pagination_gap']) : '5px';
+    $pagination_color           =isset($options['image_slider_pagination_color']) ?esc_attr($options['image_slider_pagination_color']) : '#8E1616';
+    $pagination_active_color    =isset($options['image_slider_pagination_active_color']) ?esc_attr($options['image_slider_pagination_active_color']) : '#D84040';
 
+
+?>
+<style>
+    .dot.active {
+        background-color:<?php echo !empty($pagination_active_color) ? $pagination_active_color : '#D84040'; ?> !important;
+    }
+
+</style>
 
 <div id="<?php echo esc_attr($unique_id); ?>" class="slider-wrapper image-slider" style="width: <?php echo $slider_width; ?>;">
     <div id="arrow-left" class="arrow-left" style="
@@ -89,5 +101,15 @@
         bottom: <?php echo empty($right_arrow_bottom) ? 'auto' : $right_arrow_bottom; ?>;
         opacity: <?php echo empty($right_arrow_opacity) ? '1' : $right_arrow_opacity; ?>;">
         <img src="<?php echo empty($image_slider_right_media_file) ? '' : $image_slider_right_media_file; ?>" alt="">
+    </div>
+    <div class="pagination">
+        <?php if (!empty($image_slider_data)):
+            foreach ($image_slider_data as $index => $image_url): ?>
+                <span class="dot" style="height: <?php echo !empty($pagination_height) ? $pagination_height : '15px'; ?>;
+                                         width: <?php echo !empty($pagination_width) ? $pagination_width : '15px'; ?>;
+                                         margin-left:<?php echo !empty($pagination_gap) ? $pagination_gap : '5px'; ?>;
+                                         background-color: <?php echo !empty($pagination_color) ? $pagination_color : '#8E1616'; ?>; onclick="currentSlide(<?php echo $index + 1; ?>)"></span>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 </div>

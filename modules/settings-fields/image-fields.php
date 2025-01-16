@@ -138,6 +138,28 @@
             'placeholder' => '',
             'type' => 'button'
         ),
+        'image_slider_pagination_height' => array(
+            'label' => __('Pagination Height', 'slider_bin'),
+            'placeholder' => '15px'
+        ),
+        'image_slider_pagination_width' => array(
+            'label' => __('Pagination width', 'slider_bin'),
+            'placeholder' => '15px'
+        ),
+        'image_slider_pagination_gap' => array(
+            'label' => __('Pagination Gap', 'slider_bin'),
+            'placeholder' => '5px'
+        ),
+        'image_slider_pagination_color' => array(
+            'label' => __('Pagination Color', 'slider_bin'),
+            'placeholder' => '#8E1616',
+            'type' => 'color'
+        ),
+        'image_slider_pagination_active_color' => array(
+            'label' => __('Pagination Color On Active', 'slider_bin'),
+            'placeholder' => '#D84040',
+            'type' => 'color'
+        ),
 
     );
 
@@ -181,6 +203,16 @@
                 'image_slider_right_arrow_opacity',
                 'image_slider_right_arrow_height',
                 'image_slider_right_arrow_width',
+            ),
+        ),
+        'pagination_settings' => array(
+            'title' => __('Pagination Settings', 'slider_bin'),
+            'fields' => array(
+                'image_slider_pagination_height',
+                'image_slider_pagination_width',
+                'image_slider_pagination_gap',
+                'image_slider_pagination_color',
+                'image_slider_pagination_active_color',
             ),
         ),
     );

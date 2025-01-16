@@ -91,12 +91,25 @@
     $post_slider_right_arrow_opacity = isset($post_slider_options['post_slider_right_arrow_opacity']) ? esc_attr($post_slider_options['post_slider_right_arrow_opacity']) : '1';
     $post_slider_right_arrow_height = isset($post_slider_options['post_slider_right_arrow_height']) ? esc_attr($post_slider_options['post_slider_right_arrow_height']) : '40px';
     $post_slider_right_arrow_width = isset($post_slider_options['post_slider_right_arrow_width']) ? esc_attr($post_slider_options['post_slider_right_arrow_width']) : '40px';
-    ?>
+
+    $pagination_height          =isset($post_slider_options['post_slider_pagination_height']) ?esc_attr($post_slider_options['post_slider_pagination_height']) : '15px';
+    $pagination_width           =isset($post_slider_options['post_slider_pagination_width']) ?esc_attr($post_slider_options['post_slider_pagination_width']) : '15px';
+    $pagination_gap             =isset($post_slider_options['post_slider_pagination_gap']) ?esc_attr($post_slider_options['post_slider_pagination_gap']) : '5px';
+    $pagination_color           =isset($post_slider_options['post_slider_pagination_color']) ?esc_attr($post_slider_options['post_slider_pagination_color']) : '#8E1616';
+    $pagination_active_color    =isset($post_slider_options['post_slider_pagination_active_color']) ?esc_attr($post_slider_options['post_slider_pagination_active_color']) : '#D84040';
+
+
+
+
+?>
 
 <style>
     .bg-overlay-post::before {
         background-color: <?php echo $bg_overlay_color;  ?> !important;
         opacity: <?php echo $bg_overlay_opacity; ?> !important;
+    }
+    .dot.active {
+        background-color:<?php echo !empty($pagination_active_color) ? $pagination_active_color : '#D84040'; ?> !important;
     }
 </style>
 
@@ -158,5 +171,15 @@
         bottom: <?php echo empty($post_slider_right_arrow_position_bottom) ? 'auto' : $post_slider_right_arrow_position_bottom; ?>;
         opacity: <?php echo empty($post_slider_right_arrow_opacity) ? '1' : $post_slider_right_arrow_opacity; ?>; ">
         <img src="<?php echo empty($post_slider_right_media_file) ? '' : $post_slider_right_media_file; ?>" alt="">
+    </div>
+    <div class="pagination">
+        <?php if (!empty($post_slider_data)): ?>
+            <?php foreach ($post_slider_data as $index => $post): ?>
+                <span class="dot" style="height: <?php echo !empty($pagination_height) ? $pagination_height : '15px'; ?>;
+                                         width: <?php echo !empty($pagination_width) ? $pagination_width : '15px'; ?>;
+                                         margin-left:<?php echo !empty($pagination_gap) ? $pagination_gap : '5px'; ?>;
+                                         background-color: <?php echo !empty($pagination_color) ? $pagination_color : '#8E1616'; ?>;" onclick="currentSlide(<?php echo $index + 1; ?>)"></span>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 </div>
