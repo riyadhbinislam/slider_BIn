@@ -12,7 +12,7 @@
 
 
     $slider_width = isset($options['video_slider_width']) ? esc_attr($options['video_slider_width']) : '100%';
-    $slider_height = isset($options['video_slider_height']) ? esc_attr($options['video_slider_height']) : '700px';
+    // $slider_height = isset($options['video_slider_height']) ? esc_attr($options['video_slider_height']) : '700px';
 
     $video_slider_left_media_file = isset($options['video_slider_left_media_file']) ? esc_attr($options['video_slider_left_media_file']) : '/wp-content/plugins/slider-bin/assets/icon/Arrow-Left.svg';
     $video_slider_right_media_file = isset($options['video_slider_right_media_file']) ? esc_attr($options['video_slider_right_media_file']) : '/wp-content/plugins/slider-bin/assets/icon/Arrow-Right.svg';
@@ -74,7 +74,7 @@
                 $video_url = esc_url(trim($video_url));
                 if (!empty($video_url)) {
                     ?>
-                    <div class="slide media-slide" style="height: <?php echo empty($slider_height) ? '700px' : $slider_height; ?>;">
+                    <div class="slide media-slide">
                         <video
                             width="100%"
                             height="100%"
@@ -126,7 +126,7 @@
 
                     if (!empty($embed_url)) {
                         ?>
-                        <div class="slide video-slide" style="height: <?php echo empty($slider_height) ? '700px' : $slider_height; ?>;">
+                        <div class="slide video-slide">
                             <iframe
                                 width="100%"
                                 height="100%"
