@@ -52,8 +52,11 @@ class Slider_Bin_Metabox {
     }
 
     public function meta_box_callback($post) {
-        // Retrieve current slider type
-        $slider_type = get_post_meta($post->ID, '_slider_type', true);
+        // Check if we have a valid post ID (edit mode)
+        $post_id = $post->ID ?? null;
+
+        // Retrieve the slider type from the database if in edit mode
+        $slider_type = $post_id ? get_post_meta($post_id, '_slider_type', true) : '';
 
         // Add nonce for security
         wp_nonce_field('slider_bin_save_meta_box_data', 'slider_bin_nonce');
@@ -94,8 +97,8 @@ class Slider_Bin_Metabox {
             </div>
         </div>
 
-        <?php
-    }
+    <?php
+}
 
     public function save_meta_box_data($post_id) {
 

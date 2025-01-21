@@ -59,6 +59,10 @@
     grid-template-columns: 1fr;
     z-index: 10;
     place-items: center;
+    -webkit-transform:;
+    -moz-transform:;
+    -ms-transform:;
+    -o-transform:;
 }
 
 
@@ -80,7 +84,6 @@
 
 .image-slider  .slide-caption {
   position: absolute;
-  transform: translateX(-50%);
   width: 100%;
 }
 

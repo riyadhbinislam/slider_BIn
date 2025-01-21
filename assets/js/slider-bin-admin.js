@@ -1,42 +1,90 @@
 
 // JavaScript for Slider Type toggle Functionality
+// Add New Slider Page toggle
     (function($) {
         function toggleFields() {
             console.log('Toggling fields...');
             const sliderType = $('#slider_type').val();
-            localStorage.setItem('slider_bin_selected_type', sliderType);
             $('.slider-fields').hide();
-            $('.slider-type-settings').hide();
             if (sliderType === 'hero_same') {
                 $('#hero_same_fields').show();
-                $('#hero-same-settings').show();
             } else if (sliderType === 'hero_separate') {
                 $('#hero_separate_fields').show();
-                $('#hero-separate-settings').show();
             } else if (sliderType === 'image') {
                 $('#image_fields').show();
-                $('#image-slider-settings').show();
             } else if (sliderType === 'post') {
                 $('#post_fields').show();
-                $('#post-slider-settings').show();
             } else if (sliderType === 'video') {
                 $('#video_fields').show();
-                $('#video-slider-settings').show();
             }
         }
 
-        // $(document).ready(function() {
-        //     toggleFields();
-        //     $('#slider_type').on('change', toggleFields);
-        // });
-        $(document).ready(function() {
-            // Retrieve the stored slider type from local storage
-            const storedSliderType = localStorage.getItem('slider_bin_selected_type');
-            if (storedSliderType) {
-                $('#slider_type').val(storedSliderType);
+    $(document).ready(function() {
+        toggleFields();
+        $('#slider_type').on('change', toggleFields);
+    });
+
+    })(jQuery);
+
+// Setting Page Toggling Function.
+/**
+ * Toggling setting fields...
+ * Set slider type in LocalStorage:', sliderType
+ * Retrieved slider type from LocalStorage:', storedSliderType
+ */
+    (function ($) {
+        function toggleSettingFields() {
+            // console.log('');
+            const sliderType = $sliderTypeSettings.val();
+
+            if (sliderType) {
+                localStorage.setItem('slider_bin_selected_type', sliderType);
+                // Hide all settings
+                $('.slider-type-settings').hide();
+
+                // Show the specific settings based on slider type
+                switch (sliderType) {
+                    case 'hero_same':
+                        $('#hero-same-settings').show();
+                        break;
+                    case 'hero_separate':
+                        $('#hero-separate-settings').show();
+                        break;
+                    case 'image':
+                        $('#image-slider-settings').show();
+                        break;
+                    case 'post':
+                        $('#post-slider-settings').show();
+                        break;
+                    case 'video':
+                        $('#video-slider-settings').show();
+                        break;
+                    default:
+                        console.log('No matching slider type found.');
+                }
+            } else {
+                console.warn('Slider type is not set or invalid.');
             }
-            toggleFields();
-            $('#slider_type').on('change', toggleFields);
+        }
+
+        // Cache jQuery selector for reuse
+        const $sliderTypeSettings = $('#slider_type_settings');
+
+        $(document).ready(function () {
+
+            // Retrieve the stored slider type from LocalStorage
+            let storedSliderType = localStorage.getItem('slider_bin_selected_type');
+            // If no stored value, set a default to 'hero_same'
+            if (!storedSliderType || !$sliderTypeSettings.find(`option[value="${storedSliderType}"]`).length) {
+                storedSliderType = 'hero_same';
+                localStorage.setItem('slider_bin_selected_type', storedSliderType);
+            }
+
+            // Set the dropdown value and toggle fields
+            $sliderTypeSettings.val(storedSliderType);
+            toggleSettingFields();
+            // Handle change event
+            $sliderTypeSettings.on('change', toggleSettingFields);
         });
     })(jQuery);
 
@@ -371,54 +419,54 @@
 
 //toggole Arrow Icon Functionality
 
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.custom-dropdown').forEach(function (dropdown) {
-            const selected = dropdown.querySelector('.dropdown-selected');
-            const options = dropdown.querySelector('.dropdown-options');
-            const optionItems = options.querySelectorAll('.option');
-            const hiddenInput = dropdown.querySelector('input[type="hidden"]');
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     document.querySelectorAll('.custom-dropdown').forEach(function (dropdown) {
+    //         const selected = dropdown.querySelector('.dropdown-selected');
+    //         const options = dropdown.querySelector('.dropdown-options');
+    //         const optionItems = options.querySelectorAll('.option');
+    //         const hiddenInput = dropdown.querySelector('input[type="hidden"]');
 
-            // Toggle dropdown visibility
-            selected.addEventListener('click', function (e) {
-                e.stopPropagation(); // Prevent event bubbling
-                options.classList.toggle('active');
-            });
+    //         // Toggle dropdown visibility
+    //         selected.addEventListener('click', function (e) {
+    //             e.stopPropagation(); // Prevent event bubbling
+    //             options.classList.toggle('active');
+    //         });
 
-            // Handle option selection
-            optionItems.forEach(function (option) {
-                option.addEventListener('click', function () {
-                    const selectedValue = option.getAttribute('data-value');
-                    const imgElement = option.querySelector('img');
+    //         // Handle option selection
+    //         optionItems.forEach(function (option) {
+    //             option.addEventListener('click', function () {
+    //                 const selectedValue = option.getAttribute('data-value');
+    //                 const imgElement = option.querySelector('img');
 
-                    // Update hidden input value
-                    if (hiddenInput) {
-                        hiddenInput.value = selectedValue;
-                    }
+    //                 // Update hidden input value
+    //                 if (hiddenInput) {
+    //                     hiddenInput.value = selectedValue;
+    //                 }
 
-                    // Update selected display
-                    if (imgElement) {
-                        selected.innerHTML = `<img src="${imgElement.src}" alt="${selectedValue}" />`;
-                    }
+    //                 // Update selected display
+    //                 if (imgElement) {
+    //                     selected.innerHTML = `<img src="${imgElement.src}" alt="${selectedValue}" />`;
+    //                 }
 
-                    // Update selected state
-                    optionItems.forEach(item => item.classList.remove('selected'));
-                    option.classList.add('selected');
+    //                 // Update selected state
+    //                 optionItems.forEach(item => item.classList.remove('selected'));
+    //                 option.classList.add('selected');
 
-                    // Close dropdown
-                    options.classList.remove('active');
+    //                 // Close dropdown
+    //                 options.classList.remove('active');
 
-                    console.log('Selected Value:', selectedValue);
-                });
-            });
+    //                 console.log('Selected Value:', selectedValue);
+    //             });
+    //         });
 
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function (event) {
-                if (!dropdown.contains(event.target)) {
-                    options.classList.remove('active');
-                }
-            });
-        });
-    });
+    //         // Close dropdown when clicking outside
+    //         document.addEventListener('click', function (event) {
+    //             if (!dropdown.contains(event.target)) {
+    //                 options.classList.remove('active');
+    //             }
+    //         });
+    //     });
+    // });
 
 
     document.addEventListener('DOMContentLoaded', function() {

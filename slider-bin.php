@@ -1,16 +1,16 @@
 <?php
     /*
     Plugin Name:        Slider Bin
-    Plugin URI:         https://github.com/riyadhbinislam?tab=repositories
+    Plugin URI:         https://wolfdevs.com/products/
     Description:         A versatile WordPress slider plugin supporting multiple slider types including hero, post, image, and video sliders.
     Version:            1.1.1
     Requires at Least:  6.7.1
     Requires PHP:       7.2
-    Author:             Riyadh Bin Islam
-    Author URI:         https://github.com/riyadhbinislam
+    Author:             wolfdevsllc
+    Author URI:         https://github.com/wolfdevsllc
     License:            GNU General Public License v2 or later
     License URI:        http://www.gnu.org/licenses/gpl-2.0.html
-    Update URI:         https://github.com/riyadhbinislam
+    Update URI:         https://github.com/wolfdevsllc
     Text Domain:        slider_bin
     */
 

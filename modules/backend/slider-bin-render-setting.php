@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="slider-type-wrap">
                 <div class="slider-type-heading">
                     <!-- <h3><?php _e('Slider Type', 'slider_bin'); ?></h3> -->
-                    <select name="slider_type" id="slider_type" class="slider-type-select">
+                    <select name="slider_type" id="slider_type_settings" class="slider-type-select">
                         <option value="hero_same"><?php _e('Hero with Same Heading Slider', 'slider_bin'); ?></option>
                         <option value="hero_separate"><?php _e('Hero with Separate Heading Slider', 'slider_bin'); ?></option>
                         <option value="image"><?php _e('Image Slider', 'slider_bin'); ?></option>

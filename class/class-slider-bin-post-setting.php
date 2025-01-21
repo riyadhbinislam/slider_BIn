@@ -53,7 +53,7 @@ class Slider_Bin_Post_Setting {
             return;
         }
         // Get the currently selected slider type from options
-        $selected_type = get_option('slider_bin_selected_type', 'hero_same');
+        $selected_type = get_option('slider_bin_selected_type', '');
 
         ?>
 
@@ -122,10 +122,41 @@ class Slider_Bin_Post_Setting {
 
         $options = get_option($settings_group, array());
         $id = $args['id'];
-        $placeholder = $args['placeholder'];
-        $type = $args['type'];
+        $label = isset($args['label']) ? $args['label'] : '';
+        $placeholder = isset($args['placeholder']) ? $args['placeholder'] : '';
+        $type = isset($args['type']) ? $args['type'] : 'text';
+        $fields = isset($args['fields']) ? $args['fields'] : array();
         $value = isset($options[$id]) ? $options[$id] : '';
 
+        // Check if there are subfields
+        if (!empty($fields)) {
+            // Render only subfields if they exist
+            echo '<div class="sub-fields-wrapper">';
+            foreach ($fields as $sub_id => $sub_field) {
+                $sub_placeholder = isset($sub_field['placeholder']) ? $sub_field['placeholder'] : '';
+                $sub_value = isset($options[$sub_id]) ? $options[$sub_id] : '';
+                $sub_label = isset($sub_field['label']) ? $sub_field['label'] : ucfirst($sub_placeholder);
+                $sub_type = isset($sub_field['type']) ? $sub_field['type'] : 'text';
+
+                // Handle different subfield types
+                echo '<div class="sub-field">';
+                // echo '<label for="' . esc_attr($sub_id) . '">' . esc_html($sub_label) . '</label>';
+
+                if ($sub_type === 'text') {
+                    printf(
+                        '<input type="text" id="%1$s" name="%2$s[%1$s]" value="%3$s" placeholder="%4$s" class="regular-text">',
+                        esc_attr($sub_id),
+                        esc_attr($settings_group),
+                        esc_attr($sub_value),
+                        esc_attr($sub_placeholder)
+                    );
+                }
+                echo '</div>';
+            }
+            echo '</div>';
+        } else {
+            // Render the main field if it has no subfields
+            echo '<div class="setting-field">';
         if ($type === 'text') {
             printf(
                 '<input type="text" id="%1$s" name="%2$s[%1$s]" value="%3$s" placeholder="%4$s" class="regular-text">',
@@ -135,42 +166,75 @@ class Slider_Bin_Post_Setting {
                 esc_attr($placeholder)
             );
         } elseif ($type === 'color') {
+            echo '<div class="setting-fields-inner">';
             printf(
-                '<input type="color" id="%1$s" name="%2$s[%1$s]" value="%3$s" placeholder="%4$s" class="regular-text color-picker">',
-                esc_attr($id),
-                esc_attr($settings_group),
-                esc_attr($value),
-                esc_attr($placeholder)
-            );
-        }elseif ($type === 'button') {
-             // Hidden input for storing the media URL
-            printf(
-                '<input type="hidden" id="%1$s_media" name="%2$s[%1$s]" value="%3$s" class="media-file-input">',
+                '<input type="color" id="%1$s" name="%2$s[%1$s]" value="%3$s" class="regular-text color-picker">',
                 esc_attr($id),
                 esc_attr($settings_group),
                 esc_attr($value)
             );
-
+            echo '</div>';
+        } elseif ($type === 'textarea') {
             printf(
-                '<button type="button" id="%1$s" class="button media-file-selector" data-settings-group="%2$s">%3$s</button>',
+                '<textarea id="%1$s" name="%2$s[%1$s]" placeholder="%3$s" class="regular-text">%4$s</textarea>',
                 esc_attr($id),
                 esc_attr($settings_group),
-                esc_html(__('Select Media File', 'slider_bin'))
+                esc_attr($placeholder),
+                esc_attr($value)
             );
-
-            // Preview area for the selected media
-             if ($value) {
+        } elseif ($type === 'select' && isset($args['options'])) {
+            echo '<select id="' . esc_attr($id) . '" name="' . esc_attr($settings_group) . '[' . esc_attr($id) . ']" class="regular-text">';
+            foreach ($args['options'] as $key => $option) {
                 printf(
-                    '<div class="media-preview"><img src="%1$s" alt="%2$s" style="max-width: 100%%; height: auto;" /></div>',
-                    esc_url($value),
-                    esc_attr(__('Selected Media', 'slider_bin'))
+                    '<option value="%1$s" %2$s>%3$s</option>',
+                    esc_attr($key),
+                    selected($value, $key, false),
+                    esc_html($option)
                 );
-            } else {
-                echo '<div class="media-preview">' . esc_html(__('No media selected', 'slider_bin')) . '</div>';
             }
+            echo '</select>';
+        } elseif ($type === 'radio') {
+            foreach ($args['options'] as $key => $option) {
+                printf(
+                    '<input type="radio" id="%1$s" name="%2$s[%1$s]" value="%3$s" %4$s> %5$s',
+                    esc_attr($id),
+                    esc_attr($settings_group),
+                    esc_attr($key),
+                    checked($value, $key, false),
+                    esc_html($option)
+                );
+            }
+        } elseif ($type === 'button') {
+            // Hidden input for storing the media URL
+           printf(
+               '<input type="hidden" id="%1$s_media" name="%2$s[%1$s]" value="%3$s" class="media-file-input">',
+               esc_attr($id),
+               esc_attr($settings_group),
+               esc_attr($value)
+           );
+
+           printf(
+               '<button type="button" id="%1$s" class="button media-file-selector" data-settings-group="%2$s">%3$s</button>',
+               esc_attr($id),
+               esc_attr($settings_group),
+               esc_html(__('Select Media File', 'slider_bin'))
+           );
+
+           // Preview area for the selected media
+            if ($value) {
+               printf(
+                   '<div class="media-preview"><img src="%1$s" alt="%2$s" style="max-width: 100%%; height: auto;" /></div>',
+                   esc_url($value),
+                   esc_attr(__('Selected Media', 'slider_bin'))
+               );
+           } else {
+               echo '<div class="media-preview">' . esc_html(__('No icon selected', 'slider_bin')) . '</div>';
+           }
+        }
+
+        echo '</div>';
         }
     }
-
 }
 // Instantiated in your main plugin file:
 function slider_bin_init_post_setting() {

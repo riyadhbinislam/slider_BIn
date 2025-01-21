@@ -57,10 +57,17 @@ if ( ! defined( 'ABSPATH' ) ) {
             return;
         }
 
-    if (!empty($image_slider_data)): ?>
+
+    if (!empty($image_slider_data) && array_filter($image_slider_data)):
+    ?>
         <span class="tag">Preview</span>
         <div class="slider-preview">
-            <?php include SLIDER_BIN_PATH . 'modules/frontend/slider-bin-image-slider.php';?>
+            <?php
+
+                include SLIDER_BIN_PATH . 'modules/frontend/slider-bin-image-slider.php';
+
+            ?>
         </div>
-    <?php endif; ?>
+   <?php endif;?>
+
 </div>

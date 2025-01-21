@@ -25,11 +25,16 @@
         ),
         'post_slider_bg_image_size' => array(
             'label' => __('Background Image Size', 'slider_bin'),
-            'placeholder' => 'cover'
-        ),
-        'post_slider_bg_overlay' => array(
-            'label' => __('Background Image Overlay', 'slider_bin'),
-            'placeholder' => 'true/false'
+            'type' => 'select',
+            'options'   => array(
+                'auto' => __('Auto', 'slider_bin'),
+                'cover' => __('Cover', 'slider_bin'),
+                'contain' => __('Contain', 'slider_bin'),
+                '25% 25%' => __('25% 25%', 'slider_bin'),
+                '50% 50%' => __('50% 50%', 'slider_bin'),
+                '75% 75%' => __('75% 75%', 'slider_bin'),
+                '100% 100%' => __('100% 100%', 'slider_bin'),
+            ),
         ),
         'post_slider_bg_overlay_color' => array(
             'label' => __('Background Image Overlay Color', 'slider_bin'),
@@ -40,188 +45,275 @@
             'label' => __('Background Image Overlay Opacity', 'slider_bin'),
             'placeholder' => '0.5'
         ),
-        'post_slider_content_position_top' => array(
-            'label' => __('Content Position-Top', 'slider_bin'),
-            'placeholder' => '10% or 10px'
-        ),
-        'post_slider_content_position_left' => array(
-            'label' => __('Content Position-Left', 'slider_bin'),
-            'placeholder' => '10% or 10px'
-        ),
-        'post_slider_content_position_right' => array(
-            'label' => __('Content Position-Right', 'slider_bin'),
-            'placeholder' => '10% or 10px'
-        ),
-        'post_slider_content_position_bottom' => array(
-            'label' => __('Content Position-Bottom', 'slider_bin'),
-            'placeholder' => '10% or 10px'
+
+// Content Settings Fields
+
+        'post_slider_content_position' => array(
+            'label' => __('Position', 'slider_bin'),
+            'fields' => array(
+                'post_slider_content_position_left' => array(
+                    'placeholder' => 'Left'
+                ),
+                'post_slider_content_position_top' => array(
+                    'placeholder' => 'Top'
+                ),
+                'post_slider_content_position_right' => array(
+                    'placeholder' => 'Right'
+                ),
+                'post_slider_content_position_bottom' => array(
+                    'placeholder' => 'Bottom'
+                ),
+            ),
         ),
         'post_slider_content_alignment' => array(
-            'label' => __('Content Alignment', 'slider_bin'),
+            'label' => __('Alignment', 'slider_bin'),
             'placeholder' => 'center'
         ),
         'post_slider_content_padding' => array(
-            'label' => __('Content Padding', 'slider_bin'),
-            'placeholder' => '0 0 20px 0'
+            'label' => __('Padding', 'slider_bin'),
+            'fields' => array(
+                'post_slider_content_padding_left' => array(
+                    'placeholder' => 'Left'
+                ),
+                'post_slider_content_padding_top' => array(
+                    'placeholder' => 'Top'
+                ),
+                'post_slider_content_padding_right' => array(
+                    'placeholder' => 'Right'
+                ),
+                'post_slider_content_padding_bottom' => array(
+                    'placeholder' => 'Bottom'
+                ),
+            ),
         ),
         'post_slider_content_margin' => array(
-            'label' => __('Content Margin', 'slider_bin'),
-            'placeholder' => '0 0 20px 0'
+            'label' => __('Margin', 'slider_bin'),
+            'fields' => array(
+                'post_slider_content_margin_left' => array(
+                    'placeholder' => 'Left'
+                ),
+                'post_slider_content_margin_top' => array(
+                    'placeholder' => 'Top'
+                ),
+                'post_slider_content_margin_right' => array(
+                    'placeholder' => 'Right'
+                ),
+                'post_slider_content_margin_bottom' => array(
+                    'placeholder' => 'Bottom'
+                ),
+            ),
         ),
+
+// Heading Settings Fields
+
         'post_slider_heading_font_family' => array(
-            'label' => __('Heading Font Family', 'slider_bin'),
+            'label' => __('Font Family', 'slider_bin'),
             'placeholder' => 'Arial, sans-serif'
         ),
         'post_slider_heading_font_size' => array(
-            'label' => __('Heading Font Size', 'slider_bin'),
+            'label' => __('Font Size', 'slider_bin'),
             'placeholder' => '32px'
         ),
         'post_slider_heading_font_weight' => array(
-            'label' => __('Heading Font Weight', 'slider_bin'),
+            'label' => __('Font Weight', 'slider_bin'),
             'placeholder' => '700'
         ),
         'post_slider_heading_line_height' => array(
-            'label' => __('Heading Line Height', 'slider_bin'),
+            'label' => __('Line Height', 'slider_bin'),
             'placeholder' => '1.2'
         ),
         'post_slider_heading_color' => array(
-            'label' => __('Heading Color', 'slider_bin'),
+            'label' => __('Color', 'slider_bin'),
             'placeholder' => '#ffffff',
             'type' => 'color'
         ),
         'post_slider_heading_margin' => array(
-            'label' => __('Heading Margin', 'slider_bin'),
-            'placeholder' => '0 0 20px 0'
+            'label' => __('Margin', 'slider_bin'),
+            'fields' => array(
+                'post_slider_heading_margin_left' => array(
+                    'placeholder' => 'Left'
+                ),
+                'post_slider_heading_margin_top' => array(
+                    'placeholder' => 'Top'
+                ),
+                'post_slider_heading_margin_right' => array(
+                    'placeholder' => 'Right'
+                ),
+                'post_slider_heading_margin_bottom' => array(
+                    'placeholder' => 'Bottom'
+                ),
+            ),
         ),
         'post_slider_heading_padding' => array(
-            'label' => __('Heading Padding', 'slider_bin'),
-            'placeholder' => '0 0 20px 0'
+            'label' => __('Padding', 'slider_bin'),
+            'fields' => array(
+                'post_slider_heading_padding_left' => array(
+                    'placeholder' => 'Left'
+                ),
+                'post_slider_heading_padding_top' => array(
+                    'placeholder' => 'Top'
+                ),
+                'post_slider_heading_padding_right' => array(
+                    'placeholder' => 'Right'
+                ),
+                'post_slider_heading_padding_bottom' => array(
+                    'placeholder' => 'Bottom'
+                ),
+            ),
         ),
+
+// Subheading Settings Fields
+
         'post_slider_subheading_font_family' => array(
-            'label' => __('Excerpt Font Family', 'slider_bin'),
+            'label' => __('Font Family', 'slider_bin'),
             'placeholder' => 'Arial, sans-serif'
         ),
         'post_slider_subheading_font_size' => array(
-            'label' => __('Excerpt Font Size', 'slider_bin'),
+            'label' => __('Font Size', 'slider_bin'),
             'placeholder' => '18px'
         ),
         'post_slider_subheading_font_weight' => array(
-            'label' => __('Excerpt Font Weight', 'slider_bin'),
+            'label' => __('Font Weight', 'slider_bin'),
             'placeholder' => '400'
         ),
         'post_slider_subheading_line_height' => array(
-            'label' => __('Excerpt Line Height', 'slider_bin'),
+            'label' => __('Line Height', 'slider_bin'),
             'placeholder' => '1.5'
         ),
         'post_slider_subheading_color' => array(
-            'label' => __('Excerpt Color', 'slider_bin'),
+            'label' => __('Color', 'slider_bin'),
             'placeholder' => '#ffffff',
             'type' => 'color'
         ),
         'post_slider_subheading_margin' => array(
-            'label' => __('Excerpt Margin', 'slider_bin'),
-            'placeholder' => '0 0 30px 0'
+            'label' => __('Margin', 'slider_bin'),
+            'fields' => array(
+                'post_slider_subheading_margin_left' => array(
+                    'placeholder' => 'Left'
+                ),
+                'post_slider_subheading_margin_top' => array(
+                    'placeholder' => 'Top'
+                ),
+                'post_slider_subheading_margin_right' => array(
+                    'placeholder' => 'Right'
+                ),
+                'post_slider_subheading_margin_bottom' => array(
+                    'placeholder' => 'Bottom'
+                ),
+            ),
         ),
         'post_slider_subheading_padding' => array(
-            'label' => __('Excerpt Padding', 'slider_bin'),
-            'placeholder' => '0'
+            'label' => __('Padding', 'slider_bin'),
+            'fields' => array(
+                'post_slider_subheading_padding_left' => array(
+                    'placeholder' => 'Left'
+                ),
+                'post_slider_subheading_padding_top' => array(
+                    'placeholder' => 'Top'
+                ),
+                'post_slider_subheading_padding_right' => array(
+                    'placeholder' => 'Right'
+                ),
+                'post_slider_subheading_padding_bottom' => array(
+                    'placeholder' => 'Bottom'
+                ),
+            ),
         ),
-        'post_slider_left_arrow_position_left' => array(
-            'label' => __('Left Arrow Position-Left', 'slider_bin'),
-            'placeholder' => '10% or 10px'
+
+// Arrow Settings Fields
+
+        'post_slider_arrow_position' => array(
+            'label' => __('Position', 'slider_bin'),
+            'fields' => array(
+                'post_slider_left_arrow_position_left' => array(
+                    'placeholder' => 'Left'
+                ),
+                'post_slider_left_arrow_position_top' => array(
+                    'placeholder' => 'Top'
+                ),
+                'post_slider_left_arrow_position_right' => array(
+                    'placeholder' => 'Right'
+                ),
+                'post_slider_left_arrow_position_bottom' => array(
+                    'placeholder' => 'Bottom'
+                ),
+            ),
         ),
-        'post_slider_left_arrow_position_top' => array(
-            'label' => __('Left Arrow Position-Top', 'slider_bin'),
-            'placeholder' => '10% or 10px'
-        ),
-        'post_slider_left_arrow_position_right' => array(
-            'label' => __('Left Arrow Position-Right', 'slider_bin'),
-            'placeholder' => '10% or 10px'
-        ),
-        'post_slider_left_arrow_position_bottom' => array(
-            'label' => __('Left Arrow Position-Bottom', 'slider_bin'),
-            'placeholder' => '10% or 10px'
-        ),
-        'post_slider_left_arrow_color' => array(
-            'label' => __('Left Arrow Color', 'slider_bin'),
+        'post_slider_arrow_color' => array(
+            'label' => __('Color', 'slider_bin'),
             'placeholder' => '#ffffff',
             'type' => 'color'
         ),
-        'post_slider_left_arrow_opacity' => array(
-            'label' => __('Left Arrow Opacity', 'slider_bin'),
+        'post_slider_arrow_opacity' => array(
+            'label' => __('Opacity', 'slider_bin'),
             'placeholder' => '0.8'
         ),
-        'post_slider_left_arrow_height' => array(
-            'label' => __('Left Arrow Height', 'slider_bin'),
+        'post_slider_arrow_height' => array(
+            'label' => __('Height', 'slider_bin'),
             'placeholder' => '40px'
         ),
-        'post_slider_left_arrow_width' => array(
-            'label' => __('Left Arrow Width', 'slider_bin'),
-            'placeholder' => '40px'
-        ),
-        'post_slider_right_arrow_position_left' => array(
-            'label' => __('Right Arrow Position-Left', 'slider_bin'),
-            'placeholder' => '10% or 10px'
-        ),
-        'post_slider_right_arrow_position_top' => array(
-            'label' => __('Right Arrow Position-Top', 'slider_bin'),
-            'placeholder' => '10% or 10px'
-        ),
-        'post_slider_right_arrow_position_right' => array(
-            'label' => __('Right Arrow Position-Right', 'slider_bin'),
-            'placeholder' => '10% or 10px'
-        ),
-        'post_slider_right_arrow_position_bottom' => array(
-            'label' => __('Right Arrow Position-Bottom', 'slider_bin'),
-            'placeholder' => '10% or 10px'
-        ),
-        'post_slider_right_arrow_color' => array(
-            'label' => __('Right Arrow Color', 'slider_bin'),
-            'placeholder' => '#ffffff',
-            'type' => 'color'
-        ),
-        'post_slider_right_arrow_opacity' => array(
-            'label' => __('Right Arrow Opacity', 'slider_bin'),
-            'placeholder' => '0.8'
-        ),
-        'post_slider_right_arrow_height' => array(
-            'label' => __('Right Arrow Height', 'slider_bin'),
+        'post_slider_arrow_width' => array(
+            'label' => __('Width', 'slider_bin'),
             'placeholder' => '40px'
         ),
         'post_slider_left_media_file' => array(
-                'label' => __('Select or Choose Left Icon', 'slider_bin'),
+                'label' => __('Select Left Icon', 'slider_bin'),
                 'placeholder' => '',
                 'type' => 'button'
         ),
         'post_slider_right_media_file' => array(
-            'label' => __('Select or Choose Right Icon', 'slider_bin'),
+            'label' => __('Select Right Icon', 'slider_bin'),
             'placeholder' => '',
             'type' => 'button'
         ),
-        'post_slider_arrow_right' => array(
-            'label' => __('Right Arrow Style', 'slider_bin'),
-            'placeholder' => '',
-            'type' => 'select',
-        ),
+
+// Button Settings Fields
+
         'post_slider_button_padding' => array(
-            'label' => __( 'Button Padding', 'slider_bin'),
-            'placeholder' => '10px 20px 10px 20px'
+            'label' => __( 'Padding', 'slider_bin'),
+            'fields' => array(
+                'post_slider_button_padding_left' => array(
+                    'placeholder' => 'Left'
+                ),
+                'post_slider_button_padding_top' => array(
+                    'placeholder' => 'Top'
+                ),
+                'post_slider_button_padding_right' => array(
+                    'placeholder' => 'Right'
+                ),
+                'post_slider_button_padding_bottom' => array(
+                    'placeholder' => 'Bottom'
+                ),
+            ),
         ),
         'post_slider_button_margin' => array(
-            'label' => __('Button Margin', 'slider_bin'),
-            'placeholder' => '0 0 20px 0'
+            'label' => __('Margin', 'slider_bin'),
+            'fields' => array(
+                'post_slider_button_margin_left' => array(
+                    'placeholder' => 'Left'
+                ),
+                'post_slider_button_margin_top' => array(
+                    'placeholder' => 'Top'
+                ),
+                'post_slider_button_margin_right' => array(
+                    'placeholder' => 'Right'
+                ),
+                'post_slider_button_margin_bottom' => array(
+                    'placeholder' => 'Bottom'
+                ),
+            ),
         ),
         'post_slider_button_font_size' => array(
-            'label' => __('Button Font Size', 'slider_bin'),
+            'label' => __('Font Size', 'slider_bin'),
             'placeholder' => '14px'
         ),
         'post_slider_button_color' => array(
-            'label' => __('Button Font Color', 'slider_bin'),
+            'label' => __('Font Color', 'slider_bin'),
             'placeholder' => '#ffffff',
             'type' => 'color'
         ),
         'post_slider_button_bg_color' => array(
-            'label' => __('Button Background Color', 'slider_bin'),
+            'label' => __('Background Color', 'slider_bin'),
             'placeholder' => '#ff5733',
             'type' => 'color'
         ),
@@ -236,55 +328,73 @@
         ),
         'post_slider_button_border_style' => array(
             'label' => __('Border Style', 'slider_bin'),
-            'placeholder' => 'solid/dotted/dashed'
+            'type' => 'select',
+            'options' => array(
+                'none' => __('None', 'slider_bin'),
+                'solid' => __('Solid', 'slider_bin'),
+                'dotted' => __('Dotted', 'slider_bin'),
+                'dashed' => __('Dashed', 'slider_bin'),
+                'double' => __('Double', 'slider_bin'),
+                'groove' => __('Groove', 'slider_bin'),
+                'ridge' => __('Ridge', 'slider_bin'),
+                'inset' => __('Inset', 'slider_bin'),
+                'outset' => __('Outset', 'slider_bin'),
+            ),
         ),
         'post_slider_button_border_radius' => array(
             'label' => __('Border Radius', 'slider_bin'),
             'placeholder' => '5px'
         ),
         'post_slider_button_box_shadow' => array(
-            'label' => __('Button Box Shadow', 'slider_bin'),
+            'label' => __('Box Shadow', 'slider_bin'),
             'placeholder' => '0px 4px 6px #888888'
         ),
         'post_slider_button_text_align' => array(
-            'label' => __('Button Text Align', 'slider_bin'),
+            'label' => __('Text Align', 'slider_bin'),
             'placeholder' => 'center'
         ),
         'post_slider_button_text_decoration' => array(
-            'label' => __('Button Text Decoration', 'slider_bin'),
+            'label' => __('Text Decoration', 'slider_bin'),
             'placeholder' => 'none'
         ),
         'post_slider_button_font_family' => array(
-            'label' => __('Button Font Family', 'slider_bin'),
+            'label' => __('Font Family', 'slider_bin'),
             'placeholder' => 'Arial, sans-serif'
         ),
         'post_slider_button_font_weight' => array(
-            'label' => __('Button Font Weight', 'slider_bin'),
+            'label' => __('Font Weight', 'slider_bin'),
             'placeholder' => '400'
         ),
         'post_slider_button_target' => array(
             'label' => __('Button Target', 'slider_bin'),
-            'placeholder' => '_self'
+            'type' => 'select',
+            'options' => array(
+                '_self' => __('Self', 'slider_bin'),
+                '_blank' => __('Blank', 'slider_bin'),
+            ),
         ),
+
+// Pagination Settings Fields
+
         'post_slider_pagination_height' => array(
-            'label' => __('Pagination Height', 'slider_bin'),
+            'label' => __('Height', 'slider_bin'),
             'placeholder' => '15px'
         ),
         'post_slider_pagination_width' => array(
-            'label' => __('Pagination width', 'slider_bin'),
+            'label' => __('width', 'slider_bin'),
             'placeholder' => '15px'
         ),
         'post_slider_pagination_gap' => array(
-            'label' => __('Pagination Gap', 'slider_bin'),
+            'label' => __('Gap', 'slider_bin'),
             'placeholder' => '5px'
         ),
         'post_slider_pagination_color' => array(
-            'label' => __('Pagination Color', 'slider_bin'),
+            'label' => __('Color', 'slider_bin'),
             'placeholder' => '#8E1616',
             'type' => 'color'
         ),
         'post_slider_pagination_active_color' => array(
-            'label' => __('Pagination Color On Active', 'slider_bin'),
+            'label' => __('Color On Active', 'slider_bin'),
             'placeholder' => '#D84040',
             'type' => 'color'
         ),
@@ -307,11 +417,8 @@
         'content_settings' => array(
             'title' => __('Content Settings', 'slider_bin'),
             'fields' => array(
-                'post_slider_content_position_top',
-                'post_slider_content_position_left',
-                'post_slider_content_position_right',
-                'post_slider_content_position_bottom',
                 'post_slider_content_alignment',
+                'post_slider_content_position',
                 'post_slider_content_margin',
                 'post_slider_content_padding',
             ),
@@ -324,8 +431,8 @@
                 'post_slider_heading_font_weight',
                 'post_slider_heading_line_height',
                 'post_slider_heading_color',
-                'post_slider_heading_margin',
                 'post_slider_heading_padding',
+                'post_slider_heading_margin',
             ),
         ),
         'subheading_settings' => array(
@@ -336,8 +443,8 @@
                 'post_slider_subheading_font_weight',
                 'post_slider_subheading_line_height',
                 'post_slider_subheading_color',
-                'post_slider_subheading_margin',
                 'post_slider_subheading_padding',
+                'post_slider_subheading_margin',
             ),
         ),
         'button_settings' => array(
@@ -365,22 +472,11 @@
             'fields' => array(
                 'post_slider_right_media_file',
                 'post_slider_left_media_file',
-                'post_slider_left_arrow_position_top',
-                'post_slider_left_arrow_position_left',
-                'post_slider_left_arrow_position_right',
-                'post_slider_left_arrow_position_bottom',
-                'post_slider_left_arrow_color',
-                'post_slider_left_arrow_opacity',
-                'post_slider_left_arrow_width',
-                'post_slider_left_arrow_height',
-                'post_slider_right_arrow_position_top',
-                'post_slider_right_arrow_position_left',
-                'post_slider_right_arrow_position_right',
-                'post_slider_right_arrow_position_bottom',
-                'post_slider_right_arrow_color',
-                'post_slider_right_arrow_opacity',
-                'post_slider_right_arrow_width',
-                'post_slider_right_arrow_height',
+                'post_slider_arrow_position',
+                'post_slider_arrow_color',
+                'post_slider_arrow_opacity',
+                'post_slider_arrow_width',
+                'post_slider_arrow_height',
             ),
         ),
         'pagination_settings' => array(
@@ -395,6 +491,8 @@
         ),
     );
 
+    // Register fields dynamically based on groups
+
     if (!empty($post_slider_groups)) {
         foreach ($post_slider_groups as $group_key => $group) {
             add_settings_section(
@@ -406,21 +504,36 @@
 
             foreach ($group['fields'] as $field_id) {
                 if (!isset($post_slider_fields[$field_id])) {
-                    continue; // Skip fields not defined in $post_slider_fields
+                    continue;
                 }
                 $field = $post_slider_fields[$field_id];
 
+                // Field has no subfields
+                $args = array(
+                    'id' => $field_id,
+                    'label' => isset($field['label']) ? $field['label'] : '',
+                    'placeholder' => isset($field['placeholder']) ? $field['placeholder'] : '',
+                    'type' => isset($field['type']) ? $field['type'] : 'text',
+                );
+
+                // Add options for select type fields
+                if (isset($field['type']) && $field['type'] === 'select' && isset($field['options'])) {
+                    $args['options'] = $field['options'];
+                }
+
+                // Include subfields in args
+                if (isset($field['fields']) && is_array($field['fields'])) {
+                    $args['fields'] = $field['fields'];
+                }
+
+                // Field has subfields
                 add_settings_field(
                     $field_id,
                     $field['label'],
                     array($this, 'render_settings_field'),
                     'slider_bin_post_slider_section',
                     'slider_bin_post_slider_' . $group_key . '_section',
-                    array(
-                        'id' => $field_id,
-                        'placeholder' => $field['placeholder'],
-                        'type' => isset($field['type']) ? $field['type'] : 'text'
-                    )
+                    $args
                 );
             }
         }
