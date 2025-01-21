@@ -83,7 +83,11 @@
                 $video_url = esc_url(trim($video_url));
                 if (!empty($video_url)) {
                     ?>
+<<<<<<< HEAD
                     <div class="slide media-slide" >
+=======
+                    <div class="slide media-slide">
+>>>>>>> acb32e2d25c816cd0aafbacc0a5cfd4bf7be53b7
                         <video
                             width="100%"
                             height="100%"
