@@ -12,7 +12,7 @@
 
 
     $slider_width = isset($options['video_slider_width']) ? esc_attr($options['video_slider_width']) : '100%';
-    $slider_height = isset($options['video_slider_height']) ? esc_attr($options['video_slider_height']) : '700px';
+    // $slider_height = isset($options['video_slider_height']) ? esc_attr($options['video_slider_height']) : '700px';
 
     $video_slider_left_media_file = isset($options['video_slider_left_media_file']) ? esc_attr($options['video_slider_left_media_file']) : SLIDER_BIN_URL . '/assets/icon/arrow-left.png';
     $video_slider_right_media_file = isset($options['video_slider_right_media_file']) ? esc_attr($options['video_slider_right_media_file']) : SLIDER_BIN_URL . '/assets/icon/arrow-right.png';
