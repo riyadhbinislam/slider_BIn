@@ -4,36 +4,19 @@ if (!defined('ABSPATH')) {
 }
 ?>
 
-
 <div id="post_repeater">
     <?php
     $saved_post_slider_data = get_post_meta($post->ID, '_post_slider_data', true);
 
     if ($saved_post_slider_data && is_array($saved_post_slider_data)) {
-        foreach ($saved_post_slider_data as $slider_data) { ?>
-            <div class="post_group">
-                <div class="inner-field-wrapper">
-                    <label for="post_url">Select Blog:</label>
-                    <select name="post_url[]" class="post-select" data-group-index="0">
-                        <option value="">Select Post</option>
-                        <?php
-                        $posts = get_posts(['post_type' => 'post', 'post_status' => 'publish']);
-                        foreach ($posts as $post_option) {
-                             // Store both ID and permalink as data attributes
-                            $selected = ($post_option->ID == $slider_data['url']) ? 'selected' : '';
-                            echo sprintf(
-                                '<option value="%d" data-permalink="%s" %s>%s</option>',
-                                esc_attr($post_option->ID),
-                                esc_url(get_permalink($post_option->ID)),
-                                $selected,
-                                esc_html($post_option->post_title)
-                            );
-                        }
-                        ?>
-                    </select>
-                    <input type="hidden" name="post_permalink[]" value="<?php echo esc_url(get_permalink($post_option->ID)); ?>">
-                </div>
+        foreach ($saved_post_slider_data as $slider_data) {
+            $post_url = isset($slider_data['url']) ? $slider_data['url'] : '';
+            $post_images = isset($slider_data['image']) ? $slider_data['image'] : '';
+            $post_headings = isset($slider_data['heading']) ? $slider_data['heading'] : '';
+            $post_subheadings = isset($slider_data['subheading']) ? $slider_data['subheading'] : '';
+                ?>
 
+            <div class="post_group">
                 <div class="inner-field-wrapper">
                     <label for="post_heading">Heading:</label>
                     <input type="text" name="post_heading[]" value="<?php echo esc_attr($slider_data['heading']); ?>" placeholder="Enter Heading">
@@ -43,6 +26,10 @@ if (!defined('ABSPATH')) {
                     <label for="post_subheading">Sub-Heading:</label>
                     <textarea name="post_subheading[]" placeholder="Enter Subheading"><?php echo esc_textarea($slider_data['subheading']); ?></textarea>
                 </div>
+                <div class="inner-field-wrapper">
+                    <label for="post_link">Button Link:</label>
+                    <input type="text" name="post_link[]" value="<?php echo esc_textarea($slider_data['button_link']); ?>" placeholder="Enter Button Link">
+                </div>
 
                 <div class="inner-field-wrapper">
                     <label for="post_image">Image:</label>
@@ -51,60 +38,63 @@ if (!defined('ABSPATH')) {
                 </div>
 
                 <div class="image-preview">
-                    <?php if (!empty($slider_data['image'])) { ?>
+                    <?php if (!empty($slider_data['image']) && filter_var($slider_data['image'], FILTER_VALIDATE_URL)): ?>
                         <img src="<?php echo esc_url($slider_data['image']); ?>" style="max-width: 100px; margin: 5px;">
-                    <?php } ?>
+                    <?php endif; ?>
                 </div>
                 <button type="button" class="button remove-repeater">Remove</button>
+
             </div>
+
+
         <?php }
     } else { ?>
-        <div class="post_group">
-            <div class="inner-field-wrapper">
-                <label for="post_url">Select Blog:</label>
-                <select name="post_url[]" class="post-select" data-group-index="0">
-                    <option value="">Select Post</option>
-                    <?php
-                    $posts = get_posts(['post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => -1]);
-                    if (empty($posts)) {
-                        echo '<option value="">No posts found</option>';
-                    }else {
-                    foreach ($posts as $post_option) {
+    <div class="select_post_group">
+        <!-- Category Selection -->
+        <div class="inner-field-wrapper">
+            <label for="post_category">Select Category - </label>
+            <select name="post_category[]" class="post-category" id="category_select">
+                <option value="">Select Category</option>
+                <?php
+                $categories = get_categories(['hide_empty' => false]);
+                foreach ($categories as $category) {
+                    echo sprintf(
+                        '<option value="%d">%s</option>',
+                        esc_attr($category->term_id),
+                        esc_html($category->name)
+                    );
+                }
+                ?>
+            </select>
+        </div>
+        <div class="tag-note"><span>or</span></div>
+        <!-- Tag Selection -->
+        <div class="inner-field-wrapper">
+            <label for="post_tag">Select Tags - </label>
+            <select name="post_tag[]" class="post-tag" id="tag_select">
+                <option value="">Select Tags</option>
+                <?php
+                $tags = get_tags(['hide_empty' => false]); // Correct function
+                if (!empty($tags)) {
+                    foreach ($tags as $tag) {
                         echo sprintf(
-                            '<option value="%d" data-permalink="%s">%s</option>',
-                            esc_attr($post_option->ID),
-                            esc_url(get_permalink($post_option->ID)),
-                            esc_html($post_option->post_title)
+                            '<option value="%d">%s</option>',
+                            esc_attr($tag->term_id), // Correct property for the tag ID
+                            esc_html($tag->name)
                         );
                     }
                 }
-                    ?>
-                </select>
-                <input type="hidden" name="post_permalink[]" value="<?php if (!empty($post_option->ID)){ echo esc_url(get_permalink($post_option->ID)) ;} ?>">
-            </div>
-
-            <div class="inner-field-wrapper">
-                <label for="post_heading">Heading:</label>
-                <input type="text" name="post_heading[]" placeholder="Enter Heading" value="">
-            </div>
-
-            <div class="inner-field-wrapper">
-                <label for="post_subheading">Sub-Heading:</label>
-                <textarea name="post_subheading[]" placeholder="Enter Subheading"></textarea>
-            </div>
-
-            <div class="inner-field-wrapper">
-                <label for="post_image">Image:</label>
-                <button type="button" class="button slider-bin-select-image">Upload Image</button>
-                <input type="hidden" name="post_image[]" value="">
-            </div>
-
-            <div class="image-preview"></div>
-            <button type="button" class="button remove-repeater">Remove</button>
+                ?>
+            </select>
         </div>
-    <?php } ?>
-</div>
-<button type="button" class="button" id="add_more_repeater" style="display:block; margin:30px auto;">Add More</button>
+    </div>
+
+    <?php
+} ?>
+
+
+
+<div class="slider-preview"></div>
 
 <div class="slider-preview-wrapper">
     <?php
@@ -115,5 +105,4 @@ if (!defined('ABSPATH')) {
         </div>
     <?php endif; ?>
 </div>
-
-
+</div>

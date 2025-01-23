@@ -86,6 +86,14 @@
                 error_log($message);
             }
         }
+
+        if ( ! defined( 'WP_DEBUG' ) ) {
+            define( 'WP_DEBUG', false );
+        }
+
+        if ( ! defined( 'WP_DEBUG_LOG' ) ) {
+            define( 'WP_DEBUG_LOG', false );
+        }
     }
 
 /// Hook into WordPress init with priority 0 to ensure it runs early

@@ -199,7 +199,7 @@
         font-size:      <?php echo esc_attr(!empty($heading_font_size) ? $heading_font_size : '34px'); ?>;
         font-weight:    <?php echo esc_attr(!empty($heading_font_weight) ? $heading_font_weight : 'normal'); ?>;
         line-height:    <?php echo esc_attr(!empty($heading_line_height) ? $heading_line_height : '1.5'); ?>;
-        color:          <?php echo esc_attr(!empty($heading_color) ? $heading_color : '#fff'); ?>;
+        color:          <?php echo esc_attr(!empty($heading_color) ? $heading_color : '#fff'); ?> !important;
         padding-left:   <?php echo esc_attr(!empty($heading_padding_left) ? $heading_padding_left : '0'); ?>;
         padding-top:    <?php echo esc_attr(!empty($heading_padding_top) ? $heading_padding_top : '0'); ?>;
         padding-right:  <?php echo esc_attr(!empty($heading_padding_right) ? $heading_padding_right : '0'); ?>;
@@ -215,7 +215,7 @@
         font-size:      <?php echo empty($subheading_font_size) ? '22px' : $subheading_font_size; ?>;
         font-weight:    <?php echo empty($subheading_font_weight) ? 'normal' : $subheading_font_weight; ?>;
         line-height:    <?php echo empty($subheading_line_height) ? '1.5' : $subheading_line_height; ?>;
-        color:          <?php echo empty($subheading_color) ? '#fff' : $subheading_color; ?>;
+        color:          <?php echo empty($subheading_color) ? '#fff' : $subheading_color; ?>!important;
         padding-left:   <?php echo esc_attr(!empty($subheading_padding_left) ? $subheading_padding_left : '0'); ?>;
         padding-top:    <?php echo esc_attr(!empty($subheading_padding_top) ? $subheading_padding_top : '0'); ?>;
         padding-right:  <?php echo esc_attr(!empty($subheading_padding_right) ? $subheading_padding_right : '0'); ?>;
@@ -295,10 +295,10 @@
                     ">
             <div class="slide-content">
                 <?php if ($heading) { ?>
-                    <h1 class="content-heading">
+                    <h2 class="content-heading">
                         <?php echo $heading; ?>
 
-                    </h1>
+                    </h2>
                 <?php } ?>
                 <?php if ($subheading) { ?>
                     <p class="content-subheading">

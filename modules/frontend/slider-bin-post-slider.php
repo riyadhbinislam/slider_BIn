@@ -285,7 +285,7 @@
             $image = isset($slide['image']) ? esc_url($slide['image']) : '';
             $heading = isset($slide['heading']) ? esc_html($slide['heading']) : '';
             $subheading = isset($slide['subheading']) ? esc_html($slide['subheading']) : '';
-            $permalink = isset($slide['permalink']) ? esc_url($slide['permalink']) : '';
+            $permalink = isset($slide['button_link']) ? esc_url($slide['button_link']) : '';
         ?>
 
         <div class="slide" style="background-image: url('<?php if ($image) { echo $image;} ?>'); height: <?php echo empty($slider_height) ? '700px' : $slider_height; ?>;">

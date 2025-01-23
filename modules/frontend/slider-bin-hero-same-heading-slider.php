@@ -301,9 +301,9 @@ $pagination_active_color    =isset($hero_same_options['hero_same_pagination_acti
         <?php endif; ?>
         <div class="slider-content">
             <?php if (!empty($hero_same_slider_data['heading'])): ?>
-                <h1 class="content-heading">
+                <h2 class="content-heading">
                     <?php echo esc_html($hero_same_slider_data['heading']); ?>
-                </h1>
+                </h2>
             <?php endif; ?>
 
             <?php if (!empty($hero_same_slider_data['subheading'])): ?>

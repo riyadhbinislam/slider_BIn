@@ -32,11 +32,20 @@
 #video_fields,
 #hero_same_fields .hero_group,
 #hero_separate_fields .hero_group,
-#post_repeater .post_group {
+#post_repeater .post_group,
+#post_repeater .repeate-post-by-category,
+#post_repeater .repeate-post-by-tag,
+#post_repeater .repeater-post-by-select {
   border: 1px solid #cdd8e2;
   padding: 15px;
   border-radius: 4px;
   background-color: aliceblue;
+}
+
+#post_repeater .repeate-post-by-tag,
+#post_repeater .repeate-post-by-category,
+#post_repeater .repeater-post-by-select {
+  margin-bottom: 15px;
 }
 
 @media (max-width: 768px){
@@ -194,6 +203,16 @@ background-color: #c82333 !important;
 #video_repeater p {
   width: fit-content;
   color: cadetblue;
+}
+
+
+.slider-post-item {
+  margin-bottom: 20px;
+}
+
+.slider-post-item .remove-repeater,
+.repeater-post-by-select .remove-repeater {
+  margin-top: -50px;
 }
 
 /* ADD NEW SLIDER PAGE STYLE - End*/
@@ -399,4 +418,33 @@ input[type="submit"]:hover {
 
 .setting-fields-inner span {
   cursor: pointer;
+}
+
+
+.select_post_group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.select_post_group .inner-field-wrapper {
+  padding: 10px;
+  border: 1px solid #cdd8e2;
+  border-radius: 4px;
+  background-color: aliceblue;
+}
+.select_post_group .inner-field-wrapper #blog_select  {
+  min-height: 200px;
+}
+
+.tag-note {
+  font-size: 20px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.inner-field-wrapper .button {
+  display: block;
+  margin: 10px 0;
 }

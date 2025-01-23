@@ -10,6 +10,10 @@ class Slider_Bin_Metabox {
     public function __construct() {
         add_action('add_meta_boxes', [$this, 'add_meta_boxes']);
         add_action('save_post', [$this, 'save_meta_box_data']);
+
+        // AJAX handlers for Post taxonomy
+        add_action('wp_ajax_fetch_posts_by_taxonomy', [$this, 'fetch_posts_by_taxonomy']);
+        add_action('wp_ajax_nopriv_fetch_posts_by_taxonomy', [$this, 'fetch_posts_by_taxonomy']);
     }
 
     public function add_meta_boxes() {
@@ -52,6 +56,11 @@ class Slider_Bin_Metabox {
     }
 
     public function meta_box_callback($post) {
+        // Ensure $post is a valid object before using it
+        if ( ! isset( $post ) || ! is_object( $post ) || ! isset( $post->ID ) ) {
+            return; // Exit if the post object is invalid
+        }
+
         // Check if we have a valid post ID (edit mode)
         $post_id = $post->ID ?? null;
 
@@ -97,8 +106,87 @@ class Slider_Bin_Metabox {
             </div>
         </div>
 
-    <?php
-}
+        <?php
+    }
+
+    public function fetch_posts_by_taxonomy() {
+        // Check if category or tag is provided
+        $category_id = isset($_POST['category_id']) ? absint($_POST['category_id']) : 0;
+        $tag_id = isset($_POST['tag_id']) ? absint($_POST['tag_id']) : 0;
+
+        $args = [
+            'post_type'      => 'post',
+            'posts_per_page' => -1, // Limit the number of posts
+            'orderby'        => 'date',
+            'order'          => 'DESC',
+        ];
+
+        if ($category_id) {
+            $args['cat'] = $category_id; // Filter by category
+        }
+
+        if ($tag_id) {
+            $args['tag_id'] = $tag_id; // Filter by tag
+        }
+
+        $query = new WP_Query($args);
+
+        if ($query->have_posts()) {
+            ob_start();
+
+            while ($query->have_posts()) {
+                $query->the_post();
+                // Fetch post-specific data
+                $heading = get_the_title();
+                $subheading = wp_trim_words(get_the_excerpt(), 30);
+                $button_link = get_permalink();
+                $image = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
+                ?>
+                <div class="slider-post-item">
+                    <div class="post_group">
+                        <div class="inner-field-wrapper">
+                            <label for="post_heading">Heading:</label>
+                            <input type="text" name="post_heading[]" value="<?php echo esc_attr($heading); ?>" placeholder="Enter Heading">
+                        </div>
+
+                        <div class="inner-field-wrapper">
+                            <label for="post_subheading">Sub-Heading:</label>
+                            <textarea name="post_subheading[]" placeholder="Enter Subheading"><?php echo esc_textarea($subheading); ?></textarea>
+                        </div>
+
+                        <div class="inner-field-wrapper">
+                            <label for="post_link">Button Link:</label>
+                            <input type="text" name="post_link[]" value="<?php echo esc_url($button_link); ?>" placeholder="Enter Button Link">
+                        </div>
+
+                        <div class="inner-field-wrapper">
+                            <label for="post_image">Image:</label>
+                            <button type="button" class="button slider-bin-select-image">Upload Image</button>
+                            <input type="hidden" name="post_image[]" value="<?php echo esc_url($image); ?>">
+                        </div>
+
+                        <div class="image-preview">
+                            <?php if (!empty($image)) { ?>
+                                <img src="<?php echo esc_url($image); ?>" style="max-width: 100px; margin: 5px;">
+                            <?php } ?>
+                        </div>
+                        <button type="button" class="button remove-repeater">Remove</button>
+                    </div>
+                </div>
+            <?php
+            }
+
+            wp_reset_postdata();
+            $output = ob_get_clean();
+
+            wp_send_json_success($output);
+        } else {
+            wp_send_json_error('No posts found.');
+        }
+
+        wp_die(); // Terminate immediately to return proper response
+    }
+
 
     public function save_meta_box_data($post_id) {
 
@@ -133,32 +221,34 @@ class Slider_Bin_Metabox {
             update_post_meta($post_id, '_slider_type', sanitize_text_field($_POST['slider_type']));
         }
 
-        // Save Post Slider fields
-        if (isset($_POST['slider_type']) && $_POST['slider_type'] === 'post') {
 
+        // Save Post Slider field
+
+        if (isset($_POST['slider_type']) && $_POST['slider_type'] === 'post') {
             // Get all the post data arrays
             $post_images = isset($_POST['post_image']) ? (array)$_POST['post_image'] : [];
             $post_headings = isset($_POST['post_heading']) ? (array)$_POST['post_heading'] : [];
             $post_subheadings = isset($_POST['post_subheading']) ? (array)$_POST['post_subheading'] : [];
-            $post_urls = isset($_POST['post_url']) ? (array)$_POST['post_url'] : [];
+            $post_links = isset($_POST['post_link']) ? (array)$_POST['post_link'] : [];
 
             // Prepare slider data
             $post_slider_data = [];
             for ($i = 0; $i < count($post_images); $i++) {
-                $selected_post_id = isset($post_urls[$i]) ? absint($post_urls[$i]) : 0;
+                $image_url = !empty($post_images[$i]) ? esc_url_raw($post_images[$i]) : '';
 
-                // Only add if we have valid data
-                if ($selected_post_id || !empty($post_images[$i]) || !empty($post_headings[$i]) || !empty($post_subheadings[$i])) {
-                    $post_slider_data[] = [
-                        'image' => sanitize_text_field($post_images[$i] ?? ''),
-                        'heading' => sanitize_text_field($post_headings[$i] ?? ''),
-                        'subheading' => sanitize_textarea_field($post_subheadings[$i] ?? ''),
-                        'url' => $selected_post_id,
-                        'permalink' => get_permalink($selected_post_id)
-                    ];
+                // Validate the image URL
+                if (!empty($image_url) && filter_var($image_url, FILTER_VALIDATE_URL) === false) {
+                    error_log("Invalid image URL at index $i: " . $post_images[$i]);
+                    $image_url = ''; // Optionally, set a default image if invalid
                 }
-            }
 
+                $post_slider_data[] = [
+                    'image' => sanitize_text_field($post_images[$i] ?? ''),
+                    'heading' => sanitize_text_field($post_headings[$i] ?? ''),
+                    'subheading' => sanitize_textarea_field($post_subheadings[$i] ?? ''),
+                    'button_link' => esc_url_raw($post_links[$i] ?? ''),
+                ];
+            }
             // Update the post meta with the new post slider data
             if (!empty($post_slider_data)) {
                 $update_result = update_post_meta($post_id, '_post_slider_data', $post_slider_data);
@@ -306,6 +396,7 @@ class Slider_Bin_Metabox {
             }
         }
     }
+
 }
 
 // Initialize the class

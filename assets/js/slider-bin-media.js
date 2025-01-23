@@ -91,7 +91,7 @@
                                    name="image_captions[${url}]"
                                    placeholder="Enter image caption"
                                    style="width: 100%; max-width: 300px; margin: 5px 0;" />
-                            <button type="button" class="remove-image-button" data-image-url="${url}">Remove</button>
+                            <button type="button" class="button remove-image-button" data-image-url="${url}">Remove</button>
                         </div>
                     `;
                 }).join('');

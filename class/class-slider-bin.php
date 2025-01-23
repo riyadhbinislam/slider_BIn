@@ -50,10 +50,6 @@ class Slider_Bin {
         // Initialize scripts and styles
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_assets'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
-
-        // AJAX handlers
-        add_action('wp_ajax_get_post_data', array($this, 'get_post_data_ajax'));
-        add_action('wp_ajax_nopriv_get_post_data', array($this, 'get_post_data_ajax'));
     }
 
 // Enqueue scripts and styles for the plugin frontend
@@ -87,6 +83,7 @@ class Slider_Bin {
                 'autoplay_pause_on_hover' => isset($options['autoplay_pause_on_hover']) ? $options['autoplay_pause_on_hover'] : 'false',
             )
         );
+
     }
 
 // Enqueue scripts and styles for the plugin admin area
@@ -184,45 +181,6 @@ class Slider_Bin {
         );
     }
 
-//Register AJAX Action
-//For Post SLider - For Blog Post Data call.
-
-    public function get_post_data_ajax() {
-        // Validate the request
-        if (!isset($_GET['post_id'])) {
-            wp_send_json_error(['message' => 'Invalid post ID']);
-        }
-
-        $post_id = intval($_GET['post_id']);
-        $post = get_post($post_id);
-
-        if (!$post) {
-            wp_send_json_error(['message' => 'Post not found']);
-        }
-
-        $post_type = get_post_type($post_id);
-
-        // Allow fetching for 'post' type (blog posts)
-        $allowed_post_types = ['post'];
-        if (!in_array($post_type, $allowed_post_types, true)) {
-            wp_send_json_error(['message' => "Invalid post type: $post_type"]);
-        }
-
-        // Fetch post data
-        $title = get_the_title($post_id);
-        $excerpt = wp_trim_words(get_the_excerpt($post_id), 30, '...');
-        $image_url = get_the_post_thumbnail_url($post_id, 'full') ?: '';
-        $post_url = get_permalink($post_id);
-
-        // Send post data as a response
-        wp_send_json_success([
-            'title' => $title,
-            'excerpt' => $excerpt,
-            'image_url' => $image_url,
-            'link' => $post_url,
-        ]);
-
-    }
 
 
 }
